@@ -3,13 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>rule-anchor: proof for AI-written medical software</title>
-<meta name="description" content="rule-anchor holds your AI coding agent to the requirements your experts approved and keeps the traceability record your auditor asks for. For medical-device software under IEC 62304 and EU MDR.">
-<meta property="og:title" content="rule-anchor">
-<meta property="og:description" content="Use AI on your regulated code without losing the proof.">
-<meta property="og:url" content="https://rule-anchor.newcleardigital.com/">
+<title>Anchored: every AI change, proven</title>
+<meta name="description" content="Anchored traces every change your AI coding agent makes to the requirement it implements, the test that proves it and the person who signed it off. For medical-device software under IEC 62304 and EU MDR.">
+<meta property="og:title" content="Anchored">
+<meta property="og:description" content="Every AI change, proven.">
+<meta property="og:url" content="https://anchored.newcleardigital.com/">
 <meta property="og:type" content="website">
-<link rel="canonical" href="https://rule-anchor.newcleardigital.com/">
+<link rel="canonical" href="https://anchored.newcleardigital.com/">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preload" href="fonts/schibsted-grotesk.woff2" as="font" type="font/woff2" crossorigin>
 <style>
@@ -200,9 +200,9 @@ footer a{color:var(--graphite)}
 
 <header class="top">
   <div class="wrap">
-    <a class="mark" href="#" aria-label="rule-anchor home">
+    <a class="mark" href="#" aria-label="Anchored home">
       <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 20h18" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><path d="M12 20V6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><circle cx="12" cy="5" r="2.6" fill="var(--pen)"/></svg>
-      rule-anchor
+      Anchored
     </a>
     <nav class="nav" aria-label="Main">
       <a href="#how">How it works</a>
@@ -217,10 +217,10 @@ footer a{color:var(--graphite)}
 <div class="hero">
   <div class="wrap">
     <div class="hero-copy">
-      <h1>Use AI on your regulated code without losing the proof.</h1>
-      <p class="lede">rule-anchor holds your AI coding agent to the requirements your experts approved.
-        Every change is checked as it is written, every requirement needs a passing test, and the
-        traceability record for your auditor is always current.</p>
+      <h1>Every AI change, proven.</h1>
+      <p class="lede">Use AI on your regulated code without losing the proof. Anchored traces every change
+        your AI coding agent makes to the requirement it implements, the test that proves it and the person
+        who signed it off, and keeps the record your auditor asks for current.</p>
       <div class="actions">
         <a class="btn primary" data-call href="#call">Book a 20-minute call</a>
         <a class="btn quiet" href="#record">See the audit record</a>
@@ -229,11 +229,11 @@ footer a{color:var(--graphite)}
         repository and your build, with Claude Code.</p>
     </div>
 
-    <figure class="panel" aria-label="An AI agent writes a glucose threshold straight into the code. rule-anchor stops it and says where the value must come from. The agent fixes it and all four requirements pass.">
+    <figure class="panel" aria-label="An AI agent writes a glucose threshold straight into the code. Anchored stops it and says where the value must come from. The agent fixes it and all four requirements pass.">
       <div class="panel-head"><span><b>evaluate.ts</b> in the glucose-alert example</span><span>Claude Code</span></div>
       <div class="panel-body" aria-hidden="true">
         <div class="seq s1"><span class="who">The agent writes</span><span class="step"><span class="ln">28</span>if (mmol &lt; <span class="num-bad">3.9</span>) return { state: "low" };</span></div>
-        <div class="seq s2"><span class="verdict">rule-anchor: evaluate.ts breaks the project's rules
+        <div class="seq s2"><span class="verdict">Anchored: evaluate.ts breaks the project's rules
   line 28: 3.9 is a threshold from GA-LOW-001.
   Read it from spec/constants.</span></div>
         <div class="seq s3"><span class="who">The agent fixes it</span><span class="step"><span class="ln">28</span>if (mmol &lt; <span class="num-good">lowMmolOn(day)</span>) return { state: "low" };</span></div>
@@ -248,7 +248,7 @@ footer a{color:var(--graphite)}
     <div class="head">
       <h2>They give the AI the rules. We make it follow them.</h2>
       <p class="lede">Requirements tools now hand your specification to the AI as context. Context can
-        be skipped. rule-anchor sits in the agent's working loop and in your build, so a broken rule
+        be skipped. Anchored sits in the agent's working loop and in your build, so a broken rule
         is stopped before it goes any further.</p>
     </div>
     <ul class="ledger">
@@ -298,7 +298,7 @@ footer a{color:var(--graphite)}
         </table>
       </div>
     </figure>
-    <p class="note">From the glucose-alert example that ships with rule-anchor; the specification and the
+    <p class="note">From the glucose-alert example that ships with Anchored; the specification and the
       approver are illustrative. The IEC 62304 export adds software safety class and risk controls per requirement.</p>
   </div>
 </section>
@@ -307,8 +307,8 @@ footer a{color:var(--graphite)}
   <div class="wrap">
     <div class="head">
       <h2>Four steps, one of them human.</h2>
-      <p class="lede">Usually 15 to 25 percent of a codebase is covered by the specification. That part runs
-        through rule-anchor; everything else is built the way you build it today.</p>
+      <p class="lede">We call the method Anchor-based development. The part of your code a specification
+        governs, usually 15 to 25 percent, is anchored to it; everything else is built the way you build it today.</p>
     </div>
     <ol class="steps">
       <li><h3>Bring in your specification</h3><p>The agent drafts one numbered requirement per rule, each pointing to the paragraph it came from, all marked unapproved, with every unclear point listed.</p></li>
@@ -323,7 +323,7 @@ footer a{color:var(--graphite)}
   <div class="wrap">
     <div class="head">
       <h2>What it does not do.</h2>
-      <p class="lede">Your quality team and your notified body decide compliance. rule-anchor gives them
+      <p class="lede">Your quality team and your notified body decide compliance. Anchored gives them
         evidence they can check.</p>
     </div>
     <div class="limits">
@@ -337,8 +337,8 @@ footer a{color:var(--graphite)}
 <section id="pricing">
   <div class="wrap">
     <div class="head">
-      <h2>Start with a call.</h2>
-      <p class="lede">Twenty minutes: you tell us how you keep traceability today, we show rule-anchor on the
+      <h2>Anchored for IEC 62304.</h2>
+      <p class="lede">Start with a 20-minute call: you tell us how you keep traceability today, we show Anchored on the
         glucose example. If it doesn't fit, we say so.</p>
     </div>
     <div class="offers">
@@ -357,7 +357,7 @@ footer a{color:var(--graphite)}
       <div class="offer">
         <p class="who-for">Set it up yourself</p>
         <h3>Traceability</h3>
-        <p class="price">€490 <small>per project, per month</small></p>
+        <p class="price">€490 <small>per repository, per month</small></p>
         <ul>
           <li>Installs in two commands</li>
           <li>IEC 62304 export included</li>
@@ -393,7 +393,7 @@ footer a{color:var(--graphite)}
     <div class="head"><h2>Questions.</h2></div>
     <div class="faq">
       <details><summary>We already use Jama, Polarion or Ketryx.</summary>
-        <p>Keep them. They hold the requirements; rule-anchor works where the code is written and stops untraced changes before they exist. Its evidence exports as a CSV you can bring into those tools.</p></details>
+        <p>Keep them. They hold the requirements; Anchored works where the code is written and stops untraced changes before they exist. Its evidence exports as a CSV you can bring into those tools.</p></details>
       <details><summary>We don't use AI on certified code yet.</summary>
         <p>Then this is the easiest time to start: setup is simplest before the first AI-written line, and the record is complete from day one.</p></details>
       <details><summary>Is it only for medical devices?</summary>
@@ -409,7 +409,7 @@ footer a{color:var(--graphite)}
 
 <footer>
   <div class="wrap">
-    <span>rule-anchor by newcleardigital. Evidence for your audit, not legal or regulatory advice.</span>
+    <span>Anchored by newcleardigital. Evidence for your audit, not legal or regulatory advice.</span>
     <span>No cookies, no trackers, nothing loaded from other servers. <a href="mailto:office@newcleardigital.com">office@newcleardigital.com</a></span>
   </div>
 </footer>
@@ -422,8 +422,8 @@ footer a{color:var(--graphite)}
   document.querySelectorAll("[data-call]").forEach(a => {
     const topic = a.dataset.call;
     if (CALL_URL) { a.href = CALL_URL; a.target = "_blank"; a.rel = "noopener"; return; }
-    const subject = topic ? `rule-anchor: ${topic}` : "rule-anchor: 20-minute call";
-    const body = "Hi Stoyan,\n\nI'd like a 20-minute call about rule-anchor.\n\nCompany / product:\nA few times that work for me:\n";
+    const subject = topic ? `Anchored: ${topic}` : "Anchored: 20-minute call";
+    const body = "Hi Stoyan,\n\nI'd like a 20-minute call about Anchored.\n\nCompany / product:\nA few times that work for me:\n";
     a.href = `mailto:${MAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   });
 </script>
