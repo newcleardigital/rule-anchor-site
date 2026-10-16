@@ -212,6 +212,7 @@ summary::after{content:"+";font-weight:400;font-size:1.4rem;line-height:1;color:
 details[open] summary::after{content:"\2212"}
 details p{padding:0 0 1.3rem;color:var(--graphite);max-width:42rem}
 
+.paid{background:var(--pass-soft);color:var(--ink);padding-block:1rem;border-bottom:1px solid var(--hair);font-size:1rem}
 footer{border-top:1px solid var(--hair);padding-block:2rem 3rem;font-size:.9rem;color:var(--graphite)}
 footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem 2rem}
 footer a{color:var(--graphite)}
@@ -237,6 +238,7 @@ footer a{color:var(--graphite)}
   </div>
 </header>
 
+<div class="paid" id="paid" hidden role="status"><div class="wrap">Thank you for your order. On the order page, click <b>Connect GitHub account</b> and GitHub emails you access to the repository. Questions: <a href="mailto:office@newcleardigital.com">office@newcleardigital.com</a></div></div>
 <main id="main">
 <div class="hero">
   <div class="wrap">
@@ -461,13 +463,17 @@ footer a{color:var(--graphite)}
   // and every button goes straight there instead.
   const CALL_URL = "";
   // Polar checkout links. Empty = the buy button stays hidden and the offer shows "Book a call first".
-  const CHECKOUT = { designPartner: "", traceability: "" };
+  const CHECKOUT = {
+    designPartner: "https://buy.polar.sh/polar_cl_7GYyLgAqckHAua6DGlIg086P2WEmAtf4AQtAw2fCjhL",
+    traceability: "https://buy.polar.sh/polar_cl_7hqjYohPvau6TYkC4qMgnlfjEs3iP3FSazR2d1hNgpR",
+  };
   let canBuy = false;
   document.querySelectorAll("[data-buy]").forEach(a => {
     const url = CHECKOUT[a.dataset.buy];
     if (!url) return;
     a.href = url; a.target = "_blank"; a.rel = "noopener"; a.hidden = false; canBuy = true;
   });
+  if (new URLSearchParams(location.search).has("paid")) document.getElementById("paid").hidden = false;
   if (canBuy) {
     document.querySelector("[data-after-buy]").hidden = false;
     document.querySelector("[data-after-call]").hidden = true;
