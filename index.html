@@ -709,7 +709,7 @@ Read it from law/constants.</span></div>
       <div><p class="footer-label">Say hello</p><a data-call href="#call">Book a call ↗</a><a data-call href="mailto:office@newcleardigital.com">Email ↗</a></div>
     </div>
   </div>
-  <div class="footer-bottom"><span>© 2026 newcleardigital</span><span>No cookies, no trackers, nothing loaded from other servers.</span><a href="#main">Back to top ↑</a></div>
+  <div class="footer-bottom"><span>© 2026 newcleardigital</span><span>No cookies. Visits are counted anonymously with GoatCounter.</span><a href="#main">Back to top ↑</a></div>
 </footer>
 
 <dialog class="contact-box" id="contact" aria-labelledby="cb-title">
@@ -815,5 +815,16 @@ Read it from law/constants.</span></div>
     io.observe(box);
   })();
 </script>
+<script>
+  // Anonymous, cookie-free visit counter. Each click on a call or buy button is counted as an event.
+  window.goatcounter = { allow_local: false };
+  document.addEventListener("click", e => {
+    const a = e.target.closest("[data-call],[data-buy]");
+    if (!a || !window.goatcounter || !window.goatcounter.count) return;
+    const name = a.dataset.buy ? "buy-" + a.dataset.buy : "call-" + (a.dataset.call || "general").toLowerCase().replace(/\s+/g, "-");
+    window.goatcounter.count({ path: name, title: a.textContent.trim(), event: true });
+  });
+</script>
+<script data-goatcounter="https://anchored.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 </body>
 </html>
