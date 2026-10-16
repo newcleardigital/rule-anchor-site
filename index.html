@@ -733,7 +733,10 @@ Read it from law/constants.</span></div>
   // and every button goes straight there instead.
   const CALL_URL = "";
   // Polar checkout links. Empty = the buy button stays hidden and the offer shows "Book a call first".
-  const CHECKOUT = { designPartner: "", traceability: "" }; // Polar paused 2026-10-16 (account under review)
+  const CHECKOUT = {
+    designPartner: "https://buy.polar.sh/polar_cl_7GYyLgAqckHAua6DGlIg086P2WEmAtf4AQtAw2fCjhL",
+    traceability: "https://buy.polar.sh/polar_cl_7hqjYohPvau6TYkC4qMgnlfjEs3iP3FSazR2d1hNgpR",
+  };
   let canBuy = false;
   document.querySelectorAll("[data-buy]").forEach(a => {
     const url = CHECKOUT[a.dataset.buy];
