@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Anchor-based development: every AI change, proven</title>
-<meta name="description" content="Anchored traces every change your AI coding agent makes to the requirement it implements, the test that proves it and the person who signed it off. For medical-device software under IEC 62304 and EU MDR.">
+<meta name="description" content="Anchored traces every change your AI coding agent makes to the requirement it implements, the test that proves it and the person who signed it off. Works with any written rulebook your software must follow.">
 <meta property="og:title" content="Anchor-based development">
 <meta property="og:description" content="Every AI change, proven.">
 <meta property="og:url" content="https://anchored.newcleardigital.com/">
@@ -382,17 +382,17 @@ details p{padding:0 0 1.3rem;color:var(--muted);max-width:44rem}
 <main id="main">
 <div class="hero shell">
   <div class="hero-copy">
-    <p class="eyebrow">For medical-device software · IEC 62304</p>
+    <p class="eyebrow">For code that follows a written rulebook</p>
     <h1>Every AI change, <em>proven.</em></h1>
-    <p class="lede">Anchor-based development is how to use AI on regulated code without losing the proof:
+    <p class="lede">Anchor-based development is how to use AI on rule-bound code without losing the proof:
       every change your AI coding agent makes is traced to the requirement it implements, the test that
       proves it and the person who signed it off. <strong>Anchored is the toolkit that runs it in your repository.</strong></p>
     <div class="callbar">
-      <span>20 minutes, shown on the glucose example.</span>
+      <span>20 minutes, shown on a working example.</span>
       <a class="button" data-call href="#call">Book a call <span class="arr" aria-hidden="true">→</span></a>
     </div>
-    <div class="hero-links"><a class="text-link" href="#record">See the audit record <span aria-hidden="true">↗</span></a><a class="text-link" href="#pricing">See pricing <span aria-hidden="true">↗</span></a></div>
-    <p class="hero-note"><span aria-hidden="true">✦</span>Built for IEC 62304 and EU MDR. Runs inside your repository and your build, with Claude Code.</p>
+    <div class="hero-links"><a class="text-link" href="#record">See the record <span aria-hidden="true">↗</span></a><a class="text-link" href="#pricing">See pricing <span aria-hidden="true">↗</span></a></div>
+    <p class="hero-note"><span aria-hidden="true">✦</span>Works with any written rulebook: a specification, a contract, pricing rules or a law. Runs inside your repository and your build, with Claude Code.</p>
   </div>
 
   <div class="hero-art">
@@ -400,20 +400,20 @@ details p{padding:0 0 1.3rem;color:var(--muted);max-width:44rem}
     <div class="orbit two" aria-hidden="true"></div>
     <div class="spark a" aria-hidden="true">✦</div>
     <div class="spark b" aria-hidden="true">✧</div>
-    <figure class="editor-card" aria-label="An AI agent writes a glucose threshold straight into the code. Anchored stops it and says where the value must come from. The agent fixes it and all four requirements pass.">
-      <div class="topbar" aria-hidden="true"><div class="dots"><i></i><i></i><i></i></div><span>glucose-alert / evaluate.ts</span><span class="live"><i></i>Claude Code</span></div>
+    <figure class="editor-card" aria-label="An AI agent writes a tax rate straight into the code. Anchored stops it and says where the value must come from. The agent fixes it and all four requirements pass.">
+      <div class="topbar" aria-hidden="true"><div class="dots"><i></i><i></i><i></i></div><span>price-display / display.ts</span><span class="live"><i></i>Claude Code</span></div>
       <div class="editor-body" aria-hidden="true">
-        <div class="seq s1"><span class="who">The agent writes</span><span class="code"><span class="ln">28</span><span>if (mmol &lt; <span class="bad">3.9</span>) return { state: "low" };</span></span></div>
-        <div class="seq s2"><span class="verdict"><b>Anchored: stopped.</b> evaluate.ts breaks the project's rules.
-Line 28: 3.9 is a threshold from GA-LOW-001.
-Read it from spec/constants.</span></div>
-        <div class="seq s3"><span class="who">The agent fixes it</span><span class="code"><span class="ln">28</span><span>if (mmol &lt; <span class="good">lowMmolOn(day)</span>) return { state: "low" };<b class="cursor"></b></span></span></div>
+        <div class="seq s1"><span class="who">The agent writes</span><span class="code"><span class="ln">9</span><span>const vat = net * <span class="bad">19</span> / 100;</span></span></div>
+        <div class="seq s2"><span class="verdict"><b>Anchored: stopped.</b> display.ts breaks the project's rules.
+Line 9: 19 is a rate from PD-TOTAL-001.
+Read it from law/constants.</span></div>
+        <div class="seq s3"><span class="who">The agent fixes it</span><span class="code"><span class="ln">9</span><span>const vat = net * <span class="good">vatPctOn(day)</span> / 100;<b class="cursor"></b></span></span></div>
         <div class="seq s4"><span class="verdict ok"><b>All checks pass.</b> 4 of 4 requirements proved by a test.</span></div>
       </div>
-      <div class="editor-footer" aria-hidden="true"><span>✦ Rule: <b>GA-LOW-001</b></span><span>4 / 4 proved</span></div>
+      <div class="editor-footer" aria-hidden="true"><span>✦ Rule: <b>PD-TOTAL-001</b></span><span>4 / 4 proved</span></div>
     </figure>
-    <div class="floating-note note-top" aria-hidden="true"><span>Stopped</span><b>Line 28: 3.9</b><small>belongs to GA-LOW-001</small></div>
-    <div class="floating-note note-bottom" aria-hidden="true"><span>Approved by</span><b class="sg">A. Ivanova</b><small>Clinical lead</small></div>
+    <div class="floating-note note-top" aria-hidden="true"><span>Stopped</span><b>Line 9: 19</b><small>belongs to PD-TOTAL-001</small></div>
+    <div class="floating-note note-bottom" aria-hidden="true"><span>Approved by</span><b class="sg">Dr. Weber</b><small>External counsel</small></div>
   </div>
 </div>
 
@@ -464,37 +464,37 @@ Read it from spec/constants.</span></div>
 <section id="record" class="peek">
   <div class="shell">
     <div class="intro">
-      <p class="eyebrow">The audit record</p>
-      <h2>The record your auditor asks for, <em>always current.</em></h2>
+      <p class="eyebrow">The record</p>
+      <h2>The record your reviewers ask for, <em>always current.</em></h2>
       <p>Every requirement, where it comes from, who approved it, the code and the test that proves it.
         Generated from the same data the checks use, stamped with the code version, exported as CSV or a printable page.
         <br><a class="text-link" href="#pricing" style="margin-top:1rem">See what it costs <span aria-hidden="true">↗</span></a></p>
     </div>
     <figure class="product-window">
-      <div class="window-header"><div class="dots" aria-hidden="true"><i></i><i></i><i></i></div><span class="window-title"><span aria-hidden="true">✦</span>Traceability · glucose-alert · CRS-014 rev C</span><span>Generated, do not edit</span></div>
+      <div class="window-header"><div class="dots" aria-hidden="true"><i></i><i></i><i></i></div><span class="window-title"><span aria-hidden="true">✦</span>Traceability · price-display · PAngV as in force 2026-01-01</span><span>Generated, do not edit</span></div>
       <div class="scroll">
         <table>
           <thead><tr><th>Requirement</th><th>What it says</th><th>Source</th><th>Approved by</th><th>Code</th><th>Test</th><th>Status</th></tr></thead>
           <tbody>
-            <tr><td class="id">GA-LOW-001</td><td class="what">Alert when a reading is below 3.9 mmol/L</td><td class="loc">§4.2.1</td>
-              <td><span class="sig"><span>A. Ivanova</span><small>Clinical lead, 6 Oct 2026</small></span></td>
-              <td class="loc">evaluate.ts:21</td><td class="loc">evaluate.test.ts:7</td><td><span class="ok">Proved</span></td></tr>
-            <tr><td class="id">GA-LOW-002</td><td class="what">Urgent alert below 3.0 mmol/L, cannot be snoozed</td><td class="loc">§4.2.2</td>
-              <td><span class="sig"><span>A. Ivanova</span><small>Clinical lead, 6 Oct 2026</small></span></td>
-              <td class="loc">evaluate.ts:22</td><td class="loc">evaluate.test.ts:12</td><td><span class="ok">Proved</span></td></tr>
-            <tr><td class="id">GA-DATA-001</td><td class="what">Never raise or clear an alert from a reading older than 15 minutes</td><td class="loc">§4.4.1</td>
-              <td><span class="sig"><span>A. Ivanova</span><small>Clinical lead, 6 Oct 2026</small></span></td>
-              <td class="loc">evaluate.ts:16</td><td class="loc">evaluate.test.ts:16</td><td><span class="ok">Proved</span></td></tr>
-            <tr><td class="id">GA-UNIT-001</td><td class="what">Convert mg/dL to mmol/L before any comparison</td><td class="loc">§3.1</td>
-              <td><span class="sig"><span>A. Ivanova</span><small>Clinical lead, 6 Oct 2026</small></span></td>
-              <td class="loc">evaluate.ts:11</td><td class="loc">evaluate.test.ts:22</td><td><span class="ok">Proved</span></td></tr>
-          </tbody>
+            <tr><td class="id">PD-TOTAL-001</td><td class="what">Show the total price including 19% VAT and all unavoidable charges</td><td class="loc">§3(1)</td>
+              <td><span class="sig"><span>Dr. Weber</span><small>External counsel, 6 Oct 2026</small></span></td>
+              <td class="loc">display.ts:7</td><td class="loc">display.test.ts:3</td><td><span class="ok">Proved</span></td></tr>
+            <tr><td class="id">PD-TOTAL-002</td><td class="what">Never show the net price more prominently than the total</td><td class="loc">§3(2)</td>
+              <td><span class="sig"><span>Dr. Weber</span><small>External counsel, 6 Oct 2026</small></span></td>
+              <td class="loc">display.ts:13</td><td class="loc">display.test.ts:7</td><td><span class="ok">Proved</span></td></tr>
+            <tr><td class="id">PD-UNIT-001</td><td class="what">Show the price per unit of measure next to the total</td><td class="loc">§4(1)</td>
+              <td><span class="sig"><span>Dr. Weber</span><small>External counsel, 6 Oct 2026</small></span></td>
+              <td class="loc">display.ts:20</td><td class="loc">display.test.ts:11</td><td><span class="ok">Proved</span></td></tr>
+            <tr><td class="id">PD-UNIT-002</td><td class="what">Update the unit price within 2 days of a change</td><td class="loc">§4(3)</td>
+              <td><span class="sig"><span>Dr. Weber</span><small>External counsel, 6 Oct 2026</small></span></td>
+              <td class="loc">display.ts:26</td><td class="loc">display.test.ts:15</td><td><span class="ok">Proved</span></td></tr>
+            </tbody>
         </table>
       </div>
       <div class="window-stats"><span><b>4 / 4</b><small>requirements proved</small></span><span><b>4</b><small>approved by a person</small></span><span><b>0</b><small>untraced changes</small></span></div>
     </figure>
-    <p class="note">From the glucose-alert example that ships with Anchored; the specification and the
-      approver are illustrative. The IEC 62304 export adds software safety class and risk controls per requirement.</p>
+    <p class="note">From the price-display example that ships with Anchored: four rules from the German Price Indication
+      Ordinance. The approver is illustrative.</p>
   </div>
 </section>
 
@@ -506,9 +506,9 @@ Read it from spec/constants.</span></div>
   </div>
   <ol class="steps">
     <li><h3>Bring in your specification</h3><p>The agent drafts one numbered requirement per rule, each pointing to the paragraph it came from, all marked unapproved, with every unclear point listed.</p></li>
-    <li class="person"><h3>A person approves each one</h3><p>Your clinical or regulatory lead decides what each requirement means. Only the people you name can approve.</p></li>
+    <li class="person"><h3>A person approves each one</h3><p>Your domain expert decides what each requirement means. Only the people you name can approve.</p></li>
     <li><h3>Every change is checked</h3><p>As the agent writes, and again in your build. Each requirement needs its own passing test.</p></li>
-    <li><h3>Export the proof</h3><p>One command produces the traceability record for the current code version, ready for the audit.</p></li>
+    <li><h3>Export the proof</h3><p>One command produces the traceability record for the current code version, ready for review.</p></li>
   </ol>
 </section>
 
@@ -516,11 +516,11 @@ Read it from spec/constants.</span></div>
   <div class="intro">
     <p class="eyebrow">Limits</p>
     <h2>What it <em>does not</em> do.</h2>
-    <p>Your quality team and your notified body decide compliance. Anchored gives them evidence they can check.</p>
+    <p>Your experts decide what the rules mean. Anchored gives them evidence they can check.</p>
   </div>
   <div class="limits">
     <div><h3>It does not interpret your rules</h3><p>If your expert approves a reading, the code follows that reading, and the record shows who approved it.</p></div>
-    <div><h3>It does not make you compliant</h3><p>It proves that the code does what the approved requirements say. It is not legal or regulatory advice.</p></div>
+    <div><h3>It does not give legal advice</h3><p>It proves that the code does what the approved requirements say. What a rule means is decided by your people.</p></div>
     <div><h3>It does not take your code anywhere</h3><p>The checks are plain Python scripts that run in your repository and your build. Nothing is sent to us.</p></div>
   </div>
 </section>
@@ -529,8 +529,8 @@ Read it from spec/constants.</span></div>
   <div class="intro">
     <p class="eyebrow">Pricing</p>
     <h2>Anchored, <em>the toolkit.</em></h2>
-    <p>Anchored for IEC 62304 runs Anchor-based development in your repository and build. Buy it
-      directly, or start with a 20-minute call: we show it on the glucose example, and if it doesn't fit, we say so.</p>
+    <p>Anchored runs Anchor-based development in your repository and build. Start with a 20-minute call:
+      we show it on a working example, and if it doesn't fit, we say so.</p>
   </div>
   <div class="offers">
     <div class="offer first">
@@ -539,7 +539,7 @@ Read it from spec/constants.</span></div>
       <p class="price">€2,500 <small>one time</small></p>
       <ul>
         <li>We set it up with you, in your repository</li>
-        <li>Your requirements, checks and first audit export, done</li>
+        <li>Your requirements, checks and first traceability export, done</li>
         <li>Three months included</li>
         <li>In return: your feedback and a short case study</li>
       </ul>
@@ -551,7 +551,7 @@ Read it from spec/constants.</span></div>
       <p class="price">€490 <small>per repository, per month</small></p>
       <ul>
         <li>Installs in two commands</li>
-        <li>IEC 62304 export included</li>
+        <li>Traceability export as CSV and printable page</li>
         <li>Updates and email support</li>
         <li>Cancel any time</li>
       </ul>
@@ -566,12 +566,12 @@ Read it from spec/constants.</span></div>
   <div class="faq-wrap">
     <div><p class="eyebrow">Questions</p><h2>Asked <em>before every call.</em></h2></div>
     <div class="faq">
-      <details><summary>We already use Jama, Polarion or Ketryx.</summary>
+      <details><summary>We already use Jama, Polarion or Jira.</summary>
         <p>Keep them. They hold the requirements; Anchored works where the code is written and stops untraced changes before they exist. Its evidence exports as a CSV you can bring into those tools.</p></details>
-      <details><summary>We don't use AI on certified code yet.</summary>
+      <details><summary>We don't use AI on that part of our code yet.</summary>
         <p>Then this is the easiest time to start: setup is simplest before the first AI-written line, and the record is complete from day one.</p></details>
-      <details><summary>Is it only for medical devices?</summary>
-        <p>No. It fits any software that must follow a written document: payment and banking rules, insurance tariffs, safety standards for cars, trains and aircraft, or a contract. Medical-device software is where we start.</p></details>
+      <details><summary>Which rulebooks does it work with?</summary>
+        <p>Any written document your software must follow: a product specification, a contract, pricing and consumer rules, or payment and billing rules.</p></details>
       <details><summary>What do we need?</summary>
         <p>Claude Code and a GitHub account. The checks work with TypeScript, Python, Java, Kotlin, C#, Go, Rust and more.</p></details>
       <details><summary>Does our code leave our servers?</summary>
@@ -601,7 +601,7 @@ Read it from spec/constants.</span></div>
   <div class="footer-top">
     <div class="footer-brand">
       <a class="brand" href="#" aria-label="Anchored, home"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span><span>Anchored</span></a>
-      <p>Anchor-based development and the Anchored toolkit by newcleardigital. Evidence for your audit, not legal or regulatory advice.</p>
+      <p>Anchor-based development and the Anchored toolkit by newcleardigital. Evidence for your reviews, not legal advice.</p>
     </div>
     <div class="footer-links">
       <div><p class="footer-label">Explore</p><a href="#how">How it works</a><a href="#record">The record</a><a href="#method">The method</a><a href="#pricing">Pricing</a></div>
