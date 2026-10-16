@@ -357,6 +357,70 @@ details p{padding:0 0 1.3rem;color:var(--muted);max-width:44rem}
 .footer-bottom{display:flex;flex-wrap:wrap;justify-content:space-between;gap:.6rem 2rem;padding-top:1.1rem;border-top:1px solid var(--line);color:var(--faint);font:400 .7rem var(--mono)}
 .footer-bottom a{color:var(--accent)}
 @media (max-width:760px){.footer-top{grid-template-columns:1fr}.footer-links{gap:3.5rem}}
+
+/* The problem: one orchestrated sequence, played once when it scrolls into view */
+.problem{grid-column:1/-1;position:relative;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:clamp(1.5rem,4vw,4rem);align-items:center;background:var(--paper);border:1px solid var(--line);border-radius:24px;padding:clamp(1.4rem,3.5vw,3rem);box-shadow:var(--shadow);margin-top:clamp(1rem,3vw,2.5rem)}
+.problem .eyebrow{margin-bottom:.4rem}
+.p-text{display:flex;flex-direction:column;gap:.85rem;font-size:clamp(1rem,1.25vw,1.12rem);line-height:1.6;color:var(--muted)}
+.p-text b{color:var(--ink);font-weight:600}
+.p-text .lead{font:600 clamp(1.5rem,2.4vw,2rem)/1.15 var(--head);letter-spacing:-.03em;color:var(--ink)}
+.hl{background:linear-gradient(transparent 58%,var(--lav-card) 58%) no-repeat 0 0/0% 100%;transition:background-size .9s ease .35s;color:var(--ink)}
+.hl.red{background-image:linear-gradient(transparent 58%,var(--stop-soft) 58%)}
+.p-line.on .hl{background-size:100% 100%}
+.p-stage{position:relative;display:flex;flex-direction:column;gap:1rem;font:400 .74rem var(--mono)}
+.p-row{background:var(--cream);border:1px solid var(--line);border-radius:16px;padding:1rem 1.1rem}
+.p-cap{display:flex;justify-content:space-between;gap:1rem;color:var(--faint);letter-spacing:.06em;text-transform:uppercase;font-size:.66rem;margin-bottom:.75rem}
+.code-bars{display:flex;flex-direction:column;gap:.45rem}
+.code-bars i{display:block;height:.5rem;border-radius:99px;background:var(--lav-card);transform-origin:left;transform:scaleX(0);transition:transform .6s ease}
+.code-bars i:nth-child(1){width:78%}.code-bars i:nth-child(2){width:56%;transition-delay:.15s}.code-bars i:nth-child(3){width:68%;transition-delay:.3s}
+.p-on-1 .code-bars i{transform:scaleX(1)}
+.chips{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.85rem}
+.chip{display:inline-flex;align-items:center;gap:.35rem;padding:.3rem .6rem;border-radius:99px;border:1px solid var(--line-2);background:var(--paper);color:var(--ink);font:500 .7rem var(--mono);opacity:0;transform:translateY(4px);transition:opacity .45s ease,transform .45s ease,color .3s}
+.p-on-1 .chip.looks{opacity:1;transform:none}
+.chip.looks s{text-decoration:none;background:linear-gradient(currentColor,currentColor) no-repeat 0 55%/0% 1.5px;transition:background-size .5s ease .2s}
+.p-on-2 .chip.looks{color:var(--faint)}
+.p-on-2 .chip.looks s{background-size:100% 1.5px}
+.chip.audit{border-color:var(--stop);color:var(--stop);background:var(--stop-soft)}
+.p-on-2 .chip.audit{opacity:1;transform:none;transition-delay:.5s}
+.chain{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.9rem}
+.node{position:relative;display:flex;flex-direction:column;gap:.3rem;padding:.6rem .65rem;border-radius:12px;border:1px solid var(--line-2);background:var(--paper);opacity:0;transform:translateY(6px);transition:opacity .4s ease,transform .5s ease}
+.node b{font:600 .82rem var(--head);letter-spacing:-.01em;color:var(--ink)}
+.node small{color:var(--faint);font-size:.64rem;min-height:1.1em;position:relative;white-space:nowrap}
+.node small span{transition:opacity .35s}
+.node small .now{position:absolute;left:0;top:0;opacity:0;color:var(--stop)}
+.node + .node::before{content:"";position:absolute;left:-.9rem;top:50%;width:.9rem;height:2px;background:var(--accent);transform-origin:left;transform:scaleX(0);transition:transform .35s ease}
+.p-on-3 .node{opacity:1;transform:none}
+.p-on-3 .node:nth-child(2){transition-delay:.35s}.p-on-3 .node:nth-child(3){transition-delay:.7s}.p-on-3 .node:nth-child(4){transition-delay:1.05s}
+.p-on-3 .node:nth-child(2)::before{transform:scaleX(1);transition-delay:.35s}.p-on-3 .node:nth-child(3)::before{transform:scaleX(1);transition-delay:.7s}.p-on-3 .node:nth-child(4)::before{transform:scaleX(1);transition-delay:1.05s}
+.p-on-4 .node + .node::before{background:repeating-linear-gradient(90deg,var(--stop) 0 3px,transparent 3px 6px)}
+.p-on-4 .node{border-style:dashed;transition-delay:0s!important}
+.p-on-4 .node:nth-child(1){transform:translate(-2px,-5px) rotate(-2deg)}
+.p-on-4 .node:nth-child(2){transform:translate(2px,6px) rotate(2.5deg)}
+.p-on-4 .node:nth-child(3){transform:translate(-3px,-3px) rotate(-1.5deg)}
+.p-on-4 .node:nth-child(4){transform:translate(3px,5px) rotate(2deg)}
+.p-on-4 .node small .was{opacity:0}
+.p-on-4 .node small .now{opacity:1}
+.sessions{position:relative;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:.35rem;align-items:end;padding-top:2.6rem}
+.sessions i{display:block;height:1.6rem;border-radius:6px;background:var(--lav-pale);border:1px solid var(--line);opacity:0;transform:scaleY(.3);transform-origin:bottom;transition:opacity .3s ease calc(var(--n) * 70ms),transform .35s ease calc(var(--n) * 70ms),background-color .4s ease 1.6s,border-color .4s ease 1.6s}
+.p-on-5 .sessions i{opacity:1;transform:none}
+.sessions i.s3,.sessions i.s12{background:var(--lav-card);border-color:var(--accent)}
+.p-on-5 .sessions i.s12{background:var(--stop-soft);border-color:var(--stop)}
+.s-label{position:absolute;top:0;font:500 .66rem var(--mono);white-space:nowrap;opacity:0;transition:opacity .4s ease;color:var(--ink)}
+.s-label.a{left:calc((100% + .35rem) * 2 / 12)}
+.s-label.b{right:0;color:var(--stop)}
+.p-on-5 .s-label.a{opacity:1;transition-delay:1s}
+.p-on-5 .s-label.b{opacity:1;transition-delay:1.6s}
+.arc{position:absolute;left:calc((100% + .35rem) * 2.5 / 12);right:calc((100% + .35rem) * .5 / 12);top:1.3rem;height:1.1rem;border:1.5px dashed var(--stop);border-bottom:0;border-radius:12px 12px 0 0;opacity:0;clip-path:inset(0 100% 0 0);transition:clip-path .9s ease 1.9s,opacity .2s ease 1.9s}
+.p-on-5 .arc{opacity:1;clip-path:inset(-1rem 0 0 0)}
+.arc span{position:absolute;left:50%;top:-.7rem;transform:translateX(-50%);background:var(--cream);color:var(--stop);padding:0 .4rem;font:600 .62rem var(--mono);letter-spacing:.06em;text-transform:uppercase}
+.p-replay{position:absolute;right:1rem;top:1rem;border:1px solid var(--line-2);background:transparent;color:var(--muted);font:500 .7rem var(--mono);border-radius:99px;padding:.3rem .7rem;cursor:pointer;opacity:0;transition:opacity .4s}
+.p-done .p-replay{opacity:1}
+.p-replay:hover{color:var(--ink);border-color:var(--ink)}
+.js .p-line{opacity:.18;transition:opacity .6s ease}
+.js .p-line.on{opacity:1}
+@media (max-width:980px){.problem{grid-template-columns:1fr}}
+@media (max-width:520px){.chain{grid-template-columns:repeat(2,minmax(0,1fr))}.chain .node:nth-child(3)::before{display:none}.sessions{gap:.2rem}.s-label.a{left:0}}
+@media (prefers-reduced-motion:reduce){.problem *{transition:none!important}.js .p-line{opacity:1}}
 </style>
 </head>
 <body>
@@ -415,6 +479,42 @@ Read it from law/constants.</span></div>
     <div class="floating-note note-top" aria-hidden="true"><span>Stopped</span><b>Line 9: 19</b><small>belongs to PD-TOTAL-001</small></div>
     <div class="floating-note note-bottom" aria-hidden="true"><span>Approved by</span><b class="sg">Dr. Weber</b><small>External counsel</small></div>
   </div>
+
+  <section class="problem" id="problem" aria-labelledby="problem-title">
+    <div class="p-text">
+      <p class="eyebrow" id="problem-title">The problem</p>
+      <p class="p-line lead" data-at="1">AI agents now write much of the code.</p>
+      <p class="p-line" data-at="2">In regulated software (fintech, insurance, anything bound by a law, standard or contract), <span class="hl red">&ldquo;the AI wrote it and it looks right&rdquo; won&rsquo;t pass an audit.</span></p>
+      <p class="p-line" data-at="3">Teams must show that each rule from the outside authority <span class="hl">became code, was tested, and was checked by a named person.</span></p>
+      <p class="p-line" data-at="4">Today that proof sits in <b>spreadsheets, Jira tickets and memory.</b></p>
+      <p class="p-line" data-at="5">AI agents don&rsquo;t keep it, and they drift: <span class="hl red">session 12 quietly contradicts session 3.</span></p>
+    </div>
+    <div class="p-stage" aria-hidden="true">
+      <div class="p-row">
+        <div class="p-cap"><span>The AI wrote it</span><span>pricing.ts</span></div>
+        <div class="code-bars"><i></i><i></i><i></i></div>
+        <div class="chips"><span class="chip looks">&#10003; <s>Looks right</s></span><span class="chip audit">Audit: where is the proof?</span></div>
+      </div>
+      <div class="p-row">
+        <div class="p-cap"><span>What an audit needs</span><span>per rule</span></div>
+        <div class="chain">
+          <div class="node"><b>Rule</b><small><span class="was">&sect;3(1)</span><span class="now">spreadsheet</span></small></div>
+          <div class="node"><b>Code</b><small><span class="was">pricing.ts:9</span><span class="now">Jira ticket</span></small></div>
+          <div class="node"><b>Test</b><small><span class="was">passes</span><span class="now">memory</span></small></div>
+          <div class="node"><b>Person</b><small><span class="was">signed</span><span class="now">?</span></small></div>
+        </div>
+      </div>
+      <div class="p-row">
+        <div class="p-cap"><span>Agent sessions</span><span>1 &rarr; 12</span></div>
+        <div class="sessions">
+          <span class="s-label a">s3: VAT 19%</span><span class="s-label b">s12: VAT 16%</span>
+          <div class="arc"><span>contradicts</span></div>
+          <i style="--n:1"></i><i style="--n:2"></i><i style="--n:3" class="s3"></i><i style="--n:4"></i><i style="--n:5"></i><i style="--n:6"></i><i style="--n:7"></i><i style="--n:8"></i><i style="--n:9"></i><i style="--n:10"></i><i style="--n:11"></i><i style="--n:12" class="s12"></i>
+        </div>
+      </div>
+    </div>
+    <button class="p-replay" type="button" hidden>Replay</button>
+  </section>
 </div>
 
 <div class="signal-strip shell" aria-label="What Anchored records">
@@ -680,6 +780,36 @@ Read it from law/constants.</span></div>
     }
   });
   dlg.addEventListener("click", e => { if (e.target === dlg) dlg.close(); }); // click outside closes
+</script>
+<script>
+  // The problem: reveal one sentence at a time and build the diagram beside it.
+  (function () {
+    const box = document.getElementById("problem");
+    if (!box) return;
+    document.documentElement.classList.add("js");
+    const lines = box.querySelectorAll(".p-line");
+    const replay = box.querySelector(".p-replay");
+    const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const STEP_MS = 2600, LAST = 5;
+    let timers = [];
+    function show(step) {
+      for (let i = 1; i <= LAST; i++) box.classList.toggle("p-on-" + i, i <= step);
+      lines.forEach(l => l.classList.toggle("on", +l.dataset.at <= step));
+      box.classList.toggle("p-done", step >= LAST);
+    }
+    function play() {
+      timers.forEach(clearTimeout); timers = [];
+      show(0);
+      for (let i = 1; i <= LAST; i++) timers.push(setTimeout(() => show(i), 300 + (i - 1) * STEP_MS));
+    }
+    if (reduce || !("IntersectionObserver" in window)) { show(LAST); return; }
+    replay.hidden = false;
+    replay.addEventListener("click", play);
+    const io = new IntersectionObserver(es => {
+      if (es.some(e => e.isIntersecting)) { io.disconnect(); play(); }
+    }, { threshold: 0.35 });
+    io.observe(box);
+  })();
 </script>
 </body>
 </html>
