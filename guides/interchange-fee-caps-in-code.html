@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Coding the EU interchange fee caps so an auditor can check them</title>
+<meta name="description" content="Regulation (EU) 2015/751 caps interchange at 0.2 % for debit and 0.3 % for credit cards. A worked example of implementing the caps, the commercial-card exception and the payee statement with full traceability.">
+<link rel="canonical" href="https://anchored.newcleardigital.com/guides/interchange-fee-caps-in-code.html">
+<meta property="og:title" content="Coding the EU interchange fee caps so an auditor can check them"><meta property="og:description" content="Regulation (EU) 2015/751 caps interchange at 0.2 % for debit and 0.3 % for credit cards. A worked example of implementing the caps, the commercial-card exception and the payee statement with full traceability.">
+<meta property="og:type" content="article"><meta property="og:url" content="https://anchored.newcleardigital.com/guides/interchange-fee-caps-in-code.html">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<style>
+@font-face{font-family:"Space Grotesk";src:url(../fonts/space-grotesk.woff2) format("woff2");font-weight:300 700;font-display:swap}
+@font-face{font-family:"DM Sans";src:url(../fonts/dm-sans.woff2) format("woff2");font-weight:100 1000;font-display:swap}
+@font-face{font-family:"DM Mono";src:url(../fonts/dm-mono-400.woff2) format("woff2");font-weight:400;font-display:swap}
+:root{--cream:#f7f2ea;--paper:#fffdf9;--ink:#1b1830;--muted:#67637a;--line:rgba(27,24,48,.12);--accent:#6a52c9;--lav-card:#ded4ff;--code:#17142b;--on-code:#ece8fb;
+  --head:"Space Grotesk","Helvetica Neue",system-ui,sans-serif;--sans:"DM Sans","Helvetica Neue",system-ui,sans-serif;--mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--cream:#13111f;--paper:#1d1a2e;--ink:#f2eefa;--muted:#aaa6ba;--line:rgba(255,255,255,.12);--accent:#b9a6ff;--lav-card:#2d2750;color-scheme:dark}}
+:root[data-theme="dark"]{--cream:#13111f;--paper:#1d1a2e;--ink:#f2eefa;--muted:#aaa6ba;--line:rgba(255,255,255,.12);--accent:#b9a6ff;--lav-card:#2d2750;color-scheme:dark}
+*{box-sizing:border-box}html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--cream);color:var(--ink);font:400 1.06rem/1.7 var(--sans)}
+a{color:var(--accent)}
+.top{display:flex;justify-content:space-between;align-items:center;gap:1rem;max-width:46rem;margin:0 auto;padding:1.2rem 16px}
+.top a{color:var(--ink);text-decoration:none;font:600 1rem var(--head);letter-spacing:-.02em}
+.top .cta{font:500 .85rem var(--sans);padding:.55rem .9rem;border-radius:10px;background:var(--ink);color:var(--cream)}
+main{max-width:46rem;margin:0 auto;padding:1rem 16px 4rem}
+.eyebrow{font:400 .72rem var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin:2rem 0 .8rem}
+h1{font:600 clamp(1.9rem,5vw,2.8rem)/1.08 var(--head);letter-spacing:-.045em;margin:0 0 1.2rem}
+h2{font:600 1.45rem/1.2 var(--head);letter-spacing:-.03em;margin:2.4rem 0 .8rem}
+.lede{font-size:1.15rem;color:var(--ink)}
+p,li{color:color-mix(in srgb,var(--ink) 82%,transparent)}
+li{margin:.35rem 0}
+code{font:400 .9em var(--mono);background:var(--paper);border:1px solid var(--line);border-radius:5px;padding:.05em .3em}
+pre{background:var(--code);color:var(--on-code);font:400 .82rem/1.6 var(--mono);padding:1rem 1.1rem;border-radius:12px;overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:.95rem;display:block;overflow-x:auto}
+th,td{text-align:left;vertical-align:top;padding:.6rem .7rem;border-bottom:1px solid var(--line)}
+th{font:600 .9rem var(--head)}
+.box{margin-top:3rem;padding:1.5rem;border-radius:16px;background:var(--lav-card)}
+.box h2{margin-top:0}
+.box .links{display:flex;flex-wrap:wrap;gap:.6rem 1.4rem}
+.faq dt{font:600 1.05rem var(--head);margin-top:1.2rem}.faq dd{margin:.3rem 0 0;color:var(--muted)}
+.more{margin-top:3rem;border-top:1px solid var(--line);padding-top:1.4rem}
+.more ul{padding-left:1.1rem}
+footer{max-width:46rem;margin:0 auto;padding:2rem 16px 3rem;color:var(--muted);font-size:.85rem}
+</style>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Does the cap apply to the merchant service charge?", "acceptedAnswer": {"@type": "Answer", "text": "The caps in Articles 3 and 4 apply to interchange fees. Article 12 requires the merchant service charge and the interchange fee to be shown separately to the payee."}}, {"@type": "Question", "name": "What about three-party schemes?", "acceptedAnswer": {"@type": "Answer", "text": "Article 1(3) also excludes transactions with cards issued under three-party schemes from Chapter II. Model the exclusion as its own requirement, with its own reading and test."}}]}</script>
+</head><body>
+<header class="top"><a href="../">Anchor-based development</a><a class="cta" href="../#start">Start free</a></header>
+<main>
+<p class="eyebrow">Guide · 2026-10-21</p>
+<h1>Coding the EU interchange fee caps so an auditor can check them</h1>
+<p class="lede">The Interchange Fee Regulation, Regulation (EU) 2015/751, is short and exact: a per-transaction interchange fee may not exceed 0.2 % of the value for debit cards (Article 3(1)) or 0.3 % for credit cards (Article 4). Commercial cards are outside the caps (Article 1(3)(a)). After each transaction the payee gets the merchant service charge and the interchange fee shown separately (Article 12(1)).</p>
+
+<h2>Four rules, four places they go wrong</h2>
+<table>
+<tr><th>Rule</th><th>How it fails in code</th><th>The guard</th></tr>
+<tr><td>0.2 % debit cap, Art. 3(1)</td><td><code>amount * 0.2 / 100</code> typed into a second service</td><td>Caps live in one dated table; any other use of 0.2 as a multiplier fails the build</td></tr>
+<tr><td>0.3 % credit cap, Art. 4</td><td>Rounded half-up, so a fee can exceed the cap by a cent</td><td>Decision recorded: capped fees round down</td></tr>
+<tr><td>Commercial cards, Art. 1(3)(a)</td><td>The agent widens "commercial" to every business account</td><td>The reading is approved by compliance and quoted in the code's test</td></tr>
+<tr><td>Payee statement, Art. 12(1)</td><td>Fees blended into one line</td><td>A test per rule, named after its ID</td></tr>
+</table>
+
+<h2>Dated values, not constants</h2>
+<p>A Member State may lower a cap for domestic transactions. If the code reads "the cap" it reads today's. Store each cap with the date it took effect and look it up by the transaction's value date, and last year's fees still recompute to last year's answer.</p>
+
+<h2>The worked example</h2>
+<p>The <code>interchange-fees</code> example in Anchored implements these four rules in Python, with one test per rule, the six decisions a payments ledger needs (money in whole cents, the date that decides, rounding, identity, isolation, vocabulary) and the generated change record. <a href="../sample/dora-change-record.html">See its change record</a>.</p>
+<div class="box">
+<h2>Try it on your repository</h2>
+<p>Two free, open-source tools run the same checks. Nothing leaves your repository.</p>
+<div class="links"><a href="https://github.com/newcleardigital/anchored-scan">Anchored Scan, a GitHub Action ↗</a><a href="https://github.com/newcleardigital/anchored-lite">Anchored Lite, a Claude Code plugin ↗</a><a href="../sample/dora-change-record.html">A sample change record ↗</a><a href="../#pricing">Anchored pricing ↗</a></div>
+</div>
+<h2>Questions</h2>
+<dl class="faq"><dt>Does the cap apply to the merchant service charge?</dt><dd>The caps in Articles 3 and 4 apply to interchange fees. Article 12 requires the merchant service charge and the interchange fee to be shown separately to the payee.</dd><dt>What about three-party schemes?</dt><dd>Article 1(3) also excludes transactions with cards issued under three-party schemes from Chapter II. Model the exclusion as its own requirement, with its own reading and test.</dd></dl>
+<div class="more"><p><b>More guides</b></p><ul><li><a href="dora-ai-written-code.html">DORA and AI-written code: what the change record has to show</a></li><li><a href="ai-change-approval-independence.html">Who may approve a change an AI agent wrote? RTS 2024/1774 Article 17(1)(b)</a></li><li><a href="claude-code-audit-trail.html">An audit trail for Claude Code: rule, change, test and approver for every AI edit</a></li><li><a href="ai-agents-copy-fixed-values.html">Why AI coding agents copy fixed values, and how to catch it on every pull request</a></li></ul></div>
+</main>
+<footer>© 2026 newcleardigital · Evidence for your reviews, not legal advice. · No cookies; visits counted anonymously with GoatCounter.</footer>
+<script data-goatcounter="https://newcleardigital.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+</body></html>

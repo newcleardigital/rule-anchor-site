@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>An audit trail for Claude Code: rule, change, test and approver for every AI edit</title>
+<meta name="description" content="How to make every change Claude Code writes traceable to the rule it implements, the test that proves it and the person who approved it, without leaving your repository.">
+<link rel="canonical" href="https://anchored.newcleardigital.com/guides/claude-code-audit-trail.html">
+<meta property="og:title" content="An audit trail for Claude Code: rule, change, test and approver for every AI edit"><meta property="og:description" content="How to make every change Claude Code writes traceable to the rule it implements, the test that proves it and the person who approved it, without leaving your repository.">
+<meta property="og:type" content="article"><meta property="og:url" content="https://anchored.newcleardigital.com/guides/claude-code-audit-trail.html">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<style>
+@font-face{font-family:"Space Grotesk";src:url(../fonts/space-grotesk.woff2) format("woff2");font-weight:300 700;font-display:swap}
+@font-face{font-family:"DM Sans";src:url(../fonts/dm-sans.woff2) format("woff2");font-weight:100 1000;font-display:swap}
+@font-face{font-family:"DM Mono";src:url(../fonts/dm-mono-400.woff2) format("woff2");font-weight:400;font-display:swap}
+:root{--cream:#f7f2ea;--paper:#fffdf9;--ink:#1b1830;--muted:#67637a;--line:rgba(27,24,48,.12);--accent:#6a52c9;--lav-card:#ded4ff;--code:#17142b;--on-code:#ece8fb;
+  --head:"Space Grotesk","Helvetica Neue",system-ui,sans-serif;--sans:"DM Sans","Helvetica Neue",system-ui,sans-serif;--mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--cream:#13111f;--paper:#1d1a2e;--ink:#f2eefa;--muted:#aaa6ba;--line:rgba(255,255,255,.12);--accent:#b9a6ff;--lav-card:#2d2750;color-scheme:dark}}
+:root[data-theme="dark"]{--cream:#13111f;--paper:#1d1a2e;--ink:#f2eefa;--muted:#aaa6ba;--line:rgba(255,255,255,.12);--accent:#b9a6ff;--lav-card:#2d2750;color-scheme:dark}
+*{box-sizing:border-box}html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--cream);color:var(--ink);font:400 1.06rem/1.7 var(--sans)}
+a{color:var(--accent)}
+.top{display:flex;justify-content:space-between;align-items:center;gap:1rem;max-width:46rem;margin:0 auto;padding:1.2rem 16px}
+.top a{color:var(--ink);text-decoration:none;font:600 1rem var(--head);letter-spacing:-.02em}
+.top .cta{font:500 .85rem var(--sans);padding:.55rem .9rem;border-radius:10px;background:var(--ink);color:var(--cream)}
+main{max-width:46rem;margin:0 auto;padding:1rem 16px 4rem}
+.eyebrow{font:400 .72rem var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin:2rem 0 .8rem}
+h1{font:600 clamp(1.9rem,5vw,2.8rem)/1.08 var(--head);letter-spacing:-.045em;margin:0 0 1.2rem}
+h2{font:600 1.45rem/1.2 var(--head);letter-spacing:-.03em;margin:2.4rem 0 .8rem}
+.lede{font-size:1.15rem;color:var(--ink)}
+p,li{color:color-mix(in srgb,var(--ink) 82%,transparent)}
+li{margin:.35rem 0}
+code{font:400 .9em var(--mono);background:var(--paper);border:1px solid var(--line);border-radius:5px;padding:.05em .3em}
+pre{background:var(--code);color:var(--on-code);font:400 .82rem/1.6 var(--mono);padding:1rem 1.1rem;border-radius:12px;overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:.95rem;display:block;overflow-x:auto}
+th,td{text-align:left;vertical-align:top;padding:.6rem .7rem;border-bottom:1px solid var(--line)}
+th{font:600 .9rem var(--head)}
+.box{margin-top:3rem;padding:1.5rem;border-radius:16px;background:var(--lav-card)}
+.box h2{margin-top:0}
+.box .links{display:flex;flex-wrap:wrap;gap:.6rem 1.4rem}
+.faq dt{font:600 1.05rem var(--head);margin-top:1.2rem}.faq dd{margin:.3rem 0 0;color:var(--muted)}
+.more{margin-top:3rem;border-top:1px solid var(--line);padding-top:1.4rem}
+.more ul{padding-left:1.1rem}
+footer{max-width:46rem;margin:0 auto;padding:2rem 16px 3rem;color:var(--muted);font-size:.85rem}
+</style>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Does any code leave the repository?", "acceptedAnswer": {"@type": "Answer", "text": "No. The checks are plain Python scripts in your repository and your CI runner."}}, {"@type": "Question", "name": "Does it slow the agent down?", "acceptedAnswer": {"@type": "Answer", "text": "Each check reads only the file just saved. A broken rule costs the agent one extra edit in the same turn."}}]}</script>
+</head><body>
+<header class="top"><a href="../">Anchor-based development</a><a class="cta" href="../#start">Start free</a></header>
+<main>
+<p class="eyebrow">Guide · 2026-10-21</p>
+<h1>An audit trail for Claude Code: rule, change, test and approver for every AI edit</h1>
+<p class="lede">Claude Code writes good code and keeps no record of why. Each session starts fresh, so the reason a value is 0.2 and not 0.3 lives only in the chat that is gone. Here is how to keep the trail in the repository instead.</p>
+
+<h2>The mechanism, step by step</h2>
+<ol>
+<li><b>Session start → read the record.</b> The session reads the rule catalogue, the decisions and the last handover note before writing anything, so session 12 cannot quietly contradict session 3.</li>
+<li><b>Every save → checked.</b> A PostToolUse hook runs after each file the agent writes. A rulebook value typed into the logic, an unknown requirement ID or a banned word is sent back to the agent (exit code 2), and it fixes it in the same turn.</li>
+<li><b>Every build → the same checks.</b> CI runs the exact scripts the hook used, plus: every rule has a test named after it, generated documents match their source, every file is either governed or exempt.</li>
+<li><b>Approval → a person, separately.</b> The agent cannot sign a reading; a named approver does, in their own commit.</li>
+<li><b>Release → the record is exported.</b> One command joins the catalogue, the code scan, the test scan and git history into a CSV and a printable page, stamped with the commit.</li>
+</ol>
+
+<h2>What you can do today, free</h2>
+<p>Two parts of this run without any purchase. <a href="https://github.com/newcleardigital/anchored-lite">Anchored Lite</a> is a Claude Code plugin that does steps 1 to 3 for your own list of fixed values and words. <a href="https://github.com/newcleardigital/anchored-scan">Anchored Scan</a> is a GitHub Action that comments on every pull request with fixed values copied across files and generated files edited by hand.</p>
+<div class="box">
+<h2>Try it on your repository</h2>
+<p>Two free, open-source tools run the same checks. Nothing leaves your repository.</p>
+<div class="links"><a href="https://github.com/newcleardigital/anchored-scan">Anchored Scan, a GitHub Action ↗</a><a href="https://github.com/newcleardigital/anchored-lite">Anchored Lite, a Claude Code plugin ↗</a><a href="../sample/dora-change-record.html">A sample change record ↗</a><a href="../#pricing">Anchored pricing ↗</a></div>
+</div>
+<h2>Questions</h2>
+<dl class="faq"><dt>Does any code leave the repository?</dt><dd>No. The checks are plain Python scripts in your repository and your CI runner.</dd><dt>Does it slow the agent down?</dt><dd>Each check reads only the file just saved. A broken rule costs the agent one extra edit in the same turn.</dd></dl>
+<div class="more"><p><b>More guides</b></p><ul><li><a href="dora-ai-written-code.html">DORA and AI-written code: what the change record has to show</a></li><li><a href="ai-change-approval-independence.html">Who may approve a change an AI agent wrote? RTS 2024/1774 Article 17(1)(b)</a></li><li><a href="interchange-fee-caps-in-code.html">Coding the EU interchange fee caps so an auditor can check them</a></li><li><a href="ai-agents-copy-fixed-values.html">Why AI coding agents copy fixed values, and how to catch it on every pull request</a></li></ul></div>
+</main>
+<footer>© 2026 newcleardigital · Evidence for your reviews, not legal advice. · No cookies; visits counted anonymously with GoatCounter.</footer>
+<script data-goatcounter="https://newcleardigital.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+</body></html>

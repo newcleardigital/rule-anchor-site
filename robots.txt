@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://anchored.newcleardigital.com/sitemap.xml

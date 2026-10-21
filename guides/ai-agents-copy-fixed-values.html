@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Why AI coding agents copy fixed values, and how to catch it on every pull request</title>
+<meta name="description" content="AI agents type the same fee, limit or rate into a second file because they cannot see the first. A zero-config GitHub Action that finds these copies and comments on the pull request.">
+<link rel="canonical" href="https://anchored.newcleardigital.com/guides/ai-agents-copy-fixed-values.html">
+<meta property="og:title" content="Why AI coding agents copy fixed values, and how to catch it on every pull request"><meta property="og:description" content="AI agents type the same fee, limit or rate into a second file because they cannot see the first. A zero-config GitHub Action that finds these copies and comments on the pull request.">
+<meta property="og:type" content="article"><meta property="og:url" content="https://anchored.newcleardigital.com/guides/ai-agents-copy-fixed-values.html">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<style>
+@font-face{font-family:"Space Grotesk";src:url(../fonts/space-grotesk.woff2) format("woff2");font-weight:300 700;font-display:swap}
+@font-face{font-family:"DM Sans";src:url(../fonts/dm-sans.woff2) format("woff2");font-weight:100 1000;font-display:swap}
+@font-face{font-family:"DM Mono";src:url(../fonts/dm-mono-400.woff2) format("woff2");font-weight:400;font-display:swap}
+:root{--cream:#f7f2ea;--paper:#fffdf9;--ink:#1b1830;--muted:#67637a;--line:rgba(27,24,48,.12);--accent:#6a52c9;--lav-card:#ded4ff;--code:#17142b;--on-code:#ece8fb;
+  --head:"Space Grotesk","Helvetica Neue",system-ui,sans-serif;--sans:"DM Sans","Helvetica Neue",system-ui,sans-serif;--mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--cream:#13111f;--paper:#1d1a2e;--ink:#f2eefa;--muted:#aaa6ba;--line:rgba(255,255,255,.12);--accent:#b9a6ff;--lav-card:#2d2750;color-scheme:dark}}
+:root[data-theme="dark"]{--cream:#13111f;--paper:#1d1a2e;--ink:#f2eefa;--muted:#aaa6ba;--line:rgba(255,255,255,.12);--accent:#b9a6ff;--lav-card:#2d2750;color-scheme:dark}
+*{box-sizing:border-box}html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--cream);color:var(--ink);font:400 1.06rem/1.7 var(--sans)}
+a{color:var(--accent)}
+.top{display:flex;justify-content:space-between;align-items:center;gap:1rem;max-width:46rem;margin:0 auto;padding:1.2rem 16px}
+.top a{color:var(--ink);text-decoration:none;font:600 1rem var(--head);letter-spacing:-.02em}
+.top .cta{font:500 .85rem var(--sans);padding:.55rem .9rem;border-radius:10px;background:var(--ink);color:var(--cream)}
+main{max-width:46rem;margin:0 auto;padding:1rem 16px 4rem}
+.eyebrow{font:400 .72rem var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin:2rem 0 .8rem}
+h1{font:600 clamp(1.9rem,5vw,2.8rem)/1.08 var(--head);letter-spacing:-.045em;margin:0 0 1.2rem}
+h2{font:600 1.45rem/1.2 var(--head);letter-spacing:-.03em;margin:2.4rem 0 .8rem}
+.lede{font-size:1.15rem;color:var(--ink)}
+p,li{color:color-mix(in srgb,var(--ink) 82%,transparent)}
+li{margin:.35rem 0}
+code{font:400 .9em var(--mono);background:var(--paper);border:1px solid var(--line);border-radius:5px;padding:.05em .3em}
+pre{background:var(--code);color:var(--on-code);font:400 .82rem/1.6 var(--mono);padding:1rem 1.1rem;border-radius:12px;overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:.95rem;display:block;overflow-x:auto}
+th,td{text-align:left;vertical-align:top;padding:.6rem .7rem;border-bottom:1px solid var(--line)}
+th{font:600 .9rem var(--head)}
+.box{margin-top:3rem;padding:1.5rem;border-radius:16px;background:var(--lav-card)}
+.box h2{margin-top:0}
+.box .links{display:flex;flex-wrap:wrap;gap:.6rem 1.4rem}
+.faq dt{font:600 1.05rem var(--head);margin-top:1.2rem}.faq dd{margin:.3rem 0 0;color:var(--muted)}
+.more{margin-top:3rem;border-top:1px solid var(--line);padding-top:1.4rem}
+.more ul{padding-left:1.1rem}
+footer{max-width:46rem;margin:0 auto;padding:2rem 16px 3rem;color:var(--muted);font-size:.85rem}
+</style>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Will it fail my build?", "acceptedAnswer": {"@type": "Answer", "text": "Not without configuration: it only advises. Add anchor-core.json naming your watched values and it fails the build on a copy."}}, {"@type": "Question", "name": "Does it send my code anywhere?", "acceptedAnswer": {"@type": "Answer", "text": "No. It runs in your runner and talks only to the GitHub API of your repository, to read the pull request's files and write its comment."}}]}</script>
+</head><body>
+<header class="top"><a href="../">Anchor-based development</a><a class="cta" href="../#start">Start free</a></header>
+<main>
+<p class="eyebrow">Guide · 2026-10-21</p>
+<h1>Why AI coding agents copy fixed values, and how to catch it on every pull request</h1>
+<p class="lede">Ask an agent to add a fee to the quote endpoint and it will often write <code>amount * 0.015</code>, even though <code>FEE_RATE = 0.015</code> already exists three folders away. It did not see it, and the number was right. Six months later the fee changes, one copy moves, and nobody notices until finance does.</p>
+
+<h2>Why it happens</h2>
+<ul>
+<li>The agent reads the files near its task, not the whole codebase.</li>
+<li>A literal that matches the spec looks correct to the agent and to a reviewer.</li>
+<li>Tests pass: both copies have the same value, today.</li>
+</ul>
+
+<h2>Catching it without configuration</h2>
+<p><a href="https://github.com/newcleardigital/anchored-scan">Anchored Scan</a> is a free GitHub Action. On every pull request it looks for numbers used in logic (beside a comparison, or multiplying or dividing) in two or more files outside tests and vendored code. Sizes, bit masks, HTTP status codes and small whole numbers are skipped. It posts one comment and updates it on each push:</p>
+<pre>| Value   | Files | Where                                    |
+|---------|-------|------------------------------------------|
+| 0.015   | 2     | api/quote.py:2 ✱, app/fees.py:3          |
+| 5000    | 2     | api/quote.py:3 ✱, app/fees.py:2          |</pre>
+<p>It also flags a generated file edited by hand in the pull request: the edit is lost the next time the generator runs.</p>
+
+<h2>Stopping it before the pull request</h2>
+<p>With <a href="https://github.com/newcleardigital/anchored-lite">Anchored Lite</a> in Claude Code, you list the values your product decides on purpose and the one file they live in. The moment the agent types one elsewhere, it is told where to read it from and fixes it in the same turn.</p>
+<pre>on: pull_request
+permissions:
+  contents: read
+  pull-requests: write
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: newcleardigital/anchored-scan@v1</pre>
+<div class="box">
+<h2>Try it on your repository</h2>
+<p>Two free, open-source tools run the same checks. Nothing leaves your repository.</p>
+<div class="links"><a href="https://github.com/newcleardigital/anchored-scan">Anchored Scan, a GitHub Action ↗</a><a href="https://github.com/newcleardigital/anchored-lite">Anchored Lite, a Claude Code plugin ↗</a><a href="../sample/dora-change-record.html">A sample change record ↗</a><a href="../#pricing">Anchored pricing ↗</a></div>
+</div>
+<h2>Questions</h2>
+<dl class="faq"><dt>Will it fail my build?</dt><dd>Not without configuration: it only advises. Add anchor-core.json naming your watched values and it fails the build on a copy.</dd><dt>Does it send my code anywhere?</dt><dd>No. It runs in your runner and talks only to the GitHub API of your repository, to read the pull request&#x27;s files and write its comment.</dd></dl>
+<div class="more"><p><b>More guides</b></p><ul><li><a href="dora-ai-written-code.html">DORA and AI-written code: what the change record has to show</a></li><li><a href="ai-change-approval-independence.html">Who may approve a change an AI agent wrote? RTS 2024/1774 Article 17(1)(b)</a></li><li><a href="claude-code-audit-trail.html">An audit trail for Claude Code: rule, change, test and approver for every AI edit</a></li><li><a href="interchange-fee-caps-in-code.html">Coding the EU interchange fee caps so an auditor can check them</a></li></ul></div>
+</main>
+<footer>© 2026 newcleardigital · Evidence for your reviews, not legal advice. · No cookies; visits counted anonymously with GoatCounter.</footer>
+<script data-goatcounter="https://newcleardigital.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+</body></html>
