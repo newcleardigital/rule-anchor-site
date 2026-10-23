@@ -45,7 +45,7 @@ footer{max-width:46rem;margin:0 auto;padding:2rem 16px 3rem;color:var(--muted);f
 </head><body>
 <header class="top"><a href="../">Anchor-based development</a><a class="cta" href="../#start">Start free</a></header>
 <main>
-<p class="eyebrow">Guide · 2026-10-21</p>
+<p class="eyebrow">Guide · 2026-10-23</p>
 <h1>Why AI coding agents copy fixed values, and how to catch it on every pull request</h1>
 <p class="lede">Ask an agent to add a fee to the quote endpoint and it will often write <code>amount * 0.015</code>, even though <code>FEE_RATE = 0.015</code> already exists three folders away. It did not see it, and the number was right. Six months later the fee changes, one copy moves, and nobody notices until finance does.</p>
 
@@ -85,6 +85,6 @@ jobs:
 <dl class="faq"><dt>Will it fail my build?</dt><dd>Not without configuration: it only advises. Add anchor-core.json naming your watched values and it fails the build on a copy.</dd><dt>Does it send my code anywhere?</dt><dd>No. It runs in your runner and talks only to the GitHub API of your repository, to read the pull request&#x27;s files and write its comment.</dd></dl>
 <div class="more"><p><b>More guides</b></p><ul><li><a href="dora-ai-written-code.html">DORA and AI-written code: what the change record has to show</a></li><li><a href="ai-change-approval-independence.html">Who may approve a change an AI agent wrote? RTS 2024/1774 Article 17(1)(b)</a></li><li><a href="claude-code-audit-trail.html">An audit trail for Claude Code: rule, change, test and approver for every AI edit</a></li><li><a href="interchange-fee-caps-in-code.html">Coding the EU interchange fee caps so an auditor can check them</a></li></ul></div>
 </main>
-<footer>© 2026 newcleardigital · Evidence for your reviews, not legal advice. · No cookies; visits counted anonymously with GoatCounter.</footer>
+<footer>© 2026 newcleardigital · Operated by Stoyan Dimitrov, Peyo K. Yavorov Blvd., Sofia, Bulgaria · office@newcleardigital.com · Evidence for your reviews, not legal advice. · No cookies; visits counted anonymously with GoatCounter.</footer>
 <script data-goatcounter="https://newcleardigital.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 </body></html>
