@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Anchor-based development: every AI change, proven</title>
-<meta name="description" content="Anchored traces every change your AI coding agent makes to the requirement it implements, the test that proves it and the person who signed it off. Works with any written rulebook your software must follow.">
+<meta name="description" content="For fintech and payment teams under DORA: Anchored traces every change your AI coding agent makes to rule-bound code to the rule it implements, the test that proves it and the person who approved it. Free GitHub Action and Claude Code plugin to start.">
 <meta property="og:title" content="Anchor-based development">
 <meta property="og:description" content="Every AI change, proven.">
 <meta property="og:url" content="https://anchored.newcleardigital.com/">
@@ -456,13 +456,13 @@ details p{padding:0 0 1.3rem;color:var(--muted);max-width:44rem}
 <main id="main">
 <div class="hero shell">
   <div class="hero-copy">
-    <p class="eyebrow">For code that follows a written rulebook</p>
+    <p class="eyebrow">For fintech and payment code under DORA</p>
     <h1>Every AI change, <em>proven.</em></h1>
     <p class="lede">Anchor-based development is how to use AI on rule-bound code without losing the proof:
-      every change your AI coding agent makes is traced to the requirement it implements, the test that
-      proves it and the person who signed it off. <strong>Anchored is the toolkit that runs it in your repository.</strong></p>
+      every change your AI coding agent makes to rule-bound code is traced to the rule it implements, the
+      test that proves it and the person who approved it. <strong>Anchored is the toolkit that runs it in your repository.</strong></p>
     <div class="callbar">
-      <span>Free for every pull request. One line of YAML, no account.</span>
+      <span>Free on every pull request. One workflow file, no account.</span>
       <a class="button" data-free="hero" href="#start">Start free <span class="arr" aria-hidden="true">→</span></a>
     </div>
     <div class="hero-links"><a class="text-link" data-free="sample-hero" href="sample/dora-change-record.html">Sample DORA change record <span aria-hidden="true">↗</span></a><a class="text-link" href="#record">See the record <span aria-hidden="true">↗</span></a><a class="text-link" href="#pricing">See pricing <span aria-hidden="true">↗</span></a></div>
@@ -474,20 +474,20 @@ details p{padding:0 0 1.3rem;color:var(--muted);max-width:44rem}
     <div class="orbit two" aria-hidden="true"></div>
     <div class="spark a" aria-hidden="true">✦</div>
     <div class="spark b" aria-hidden="true">✧</div>
-    <figure class="editor-card" aria-label="An AI agent writes a tax rate straight into the code. Anchored stops it and says where the value must come from. The agent fixes it and all four requirements pass.">
-      <div class="topbar" aria-hidden="true"><div class="dots"><i></i><i></i><i></i></div><span>price-display / display.ts</span><span class="live"><i></i>Claude Code</span></div>
+    <figure class="editor-card" aria-label="An AI agent writes the debit-card interchange cap straight into the code. Anchored catches it as the file is saved and says where the value must come from. The agent fixes it and all four rules pass.">
+      <div class="topbar" aria-hidden="true"><div class="dots"><i></i><i></i><i></i></div><span>interchange-fees / interchange.py</span><span class="live"><i></i>Claude Code</span></div>
       <div class="editor-body" aria-hidden="true">
-        <div class="seq s1"><span class="who">The agent writes</span><span class="code"><span class="ln">9</span><span>const vat = net * <span class="bad">19</span> / 100;</span></span></div>
-        <div class="seq s2"><span class="verdict"><b>Anchored: stopped.</b> display.ts breaks the project's rules.
-Line 9: 19 is a rate from PD-TOTAL-001.
-Read it from law/constants.</span></div>
-        <div class="seq s3"><span class="who">The agent fixes it</span><span class="code"><span class="ln">9</span><span>const vat = net * <span class="good">vatPctOn(day)</span> / 100;<b class="cursor"></b></span></span></div>
-        <div class="seq s4"><span class="verdict ok"><b>All checks pass.</b> 4 of 4 requirements proved by a test.</span></div>
+        <div class="seq s1"><span class="who">The agent writes</span><span class="code"><span class="ln">9</span><span>cap = amount * <span class="bad">0.2</span> / 100</span></span></div>
+        <div class="seq s2"><span class="verdict"><b>Anchored: caught.</b> interchange.py breaks the project's rules.
+Line 9: 0.2 is the debit cap from IF-CAP-001.
+Read it from law/caps.py.</span></div>
+        <div class="seq s3"><span class="who">The agent fixes it</span><span class="code"><span class="ln">9</span><span>cap = amount * <span class="good">debit_cap_pct(day)</span> / 100<b class="cursor"></b></span></span></div>
+        <div class="seq s4"><span class="verdict ok"><b>All checks pass.</b> 4 of 4 rules proved by a test.</span></div>
       </div>
-      <div class="editor-footer" aria-hidden="true"><span>✦ Rule: <b>PD-TOTAL-001</b></span><span>4 / 4 proved</span></div>
+      <div class="editor-footer" aria-hidden="true"><span>✦ Rule: <b>IF-CAP-001</b></span><span>4 / 4 proved</span></div>
     </figure>
-    <div class="floating-note note-top" aria-hidden="true"><span>Stopped</span><b>Line 9: 19</b><small>belongs to PD-TOTAL-001</small></div>
-    <div class="floating-note note-bottom" aria-hidden="true"><span>Approved by</span><b class="sg">Dr. Weber</b><small>External counsel</small></div>
+    <div class="floating-note note-top" aria-hidden="true"><span>Caught</span><b>Line 9: 0.2</b><small>belongs to IF-CAP-001</small></div>
+    <div class="floating-note note-bottom" aria-hidden="true"><span>Approved by</span><b class="sg">M. Petrova</b><small>Head of compliance</small></div>
   </div>
 
   <section class="problem" id="problem" aria-labelledby="problem-title">
@@ -536,7 +536,7 @@ Read it from law/constants.</span></div>
   <div class="intro">
     <p class="eyebrow">Start free</p>
     <h2>Try the checks <em>today, for free.</em></h2>
-    <p>Two free tools run the same checks Anchored is built on. No account, no sign-up, and nothing leaves your repository.</p>
+    <p>Two free tools catch the first problems AI-written code brings: copied fixed values, drifting names and hand-edited generated files. No account, no sign-up, and nothing leaves your repository.</p>
   </div>
   <div class="starts">
     <div class="start-card lead">
@@ -579,15 +579,15 @@ claude plugin install anchor-core@anchored-lite</pre>
       <div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 9h14M5 15h14M10 4 8 20M16 4l-2 16"/></svg></div>
       <p class="card-index">01 / 04</p>
       <h3>A number from the specification, typed into the code</h3>
-      <p>Stopped on that file. The agent is told which requirement the number belongs to and where to read it from.</p>
-      <div class="outcome"><span class="stopped">Stopped</span><i class="arr" aria-hidden="true">↗</i></div>
+      <p>Caught the moment the file is saved. The agent is told which requirement the number belongs to and where to read it from, and fixes it in the same turn.</p>
+      <div class="outcome"><span class="stopped">Caught</span><i class="arr" aria-hidden="true">↗</i></div>
     </li>
     <li class="feature-card fc-peach">
       <div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="m10 12 4 4m0-4-4 4"/></svg></div>
       <p class="card-index">02 / 04</p>
       <h3>Code that cites a requirement that does not exist</h3>
-      <p>Stopped, with the unknown ID named. No code can claim to follow a rule nobody wrote.</p>
-      <div class="outcome"><span class="stopped">Stopped</span><i class="arr" aria-hidden="true">↗</i></div>
+      <p>Caught on save, with the unknown ID named, and the build fails. No code can claim to follow a rule nobody wrote.</p>
+      <div class="outcome"><span class="stopped">Caught</span><i class="arr" aria-hidden="true">↗</i></div>
     </li>
     <li class="feature-card fc-pale">
       <div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c1.2-3.4 3.8-5 7-5s5.8 1.6 7 5"/></svg></div>
@@ -616,30 +616,30 @@ claude plugin install anchor-core@anchored-lite</pre>
         <br><a class="text-link" href="#pricing" style="margin-top:1rem">See what it costs <span aria-hidden="true">↗</span></a></p>
     </div>
     <figure class="product-window">
-      <div class="window-header"><div class="dots" aria-hidden="true"><i></i><i></i><i></i></div><span class="window-title"><span aria-hidden="true">✦</span>Traceability · price-display · PAngV as in force 2026-01-01</span><span>Generated, do not edit</span></div>
+      <div class="window-header"><div class="dots" aria-hidden="true"><i></i><i></i><i></i></div><span class="window-title"><span aria-hidden="true">✦</span>Traceability · interchange-fees · Regulation (EU) 2015/751</span><span>Generated, do not edit</span></div>
       <div class="scroll">
         <table>
           <thead><tr><th>Requirement</th><th>What it says</th><th>Source</th><th>Approved by</th><th>Code</th><th>Test</th><th>Status</th></tr></thead>
           <tbody>
-            <tr><td class="id">PD-TOTAL-001</td><td class="what">Show the total price including 19% VAT and all unavoidable charges</td><td class="loc">§3(1)</td>
-              <td><span class="sig"><span>Dr. Weber</span><small>External counsel, 6 Oct 2026</small></span></td>
-              <td class="loc">display.ts:7</td><td class="loc">display.test.ts:3</td><td><span class="ok">Proved</span></td></tr>
-            <tr><td class="id">PD-TOTAL-002</td><td class="what">Never show the net price more prominently than the total</td><td class="loc">§3(2)</td>
-              <td><span class="sig"><span>Dr. Weber</span><small>External counsel, 6 Oct 2026</small></span></td>
-              <td class="loc">display.ts:13</td><td class="loc">display.test.ts:7</td><td><span class="ok">Proved</span></td></tr>
-            <tr><td class="id">PD-UNIT-001</td><td class="what">Show the price per unit of measure next to the total</td><td class="loc">§4(1)</td>
-              <td><span class="sig"><span>Dr. Weber</span><small>External counsel, 6 Oct 2026</small></span></td>
-              <td class="loc">display.ts:20</td><td class="loc">display.test.ts:11</td><td><span class="ok">Proved</span></td></tr>
-            <tr><td class="id">PD-UNIT-002</td><td class="what">Update the unit price within 2 days of a change</td><td class="loc">§4(3)</td>
-              <td><span class="sig"><span>Dr. Weber</span><small>External counsel, 6 Oct 2026</small></span></td>
-              <td class="loc">display.ts:26</td><td class="loc">display.test.ts:15</td><td><span class="ok">Proved</span></td></tr>
-            </tbody>
+            <tr><td class="id">IF-CAP-001</td><td class="what">Debit card interchange no more than 0.2 % of the transaction value</td><td class="loc">Art. 3(1)</td>
+              <td><span class="sig"><span>M. Petrova</span><small>Head of compliance, 2 Oct 2026</small></span></td>
+              <td class="loc">interchange.py:24</td><td class="loc">test_interchange.py:13</td><td><span class="ok">Proved</span></td></tr>
+            <tr><td class="id">IF-CAP-002</td><td class="what">Credit card interchange no more than 0.3 % of the transaction value</td><td class="loc">Art. 4</td>
+              <td><span class="sig"><span>M. Petrova</span><small>Head of compliance, 2 Oct 2026</small></span></td>
+              <td class="loc">interchange.py:24</td><td class="loc">test_interchange.py:18</td><td><span class="ok">Proved</span></td></tr>
+            <tr><td class="id">IF-SCOPE-001</td><td class="what">Commercial cards are outside the caps</td><td class="loc">Art. 1(3)(a)</td>
+              <td><span class="sig"><span>M. Petrova</span><small>Head of compliance, 2 Oct 2026</small></span></td>
+              <td class="loc">interchange.py:29</td><td class="loc">test_interchange.py:23</td><td><span class="ok">Proved</span></td></tr>
+            <tr><td class="id">IF-INFO-001</td><td class="what">Show the payee the service charge and interchange fee separately</td><td class="loc">Art. 12(1)</td>
+              <td><span class="sig"><span>M. Petrova</span><small>Head of compliance, 2 Oct 2026</small></span></td>
+              <td class="loc">statement.py:7</td><td class="loc">test_interchange.py:27</td><td><span class="ok">Proved</span></td></tr>
+</tbody>
         </table>
       </div>
       <div class="window-stats"><span><b>4 / 4</b><small>requirements proved</small></span><span><b>4</b><small>approved by a person</small></span><span><b>0</b><small>untraced changes</small></span></div>
     </figure>
-    <p class="note">From the price-display example that ships with Anchored: four rules from the German Price Indication
-      Ordinance. The approver is illustrative.</p>
+    <p class="note">From the interchange-fees example that ships with Anchored: four rules from the EU Interchange Fee
+      Regulation. The approver is illustrative. <a class="text-link" href="sample/dora-change-record.html">See its full DORA change record</a>.</p>
   </div>
 </section>
 
@@ -675,7 +675,7 @@ claude plugin install anchor-core@anchored-lite</pre>
     <p class="eyebrow">Pricing</p>
     <h2>Anchored, <em>the toolkit.</em></h2>
     <p>Anchored runs Anchor-based development in your repository and build. Start with the free tools;
-      buy when you need the evidence. Access to the repository arrives right after checkout.</p>
+      buy when you need the evidence. Connect your GitHub account on the order page and access arrives at once.</p>
   </div>
   <div class="offers">
     <div class="offer first">
@@ -693,9 +693,9 @@ claude plugin install anchor-core@anchored-lite</pre>
     <div class="offer">
       <p class="who-for">The whole team</p>
       <h3>Team</h3>
-      <p class="price">€490 <small>per project, per month</small></p>
+      <p class="price">€490 <small>per repository, per month</small></p>
       <ul>
-        <li>Unlimited developers on the project</li>
+        <li>Unlimited developers on the repository</li>
         <li>Everything in Solo</li>
         <li>Reply within one working day</li>
         <li>Written help setting up your catalogue</li>
@@ -707,9 +707,9 @@ claude plugin install anchor-core@anchored-lite</pre>
       <h3>Design Partner</h3>
       <p class="price">€2,500 <small>one time</small></p>
       <ul>
-        <li>We set it up with you, in your repository</li>
+        <li>We set it up in your repository, by pull request</li>
         <li>Your requirements, checks and first traceability export, done</li>
-        <li>Three months included</li>
+        <li>Three months included, questions by email</li>
         <li>In return: your feedback and a short case study</li>
       </ul>
       <div class="buy"><a class="button" data-buy="designPartner" hidden>Buy Design Partner <span class="arr" aria-hidden="true">→</span></a><a class="button ghost" data-call="Design Partner" href="#call">Email a question</a></div>
@@ -725,15 +725,15 @@ claude plugin install anchor-core@anchored-lite</pre>
     <div><p class="eyebrow">Questions</p><h2>Asked <em>before buying.</em></h2></div>
     <div class="faq">
       <details><summary>Can we try it before paying?</summary>
-        <p>Yes. Anchored Scan and Anchored Lite are free and run the same checks. When you buy, monthly plans come with 14 days to change your mind and a full refund.</p></details>
-      <details><summary>We already use Jama, Polarion or Jira.</summary>
-        <p>Keep them. They hold the requirements; Anchored works where the code is written and stops untraced changes before they exist. Its evidence exports as a CSV you can bring into those tools.</p></details>
+        <p>Yes. Anchored Scan and Anchored Lite are free and show how the checks work on your own code. The paid toolkit adds the rule catalogue, the approval lock, a test per rule and the evidence export; the sample change record shows what you get. Monthly plans come with 14 days to change your mind and a full refund.</p></details>
+      <details><summary>We already use Jira, Confluence or ServiceNow.</summary>
+        <p>Keep them. They hold tickets and change requests; Anchored works where the code is written: it catches untraced changes as they are saved and fails the build on any that remain. Its evidence exports as a CSV you can attach to those records.</p></details>
       <details><summary>We don't use AI on that part of our code yet.</summary>
         <p>Then this is the easiest time to start: setup is simplest before the first AI-written line, and the record is complete from day one.</p></details>
       <details><summary>Which rulebooks does it work with?</summary>
         <p>Any written document your software must follow: a product specification, a contract, pricing and consumer rules, or payment and billing rules.</p></details>
       <details><summary>What do we need?</summary>
-        <p>Claude Code and a GitHub account. The checks work with TypeScript, Python, Java, Kotlin, C#, Go, Rust and more.</p></details>
+        <p>For Anchored: Claude Code, a GitHub repository and Python 3 in your CI. The free Scan needs only GitHub. The checks work with TypeScript, Python, Java, Kotlin, C#, Go, Rust and more.</p></details>
       <details><summary>Does our code leave our servers?</summary>
         <p>No. The checks run in your repository and your build. Nothing is sent to us.</p></details>
     </div>
@@ -745,7 +745,7 @@ claude plugin install anchor-core@anchored-lite</pre>
     <p class="eyebrow">Questions</p>
     <h2>Ask the person <em>who built it.</em></h2>
     <p class="body">Write with your product and the rules it must follow. I answer every email myself.
-      The code is plain Python you can read and keep.</p>
+      The checks are plain Python you can read, and everything they produce in your repository stays yours.</p>
     <p class="sig-line" aria-hidden="true">Stoyan Dimitrov</p>
     <p class="who-is">Stoyan Dimitrov, newcleardigital</p>
     <div class="actions">
