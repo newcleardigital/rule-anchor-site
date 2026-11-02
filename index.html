@@ -240,7 +240,7 @@ td.what{max-width:20rem}
 @media (max-width:640px){.steps{grid-template-columns:1fr}.steps li{border-left:0!important}.steps li + li{border-top:1px solid var(--hair)}}
 
 /* Limits */
-.limits{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:2rem}
+.limits{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:2rem}
 .limits div{display:flex;flex-direction:column;gap:.6rem;padding-top:1rem;border-top:1px solid var(--hair)}
 .limits p{color:var(--muted)}
 @media (max-width:860px){.limits{grid-template-columns:1fr;gap:1.5rem}}
@@ -372,58 +372,158 @@ details p{padding:0 0 1.25rem;color:var(--muted);max-width:44rem}
 @media (max-width:980px){.problem{grid-template-columns:1fr}}
 @media (max-width:520px){.chain{grid-template-columns:repeat(2,minmax(0,1fr))}.chain .node:nth-child(3)::before{display:none}.sessions{gap:.2rem}.s-label.a{left:0}}
 @media (prefers-reduced-motion:reduce){.problem *{transition:none!important}.js .p-line{opacity:1}}
+
+/* Kiro-style structure (2026-11-02): install first, then proof, then trust. The look stays the Anchored design system. */
+.site-header.kiro{grid-template-columns:auto 1fr}
+.site-header.kiro .brand{justify-self:start}
+.site-header.kiro .nav.right{gap:1.75rem}
+@media (max-width:860px){.site-header.kiro .nav.right a:not(.header-cta){display:none}}
+.hero2{padding-block:clamp(3.5rem,8vw,6rem) 0;display:flex;flex-direction:column;gap:1.5rem}
+.hero2 > *{max-width:52rem}
+.hero2 h1{max-width:20ch}
+.hero-actions{display:flex;flex-wrap:wrap;gap:.75rem}
+.button.small{padding:.4rem .8rem;font-size:.8125rem}
+.install{margin-top:.75rem;border:1px solid var(--hair);background:var(--sunken);max-width:44rem}
+.install-head{display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:.5rem .5rem .5rem 1rem;border-bottom:1px solid var(--hair);font:500 .6875rem var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.install pre{margin:0;padding:1rem;font:400 .8125rem/1.6 var(--mono);overflow-x:auto;color:var(--ink)}
+.install-foot{padding:.6rem 1rem;border-top:1px solid var(--hair);font-size:.8125rem;color:var(--muted)}
+.install-foot code{font:400 .8125rem var(--mono);color:var(--ink)}
+@media (max-width:520px){.install-head{flex-direction:column;align-items:flex-start}}
+.hero-band{padding-bottom:clamp(3rem,6vw,5rem)}
+.shots{margin:clamp(2.5rem,5vw,4rem) 0 0;border:1px solid var(--hair);background:var(--sunken)}
+.tabs{display:flex;flex-wrap:wrap;border-bottom:1px solid var(--hair)}
+.tab{border:0;border-right:1px solid var(--hair);background:transparent;color:var(--muted);font:500 .875rem var(--sans);padding:.8rem 1.1rem;cursor:pointer}
+.tab:hover{color:var(--ink)}
+.tab[aria-selected="true"]{color:var(--ink);box-shadow:inset 0 -2px 0 var(--brass)}
+.term{margin:0;padding:1.25rem;min-height:15rem;font:400 .8125rem/1.65 var(--mono);color:var(--ink);white-space:pre-wrap;overflow-wrap:anywhere}
+.t-dim{color:var(--muted)}.t-bad{color:var(--danger)}.t-ok{color:var(--success)}
+.shots figcaption{padding:.6rem 1.25rem;border-top:1px solid var(--hair);font:400 .75rem var(--mono);color:var(--muted)}
+.rows{display:flex;flex-direction:column;border-top:1px solid var(--hair)}
+.row{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(2rem,5vw,5rem);align-items:center;padding-block:clamp(2.5rem,5vw,4rem);border-bottom:1px solid var(--hair)}
+.row.rev .row-text{order:2}
+.row-text{display:flex;flex-direction:column;gap:1rem;align-items:flex-start}
+.row-text h3{font-size:clamp(1.5rem,2.4vw,2rem);line-height:1.15;letter-spacing:-.015em}
+.row-text p:not(.row-num){color:var(--muted);font-size:1.0625rem;max-width:34rem}
+.row-num{font:500 .75rem var(--mono);letter-spacing:.16em;color:var(--muted)}
+.row-pic{min-width:0}
+.row-pic .hero-art{padding:4.5rem 0 0}
+@media (max-width:900px){.row{grid-template-columns:minmax(0,1fr)}.row.rev .row-text{order:0}}
+.ledger{background:var(--sunken);border:1px solid var(--hair);padding:1rem}
+.ledger-head,.ledger-foot{font:500 .6875rem var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.ledger-foot{letter-spacing:.06em;text-transform:none;font:400 .75rem var(--mono);margin-top:.75rem}
+.rec{margin-top:.6rem;padding:.6rem .75rem;background:var(--surface);font:400 .8125rem/1.5 var(--mono);color:var(--ink)}
+.rec .sep{color:var(--muted);padding:0 .4em}
+.rec .yes{color:var(--success)}.rec .no{color:var(--danger)}
+table.mini{min-width:30rem}
+table.mini th,table.mini td{padding:.75rem 1rem}
+.trust{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid var(--hair)}
+.trust div{padding:1.5rem 1.5rem 0 0;display:flex;flex-direction:column;gap:.6rem}
+.trust div + div{padding-left:1.5rem;border-left:1px solid var(--hair)}
+.trust p{color:var(--muted)}
+.trust-band .intro{border-top-color:var(--hair)}
+@media (max-width:860px){.trust{grid-template-columns:1fr}.trust div + div{padding-left:0;border-left:0;border-top:1px solid var(--hair)}.trust div{padding-bottom:1.25rem}}
+.proof{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid var(--hair);border-bottom:1px solid var(--hair)}
+.proof > div{padding:1.5rem;display:flex;flex-direction:column;gap:.6rem;align-items:flex-start}
+.proof > div + div{border-left:1px solid var(--hair)}
+.stat{font:500 clamp(2.25rem,4vw,3rem)/1 var(--mono);letter-spacing:-.02em}
+.proof p:not(.stat){color:var(--muted)}
+@media (max-width:1000px){.proof{grid-template-columns:repeat(2,minmax(0,1fr))}.proof > div:nth-child(3){border-left:0}.proof > div:nth-child(n+3){border-top:1px solid var(--hair)}}
+@media (max-width:560px){.proof{grid-template-columns:1fr}.proof > div{border-left:0!important}.proof > div + div{border-top:1px solid var(--hair)}}
+.guide-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--hair);border:1px solid var(--hair)}
+.guide-card{display:flex;flex-direction:column;gap:.6rem;padding:1.5rem;background:var(--surface);color:var(--ink);text-decoration:none}
+.guide-card:hover{background:var(--sunken)}
+.guide-card h3{font-size:1.125rem;line-height:1.3}
+.guide-card p:not(.row-num){color:var(--muted);font-size:.9375rem}
+.guide-card .read{margin-top:auto;font-weight:600;font-size:.9375rem}
+@media (max-width:980px){.guide-cards{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:600px){.guide-cards{grid-template-columns:1fr}}
+.cta-install{display:flex;flex-wrap:wrap;align-items:center;gap:.75rem 1rem;margin-top:1.75rem;padding-top:1.25rem;border-top:1px solid var(--hair);color:var(--muted);font-size:.9375rem}
 </style>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
 
-<header class="site-header shell">
-  <nav class="nav left" aria-label="The method">
-    <a href="#how">How it works</a>
-    <a href="#record">The record</a>
-    <a href="#method">The method</a>
-  </nav>
+<header class="site-header kiro shell">
   <a class="brand" href="#" aria-label="Anchored, home"><img class="logo-navy" src="brand/anchored-logo-navy.png" width="538" height="160" alt="Anchored"><img class="logo-paper" src="brand/anchored-logo-paper.png" width="479" height="139" alt="Anchored"></a>
-  <nav class="nav right" aria-label="The toolkit">
-    <a class="product" href="#pricing">Pricing</a>
+  <nav class="nav right" aria-label="Main">
+    <a href="#how">How it works</a>
+    <a href="#start">Free tools</a>
+    <a href="#guides">Guides</a>
+    <a href="#pricing">Pricing</a>
     <a class="header-cta" data-free="header" href="#start">Start free<span aria-hidden="true">↓</span></a>
   </nav>
 </header>
 
 <div class="paid" id="paid" hidden role="status"><div class="shell">Thank you for your order. On the order page, click <b>Connect GitHub account</b> and GitHub emails you access to the repository. Questions: <a href="mailto:office@newcleardigital.com">office@newcleardigital.com</a></div></div>
 <main id="main">
-<div class="band hero-band"><div class="hero shell">
-  <div class="hero-copy">
+<div class="band hero-band">
+  <div class="shell hero2">
     <p class="eyebrow">For fintech and payment code under DORA</p>
-    <h1>Every AI change, <em>proven.</em></h1>
-    <p class="lede">Anchor-based development is how to use AI on rule-bound code without losing the proof:
-      every change your AI coding agent makes to rule-bound code is traced to the rule it implements, the
-      test that proves it and the person who approved it. <strong>Anchored is the toolkit that runs it in your repository.</strong></p>
-    <div class="callbar">
-      <span>Free on every pull request. One workflow file, no account.</span>
+    <h1>Move beyond spec‑driven to <em>anchor‑based development.</em></h1>
+    <p class="lede">Every change your AI coding agent makes to rule-bound code is traced to the rule it implements,
+      the test that proves it and the person who approved it. <strong>Anchored is the toolkit that runs it in your repository.</strong></p>
+    <div class="hero-actions">
       <a class="button" data-free="hero" href="#start">Start free <span class="arr" aria-hidden="true">→</span></a>
+      <a class="button ghost" href="#pricing">Pricing</a>
     </div>
-    <div class="hero-links"><a class="text-link" data-free="sample-hero" href="sample/dora-change-record.html">Sample DORA change record <span aria-hidden="true">↗</span></a><a class="text-link" href="#record">See the record <span aria-hidden="true">↗</span></a><a class="text-link" href="#pricing">See pricing <span aria-hidden="true">↗</span></a></div>
-    <p class="hero-note">Works with any written rulebook: a specification, a contract, pricing rules or a law. Runs inside your repository and your build, with Claude Code.</p>
+    <div class="install">
+      <div class="install-head"><span>Anchored Scan · free GitHub Action · no account</span><button class="button small" type="button" data-copy="scan-yaml">Copy the workflow</button></div>
+      <pre id="scan-yaml">on: pull_request
+permissions:
+  contents: read
+  pull-requests: write
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: newcleardigital/anchored-scan@v1</pre>
+      <p class="install-foot">Save it as a file in <code>.github/workflows/</code>. Scan then comments on every pull request.</p>
+    </div>
   </div>
 
-  <div class="hero-art">
-    <figure class="editor-card" aria-label="An AI agent writes the debit-card interchange cap straight into the code. Anchored catches it as the file is saved and says where the value must come from. The agent fixes it and all four rules pass.">
-      <div class="topbar" aria-hidden="true"><div class="dots"><i></i><i></i><i></i></div><span>interchange-fees / interchange.py</span><span class="live"><i></i>Claude Code</span></div>
-      <div class="editor-body" aria-hidden="true">
-        <div class="seq s1"><span class="who">The agent writes</span><span class="code"><span class="ln">9</span><span>cap = amount * <span class="bad">0.2</span> / 100</span></span></div>
-        <div class="seq s2"><span class="verdict"><b>Anchored: caught.</b> interchange.py breaks the project's rules.
-Line 9: 0.2 is the debit cap from IF-CAP-001.
-Read it from law/caps.py.</span></div>
-        <div class="seq s3"><span class="who">The agent fixes it</span><span class="code"><span class="ln">9</span><span>cap = amount * <span class="good">debit_cap_pct(day)</span> / 100<b class="cursor"></b></span></span></div>
-        <div class="seq s4"><span class="verdict ok"><b>All checks pass.</b> 4 of 4 rules proved by a test.</span></div>
+  <div class="shell">
+    <figure class="shots" id="shots">
+      <div class="tabs" role="tablist" aria-label="What the AI sees">
+        <button class="tab" role="tab" id="tab-1" aria-controls="shot-1" aria-selected="true">Caught on save</button>
+        <button class="tab" role="tab" id="tab-2" aria-controls="shot-2" aria-selected="false" tabindex="-1">The AI cannot sign</button>
+        <button class="tab" role="tab" id="tab-3" aria-controls="shot-3" aria-selected="false" tabindex="-1">The build fails</button>
       </div>
-      <div class="editor-footer" aria-hidden="true"><span>Rule: <b>IF-CAP-001</b></span><span>4 / 4 proved</span></div>
+      <div class="shot" role="tabpanel" id="shot-1" aria-labelledby="tab-1">
+<pre class="term"><span class="t-dim">The agent writes into src/fees/interchange.py:</span>
+    return a * 0.2 / 100
+
+<span class="t-dim">The file is saved. The check runs and answers the agent:</span>
+<span class="t-bad">rule-anchor: src/fees/interchange.py breaks the project's own rules:</span>
+  line 36: 0.2 is a threshold from the authority — read it from `law`
+
+Fix it now, or mark a deliberate use `anchor-allow: &lt;why&gt;`.</pre>
+      </div>
+      <div class="shot" role="tabpanel" id="shot-2" aria-labelledby="tab-2" hidden>
+<pre class="term"><span class="t-dim">The agent tries to mark IF-SCOPE-001 as signed off in docs/requirements.json.</span>
+<span class="t-dim">The edit is blocked before it happens:</span>
+<span class="t-bad">rule-anchor: this edit signs off or rewrites a signed-off reading: IF-SCOPE-001.</span>
+Only a named approver signs a reading. Leave `verified`, `verified_by`, `verified_on` as they are, and do not change the text or reading of a signed-off requirement. To propose a new reading, set `verified` to false in the same edit.
+Ask the person who signs readings to approve it in their own terminal: python3 .anchor/gates/approve.py &lt;ID&gt;.</pre>
+      </div>
+      <div class="shot" role="tabpanel" id="shot-3" aria-labelledby="tab-3" hidden>
+<pre class="term"><span class="t-dim">$ bash .anchor/gates/run.sh      (in CI, on every push; excerpt)</span>
+<span class="t-ok">OK</span>  catalogue well formed  ·  4 requirements, 3 declared domain(s)  ·  all verified
+<span class="t-ok">OK</span>  boundary named  ·  6 anchored, 2 exempt  (75% anchored)
+<span class="t-bad">FAIL</span>  requirement IDs cited in code that are absent from the catalogue — 1:
+  IF-CAP-999  at src/fees/interchange.py:34
+
+An ID not in the catalogue proves nothing. Add the requirement, or fix the typo.
+<span class="t-ok">OK</span>  no authority threshold outside law  ·  2 watched value(s), generated from the requirements
+<span class="t-ok">OK</span>  checks rule-anchor 1.6.0, fingerprint c01ddf7a96ee, intact
+
+<span class="t-bad">GATES FAILED</span></pre>
+      </div>
+      <figcaption>Real output, copied from a run on the public interchange-fees example (Anchored 1.6.0).</figcaption>
     </figure>
-    <div class="floating-note note-top" aria-hidden="true"><span>Caught</span><b>Line 9: 0.2</b><small>belongs to IF-CAP-001</small></div>
-    <div class="floating-note note-bottom" aria-hidden="true"><span>Approved by</span><b class="sg">M. Petrova</b><small>Head of compliance</small></div>
   </div>
-</div></div>
+</div>
+
 <div class="shell problem-wrap">
   <section class="problem" id="problem" aria-labelledby="problem-title">
     <div class="p-text">
@@ -462,10 +562,118 @@ Read it from law/caps.py.</span></div>
   </section>
 </div>
 
-<div class="signal-strip shell" aria-label="What Anchored records">
-  <p>Built for the <span>show me the evidence</span> moment.</p>
-  <div class="strip-items"><span>Traced</span><i></i><span>Approved</span><i></i><span>Proved</span></div>
-</div>
+<section id="how" class="shell">
+  <div class="intro">
+    <p class="eyebrow">How it works</p>
+    <h2>They give the AI the rules. <em>We make it follow them.</em></h2>
+    <p>Requirements tools now hand your specification to the AI as context. Context can be skipped.
+      Anchored sits in the agent's working loop and in your build, so a broken rule is caught before it goes any further.</p>
+  </div>
+  <div class="rows">
+    <div class="row">
+      <div class="row-text">
+        <p class="row-num">01</p>
+        <h3>Caught while the AI types</h3>
+        <p>When the agent saves a file, the check runs. A number from the rulebook typed into the code, a requirement ID
+          that does not exist, a banned name: each is named with its file and line, and the agent fixes it in the same turn.
+          Your build runs the same checks again, and a rule without a passing test fails it.</p>
+        <a class="text-link" href="guides/ai-agents-copy-fixed-values.html">Why AI agents copy fixed values <span aria-hidden="true">→</span></a>
+      </div>
+      <div class="row-pic">
+  <div class="hero-art">
+    <figure class="editor-card" aria-label="An AI agent writes the debit-card interchange cap straight into the code. The check catches it as the file is saved and says where the value must come from. The agent fixes it and all four rules pass.">
+      <div class="topbar" aria-hidden="true"><div class="dots"><i></i><i></i><i></i></div><span>interchange-fees / interchange.py</span><span class="live"><i></i>Claude Code</span></div>
+      <div class="editor-body" aria-hidden="true">
+        <div class="seq s1"><span class="who">The agent writes</span><span class="code"><span class="ln">9</span><span>cap = amount * <span class="bad">0.2</span> / 100</span></span></div>
+        <div class="seq s2"><span class="verdict"><b>rule-anchor:</b> src/fees/interchange.py breaks the project's own rules:
+  line 9: 0.2 is a threshold from the authority — read it from `law`</span></div>
+        <div class="seq s3"><span class="who">The agent fixes it</span><span class="code"><span class="ln">9</span><span>cap = amount * <span class="good">debit_cap_pct(day)</span> / 100<b class="cursor"></b></span></span></div>
+        <div class="seq s4"><span class="verdict ok"><b>All checks pass.</b> 4 of 4 rules proved by a test.</span></div>
+      </div>
+      <div class="editor-footer" aria-hidden="true"><span>Rule: <b>IF-CAP-001</b></span><span>4 / 4 proved</span></div>
+    </figure>
+    <div class="floating-note note-top" aria-hidden="true"><span>Caught</span><b>Line 9: 0.2</b><small>belongs to IF-CAP-001</small></div>
+    <div class="floating-note note-bottom" aria-hidden="true"><span>Approved by</span><b class="sg">M. Petrova</b><small>Head of compliance</small></div>
+  </div>
+      </div>
+    </div>
+    <div class="row rev">
+      <div class="row-text">
+        <p class="row-num">02</p>
+        <h3>The AI cannot approve itself</h3>
+        <p>A reading of a rule counts only when a named person signs it, in their own terminal, in a commit that changes
+          nothing else. The agent is blocked from signing or rewording a signed rule, and CI checks every sign-off against
+          the approver list. The record shows it when an approver also changed the code.</p>
+        <a class="text-link" href="guides/ai-change-approval-independence.html">Who may approve a change an AI agent wrote <span aria-hidden="true">→</span></a>
+      </div>
+      <div class="row-pic">
+        <div class="ledger" aria-label="Three lines from the sample change record">
+          <p class="ledger-head">From the sample change record</p>
+          <p class="rec">IF-CAP-001<span class="sep">·</span>Maria Petrova<span class="sep">·</span>a3ebe5a<span class="sep">·</span>AI-assisted<span class="sep">·</span><span class="yes">independent</span></p>
+          <p class="rec">IF-SCOPE-001<span class="sep">·</span>Maria Petrova<span class="sep">·</span>3c20407<span class="sep">·</span>AI-assisted<span class="sep">·</span><span class="yes">independent</span></p>
+          <p class="rec">IF-INFO-001<span class="sep">·</span>Maria Petrova<span class="sep">·</span>d86f2d7<span class="sep">·</span>AI-assisted<span class="sep">·</span><span class="no">not independent: the approver also changed this code</span></p>
+          <p class="ledger-foot">Rule · approver · approval commit · AI-assisted change · approver independent of the implementers</p>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="row-text">
+        <p class="row-num">03</p>
+        <h3>Proof for the auditor</h3>
+        <p>One command exports the change record for the current commit: the rule and its article, the agreed reading,
+          who approved it and in which commit, where it is implemented, who changed that code, whether an AI helped,
+          whether the approver is independent, and the test that proves it. As CSV or a printable page.</p>
+        <a class="text-link" data-free="sample-row" href="sample/dora-change-record.html">See the sample DORA change record <span aria-hidden="true">→</span></a>
+      </div>
+      <div class="row-pic" id="record">
+        <figure class="product-window">
+          <div class="window-header"><span class="window-title">Traceability · interchange-fees</span><span>Generated, do not edit</span></div>
+          <div class="scroll">
+            <table class="mini">
+              <thead><tr><th>Rule</th><th>Approved by</th><th>Test</th><th>Status</th></tr></thead>
+              <tbody>
+                <tr><td class="id">IF-CAP-001</td><td><span class="sig"><span>M. Petrova</span></span></td><td class="loc">test_interchange.py:13</td><td><span class="ok">Proved</span></td></tr>
+                <tr><td class="id">IF-CAP-002</td><td><span class="sig"><span>M. Petrova</span></span></td><td class="loc">test_interchange.py:18</td><td><span class="ok">Proved</span></td></tr>
+                <tr><td class="id">IF-SCOPE-001</td><td><span class="sig"><span>M. Petrova</span></span></td><td class="loc">test_interchange.py:23</td><td><span class="ok">Proved</span></td></tr>
+                <tr><td class="id">IF-INFO-001</td><td><span class="sig"><span>M. Petrova</span></span></td><td class="loc">test_interchange.py:27</td><td><span class="ok">Proved</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band trust-band">
+  <div class="shell">
+    <div class="intro">
+      <p class="eyebrow">For the people who sign the order</p>
+      <h2>Your code stays yours. <em>The price is per repository.</em></h2>
+      <p>What a head of engineering or compliance asks before the first purchase.</p>
+    </div>
+    <div class="trust">
+      <div><h3>Your code stays in your repository</h3><p>The checks are plain Python that run in your repository and your CI. No sign-in, no upload, no telemetry. Nothing is sent to us.</p></div>
+      <div><h3>The record does not depend on the AI</h3><p>The build checks read the code and the git history, not the tool that wrote it. The check on save and the approval lock run in Claude Code.</p></div>
+      <div><h3>A clear price per repository</h3><p>Solo €99 a month for one repository and up to three developers. Team €490 per repository. Monthly plans: cancel any time, 14 days to change your mind.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="shell proof-section">
+  <div class="intro">
+    <p class="eyebrow">Proof</p>
+    <h2>Numbers you can <em>check yourself.</em></h2>
+    <p>No quotes from customers, because there are none to quote yet. These you can rerun.</p>
+  </div>
+  <div class="proof">
+    <div><p class="stat">2</p><p>candidate copied values Anchored Scan flags in pip's own source.</p></div>
+    <div><p class="stat">9</p><p>in Actual Budget, an open-source finance app.</p><a class="text-link" data-free="proof-scan" href="https://github.com/newcleardigital/anchored-scan">Run Scan on yours <span aria-hidden="true">↗</span></a></div>
+    <div><p class="stat">62/62</p><p>self-test of the paid checks: each gate is broken on purpose and must go red, and only that gate.</p></div>
+    <div><p class="stat">8</p><p>gates in your CI, run from your repository's own pinned copy of the checks.</p><a class="text-link" data-free="proof-sample" href="sample/dora-change-record.html">See what they export <span aria-hidden="true">→</span></a></div>
+  </div>
+</section>
+
 
 <section id="start" class="shell">
   <div class="intro">
@@ -478,7 +686,7 @@ Read it from law/caps.py.</span></div>
       <p class="who-for">GitHub Action · free · MIT</p>
       <h3>Anchored Scan</h3>
       <p>Comments on every pull request with two things AI-written code gets wrong and reviewers miss: a fixed number copied into a second file, and a generated file edited by hand. Zero configuration.</p>
-      <pre class="snippet" id="scan-yaml">on: pull_request
+      <pre class="snippet" id="scan-yaml-card">on: pull_request
 permissions:
   contents: read
   pull-requests: write
@@ -488,7 +696,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: newcleardigital/anchored-scan@v1</pre>
-      <div class="buy"><button class="button" type="button" data-copy="scan-yaml">Copy the workflow <span class="arr" aria-hidden="true">→</span></button><a class="button ghost" data-free="scan" href="https://github.com/newcleardigital/anchored-scan">See it on GitHub</a></div>
+      <div class="buy"><button class="button" type="button" data-copy="scan-yaml-card">Copy the workflow <span class="arr" aria-hidden="true">→</span></button><a class="button ghost" data-free="scan" href="https://github.com/newcleardigital/anchored-scan">See it on GitHub</a></div>
     </div>
     <div class="start-card">
       <p class="who-for">Claude Code plugin · free · MIT</p>
@@ -500,82 +708,6 @@ claude plugin install anchor-core@anchored-lite</pre>
     </div>
   </div>
   <p class="after">When your rules come from outside, such as card-scheme rules, regulator fees or a contract, <a class="text-link" href="#pricing">Anchored</a> traces each one to its code, its test and the person who approved it. <a class="text-link" data-free="sample-start" href="sample/dora-change-record.html">See a sample change record</a>, built from a public example with the EU interchange fee caps.</p>
-</section>
-
-<section id="how" class="shell">
-  <div class="intro">
-    <p class="eyebrow">The controls</p>
-    <h2>They give the AI the rules. <em>We make it follow them.</em></h2>
-    <p>Requirements tools now hand your specification to the AI as context. Context can be skipped.
-      Anchored sits in the agent's working loop and in your build, so a broken rule is stopped before it goes any further.</p>
-  </div>
-  <ul class="feature-grid">
-    <li class="feature-card fc-lav">
-      <div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 9h14M5 15h14M10 4 8 20M16 4l-2 16"/></svg></div>
-      <p class="card-index">01 / 04</p>
-      <h3>A number from the specification, typed into the code</h3>
-      <p>Caught the moment the file is saved. The agent is told which requirement the number belongs to and where to read it from, and fixes it in the same turn.</p>
-      <div class="outcome"><span class="stopped">Caught</span></div>
-    </li>
-    <li class="feature-card fc-peach">
-      <div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="m10 12 4 4m0-4-4 4"/></svg></div>
-      <p class="card-index">02 / 04</p>
-      <h3>Code that cites a requirement that does not exist</h3>
-      <p>Caught on save, with the unknown ID named, and the build fails. No code can claim to follow a rule nobody wrote.</p>
-      <div class="outcome"><span class="stopped">Caught</span></div>
-    </li>
-    <li class="feature-card fc-pale">
-      <div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c1.2-3.4 3.8-5 7-5s5.8 1.6 7 5"/></svg></div>
-      <p class="card-index">03 / 04</p>
-      <h3>A requirement nobody has approved yet</h3>
-      <p>The agent will not start building on it, and names the person who has to approve it.</p>
-      <div class="outcome"><span>Waits for a person</span></div>
-    </li>
-    <li class="feature-card fc-night">
-      <div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 3h6M10 3v6L5 18a2 2 0 0 0 1.8 3h10.4a2 2 0 0 0 1.8-3l-5-9V3"/></svg></div>
-      <p class="card-index">04 / 04</p>
-      <h3>A requirement without a passing test named after it</h3>
-      <p>The build fails. A comment that claims coverage is not evidence; a test is.</p>
-      <div class="outcome"><span class="stopped">Build fails</span></div>
-    </li>
-  </ul>
-</section>
-
-<section id="record" class="peek band">
-  <div class="shell">
-    <div class="intro">
-      <p class="eyebrow">The record</p>
-      <h2>The record your reviewers ask for, <em>always current.</em></h2>
-      <p>Every requirement, where it comes from, who approved it, the code and the test that proves it.
-        Generated from the same data the checks use, stamped with the code version, exported as CSV or a printable page.
-        <br><a class="text-link" href="#pricing" style="margin-top:1rem">See what it costs <span aria-hidden="true">↗</span></a></p>
-    </div>
-    <figure class="product-window">
-      <div class="window-header"><div class="dots" aria-hidden="true"><i></i><i></i><i></i></div><span class="window-title">Traceability · interchange-fees · Regulation (EU) 2015/751</span><span>Generated, do not edit</span></div>
-      <div class="scroll">
-        <table>
-          <thead><tr><th>Requirement</th><th>What it says</th><th>Source</th><th>Approved by</th><th>Code</th><th>Test</th><th>Status</th></tr></thead>
-          <tbody>
-            <tr><td class="id">IF-CAP-001</td><td class="what">Debit card interchange no more than 0.2 % of the transaction value</td><td class="loc">Art. 3(1)</td>
-              <td><span class="sig"><span>M. Petrova</span><small>Head of compliance, 2 Oct 2026</small></span></td>
-              <td class="loc">interchange.py:24</td><td class="loc">test_interchange.py:13</td><td><span class="ok">Proved</span></td></tr>
-            <tr><td class="id">IF-CAP-002</td><td class="what">Credit card interchange no more than 0.3 % of the transaction value</td><td class="loc">Art. 4</td>
-              <td><span class="sig"><span>M. Petrova</span><small>Head of compliance, 2 Oct 2026</small></span></td>
-              <td class="loc">interchange.py:24</td><td class="loc">test_interchange.py:18</td><td><span class="ok">Proved</span></td></tr>
-            <tr><td class="id">IF-SCOPE-001</td><td class="what">Commercial cards are outside the caps</td><td class="loc">Art. 1(3)(a)</td>
-              <td><span class="sig"><span>M. Petrova</span><small>Head of compliance, 2 Oct 2026</small></span></td>
-              <td class="loc">interchange.py:29</td><td class="loc">test_interchange.py:23</td><td><span class="ok">Proved</span></td></tr>
-            <tr><td class="id">IF-INFO-001</td><td class="what">Show the payee the service charge and interchange fee separately</td><td class="loc">Art. 12(1)</td>
-              <td><span class="sig"><span>M. Petrova</span><small>Head of compliance, 2 Oct 2026</small></span></td>
-              <td class="loc">statement.py:7</td><td class="loc">test_interchange.py:27</td><td><span class="ok">Proved</span></td></tr>
-</tbody>
-        </table>
-      </div>
-      <div class="window-stats"><span><b>4 / 4</b><small>requirements proved</small></span><span><b>4</b><small>approved by a person</small></span><span><b>0</b><small>untraced changes</small></span></div>
-    </figure>
-    <p class="note">From the interchange-fees example that ships with Anchored: four rules from the EU Interchange Fee
-      Regulation. The approver is illustrative. <a class="text-link" href="sample/dora-change-record.html">See its full DORA change record</a>.</p>
-  </div>
 </section>
 
 <section id="method" class="shell">
@@ -601,7 +733,6 @@ claude plugin install anchor-core@anchored-lite</pre>
   <div class="limits">
     <div><h3>It does not interpret your rules</h3><p>If your expert approves a reading, the code follows that reading, and the record shows who approved it.</p></div>
     <div><h3>It does not give legal advice</h3><p>It proves that the code does what the approved requirements say. What a rule means is decided by your people.</p></div>
-    <div><h3>It does not take your code anywhere</h3><p>The checks are plain Python scripts that run in your repository and your build. Nothing is sent to us.</p></div>
   </div>
 </section>
 
@@ -655,6 +786,21 @@ claude plugin install anchor-core@anchored-lite</pre>
   <p class="after">Want to try the checks first, or does your code follow no outside rulebook? <a class="text-link" href="#start">Anchored Scan and Anchored Lite</a> are free and open source (MIT).</p>
 </section>
 
+<section id="guides" class="shell" style="padding-top:0">
+  <div class="intro">
+    <p class="eyebrow">Guides</p>
+    <h2>Read before <em>you install.</em></h2>
+    <p>Short guides on DORA change records, approval independence and AI-written code. <a class="text-link" href="guides/">All guides</a></p>
+  </div>
+  <div class="guide-cards">
+    <a class="guide-card" href="guides/dora-ai-written-code.html"><p class="row-num">Guide</p><h3>DORA and AI-written code: what the change record has to show</h3><p>The five facts the record needs when an AI agent writes the change, and where each one comes from.</p><span class="read">Read <span aria-hidden="true">→</span></span></a>
+    <a class="guide-card" href="guides/ai-change-approval-independence.html"><p class="row-num">Guide</p><h3>Who may approve a change an AI agent wrote?</h3><p>RTS 2024/1774 Article 17(1)(b) asks for independent approval. How to make it provable from git.</p><span class="read">Read <span aria-hidden="true">→</span></span></a>
+    <a class="guide-card" href="guides/claude-code-audit-trail.html"><p class="row-num">Guide</p><h3>An audit trail for Claude Code</h3><p>Rule, change, test and approver for every AI edit, without leaving your repository.</p><span class="read">Read <span aria-hidden="true">→</span></span></a>
+    <a class="guide-card" href="guides/interchange-fee-caps-in-code.html"><p class="row-num">Guide</p><h3>Coding the EU interchange fee caps so an auditor can check them</h3><p>0.2 % debit, 0.3 % credit, the commercial-card exception and the payee statement, fully traced.</p><span class="read">Read <span aria-hidden="true">→</span></span></a>
+    <a class="guide-card" href="guides/ai-agents-copy-fixed-values.html"><p class="row-num">Guide</p><h3>Why AI coding agents copy fixed values</h3><p>The same fee typed into a second file, and a free GitHub Action that catches it on every pull request.</p><span class="read">Read <span aria-hidden="true">→</span></span></a>
+  </div>
+</section>
+
 <section class="shell" style="padding-top:0">
   <div class="faq-wrap">
     <div><p class="eyebrow">Questions</p><h2>Asked <em>before buying.</em></h2></div>
@@ -686,6 +832,7 @@ claude plugin install anchor-core@anchored-lite</pre>
       <a class="button light" data-call href="#call">Email a question <span class="arr" aria-hidden="true">↗</span></a>
       <a class="mail" data-call href="mailto:office@newcleardigital.com">office@newcleardigital.com</a>
     </div>
+    <div class="cta-install"><span>Or start now, free: add Anchored Scan to a repository.</span><button class="button ghost" type="button" data-copy="scan-yaml">Copy the workflow</button></div>
     <p class="fine">No email list. No cookies. Just a reply from a person.</p>
   </div>
 </section>
@@ -698,7 +845,7 @@ claude plugin install anchor-core@anchored-lite</pre>
       <p>Anchor-based development and the Anchored toolkit by newcleardigital. Evidence for your reviews, not legal advice.</p>
     </div>
     <div class="footer-links">
-      <div><p class="footer-label">Explore</p><a href="#how">How it works</a><a href="#record">The record</a><a href="#method">The method</a><a href="#pricing">Pricing</a><a href="guides/">Guides</a><a href="sample/dora-change-record.html">Sample change record</a><a data-free="footer-scan" href="https://github.com/newcleardigital/anchored-scan">Anchored Scan, free ↗</a><a data-lite href="https://github.com/newcleardigital/anchored-lite">Anchored Lite, free ↗</a></div>
+      <div><p class="footer-label">Explore</p><a href="#how">How it works</a><a href="#start">Free tools</a><a href="#guides">Guides</a><a href="#pricing">Pricing</a><a href="#method">The method</a><a href="sample/dora-change-record.html">Sample change record</a><a data-free="footer-scan" href="https://github.com/newcleardigital/anchored-scan">Anchored Scan, free ↗</a><a data-lite href="https://github.com/newcleardigital/anchored-lite">Anchored Lite, free ↗</a></div>
       <div><p class="footer-label">Say hello</p><a data-call href="mailto:office@newcleardigital.com">Email ↗</a></div>
     </div>
   </div>
@@ -784,7 +931,7 @@ claude plugin install anchor-core@anchored-lite</pre>
     const label = b.innerHTML;
     b.addEventListener("click", async () => {
       const src = document.getElementById(b.dataset.copy);
-      const text = b.dataset.copy === "scan-yaml" ? "name: Anchored Scan\n" + src.textContent + "\n" : src.textContent + "\n";
+      const text = b.dataset.copy.startsWith("scan-yaml") ? "name: Anchored Scan\n" + src.textContent + "\n" : src.textContent + "\n";
       try { await navigator.clipboard.writeText(text); b.textContent = "Copied"; }
       catch (e) { const r = document.createRange(); r.selectNodeContents(src); const sel = getSelection(); sel.removeAllRanges(); sel.addRange(r); b.textContent = "Selected, press Ctrl+C"; }
       setTimeout(() => { b.innerHTML = label; }, 2500);
@@ -832,6 +979,30 @@ claude plugin install anchor-core@anchored-lite</pre>
       : "email-" + (a.dataset.call || "general").toLowerCase().replace(/\s+/g, "-");
     window.goatcounter.count({ path: name, title: a.textContent.trim(), event: true });
   });
+</script>
+<script>
+  // Product shots: three tabs, rotated every 7 s until the visitor touches them.
+  (function () {
+    const box = document.getElementById("shots"); if (!box) return;
+    const tabs = [...box.querySelectorAll('[role="tab"]')];
+    let timer = null;
+    function pick(t, focus) {
+      tabs.forEach(x => { const on = x === t; x.setAttribute("aria-selected", on); x.tabIndex = on ? 0 : -1;
+        document.getElementById(x.getAttribute("aria-controls")).hidden = !on; });
+      if (focus) t.focus();
+    }
+    function stop() { clearInterval(timer); timer = null; }
+    tabs.forEach((t, i) => {
+      t.addEventListener("click", () => { stop(); pick(t); });
+      t.addEventListener("keydown", e => {
+        const d = e.key === "ArrowRight" ? 1 : e.key === "ArrowLeft" ? -1 : 0;
+        if (d) { e.preventDefault(); stop(); pick(tabs[(i + d + tabs.length) % tabs.length], true); }
+      });
+    });
+    box.addEventListener("pointerenter", stop); box.addEventListener("focusin", stop);
+    if (!matchMedia("(prefers-reduced-motion: reduce)").matches)
+      timer = setInterval(() => { const i = tabs.findIndex(t => t.getAttribute("aria-selected") === "true"); pick(tabs[(i + 1) % tabs.length]); }, 7000);
+  })();
 </script>
 <script data-goatcounter="https://newcleardigital.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 </body>
