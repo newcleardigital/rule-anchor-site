@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Anchor-based development: every AI change, proven</title>
+<title>Anchored. AI under control. Your rules. Your sign-off. Your proof.</title>
 <meta name="description" content="For fintech and payment teams under DORA: Anchored traces every change your AI coding agent makes to rule-bound code to the rule it implements, the test that proves it and the person who approved it. Free GitHub Action and Claude Code plugin to start.">
-<meta property="og:title" content="Anchor-based development">
-<meta property="og:description" content="Every AI change, proven.">
+<meta property="og:title" content="Anchored. AI under control.">
+<meta property="og:description" content="AI under control. Your rules. Your sign-off. Your proof.">
 <meta property="og:url" content="https://anchored.newcleardigital.com/">
 <meta property="og:type" content="website">
 <meta name="theme-color" content="#0b1b2e">
@@ -380,7 +380,7 @@ details p{padding:0 0 1.25rem;color:var(--muted);max-width:44rem}
 @media (max-width:860px){.site-header.kiro .nav.right a:not(.header-cta){display:none}}
 .hero2{padding-block:clamp(3.5rem,8vw,6rem) 0;display:flex;flex-direction:column;gap:1.5rem}
 .hero2 > *{max-width:52rem}
-.hero2 h1{max-width:20ch}
+.hero2 h1{max-width:19ch}
 .hero-actions{display:flex;flex-wrap:wrap;gap:.75rem}
 .button.small{padding:.4rem .8rem;font-size:.8125rem}
 .install{margin-top:.75rem;border:1px solid var(--hair);background:var(--sunken);max-width:44rem}
@@ -438,6 +438,96 @@ table.mini th,table.mini td{padding:.75rem 1rem}
 @media (max-width:980px){.guide-cards{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:600px){.guide-cards{grid-template-columns:1fr}}
 .cta-install{display:flex;flex-wrap:wrap;align-items:center;gap:.75rem 1rem;margin-top:1.75rem;padding-top:1.25rem;border-top:1px solid var(--hair);color:var(--muted);font-size:.9375rem}
+
+/* What you get / what you miss */
+.value{border-top:1px solid var(--ink)}
+.vhead,.vrow{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+.vhead p{padding:.9rem 1.5rem .9rem 0;font:500 .75rem var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.vhead p + p{padding-left:1.5rem;border-left:1px solid var(--hair)}
+.vrow{border-top:1px solid var(--hair)}
+.vrow p{padding:1.25rem 1.5rem 1.25rem 0;line-height:1.5;font-size:1.0625rem}
+.vrow .with b{font-weight:600;display:block;margin-bottom:.2rem}
+.vrow .with{color:var(--ink);font-weight:400;position:relative;padding-left:1.5rem}
+.vrow .with::before{content:"";position:absolute;left:0;top:1.55rem;width:7px;height:7px;background:var(--success)}
+.vrow .without{color:var(--muted);padding-left:1.5rem;border-left:1px solid var(--hair);position:relative}
+.vrow .without::before{content:"";position:absolute;left:1.5rem;top:1.75rem;width:10px;height:2px;background:var(--danger)}
+.vrow .without{padding-left:2.6rem}
+.vlab{display:none}
+.value-cta{margin-top:2rem}
+@media (max-width:760px){
+  .vhead{display:none}
+  .vrow{grid-template-columns:minmax(0,1fr)}
+  .vrow .without{border-left:0;padding-top:0}
+  .vrow .without::before{top:.5rem}
+  .vlab{display:block;font:500 .6875rem var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:.25rem}
+  .vrow .with .vlab{color:var(--success)}.vrow .without .vlab{color:var(--danger);font-weight:500}
+}
+
+/* Comparison */
+.compare{border-top:1px solid var(--ink)}
+.chead,.crow{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1fr) minmax(0,1.1fr) minmax(0,1.1fr)}
+.chead p{padding:.9rem 1.25rem .9rem 0;font:500 .75rem var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.chead p:last-child{color:var(--ink);padding-left:1.25rem;background:var(--sunken)}
+.crow{border-top:1px solid var(--hair)}
+.crow > *{padding:1.15rem 1.25rem 1.15rem 0;line-height:1.5}
+.cwho b{display:block;font-weight:600}
+.cwho small{display:block;margin-top:.2rem;color:var(--muted);font-size:.8125rem}
+.cgood,.cgap{color:var(--muted)}
+.cgap{position:relative;padding-left:1.1rem}
+.cgap::before{content:"";position:absolute;left:0;top:1.85rem;width:8px;height:2px;background:var(--danger)}
+.cus{background:var(--sunken);padding-left:1.25rem!important;color:var(--ink);font-weight:500}
+@media (max-width:900px){
+  .chead{display:none}
+  .crow{grid-template-columns:minmax(0,1fr)}
+  .crow > *{padding:.35rem 0}
+  .cwho{padding-top:1.1rem!important}
+  .cgap{padding-left:0}.cgap::before{display:none}
+  .crow .cgap .vlab{color:var(--danger)}
+  .cus{padding:.75rem 1rem!important;margin:.4rem 0 1.1rem}
+  .crow .vlab{display:block;font:500 .6875rem var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:.15rem}
+}
+
+/* Why Anchored: get + saves, unique + others */
+.why{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));border-top:1px solid var(--ink)}
+.why-col{padding:1.5rem 2rem 0 0}
+.why-col + .why-col{padding-left:2rem;border-left:1px solid var(--hair)}
+.why-title{font:500 .75rem var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem}
+.why-list{counter-reset:w}
+.why-list li{counter-increment:w;position:relative;display:flex;flex-direction:column;gap:.3rem;padding:1.1rem 0 1.1rem 2.5rem;border-top:1px solid var(--hair)}
+.why-list li:first-child{border-top:0}
+.why-list li::before{content:"0" counter(w);position:absolute;left:0;top:1.2rem;font:500 .8125rem var(--mono);color:var(--muted)}
+.why-list b{font-size:1.25rem;font-weight:600;letter-spacing:-.01em;line-height:1.3}
+.why-list span{color:var(--muted);line-height:1.5}
+.why-list .saves,.why-list .others{margin-top:.35rem;color:var(--ink);font-size:.9375rem}
+.vlab2{display:block;font:500 .6875rem var(--sans);letter-spacing:.2em;text-transform:uppercase;margin-bottom:.1rem}
+.saves .vlab2{color:var(--success)}
+.others .vlab2{color:var(--muted)}
+.why-sum{margin:.5rem 0 0 2.5rem;padding:.9rem 1rem;background:var(--sunken);font-weight:600}
+.why-more{margin-top:2.5rem;border-top:1px solid var(--hair);border-bottom:1px solid var(--hair)}
+.why-more > summary{font:600 1rem var(--sans)}
+.why-more .compare{margin-top:.5rem}
+.why-more .after{margin-bottom:1.25rem}
+@media (max-width:900px){.why{grid-template-columns:minmax(0,1fr)}.why-col{padding-right:0}.why-col + .why-col{padding-left:0;border-left:0;border-top:1px solid var(--hair);margin-top:1rem}.why-sum{margin-left:0}}
+
+/* Use cases: who asks, what they ask, what you show */
+.uc{margin-top:2.5rem;border-top:1px solid var(--ink);padding-top:1.5rem}
+.uc-list{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid var(--hair);margin-top:.5rem}
+.uc-list li{display:flex;flex-direction:column;gap:.9rem;padding:1.25rem 1.25rem 1.25rem 0}
+.uc-list li + li{padding-left:1.25rem;border-left:1px solid var(--hair)}
+.uc-who b{display:block;font-size:1.125rem;font-weight:600}
+.uc-who small{display:block;margin-top:.15rem;color:var(--muted);font-size:.875rem}
+.uc-ask{color:var(--muted);font-style:italic}
+.uc-ask .vlab2,.uc-show .vlab2{font-style:normal;color:var(--muted)}
+.uc-show{margin-top:auto;padding:.75rem .9rem;background:var(--sunken);color:var(--ink);font-weight:500}
+.uc-show .vlab2{color:var(--success)}
+@media (max-width:1000px){.uc-list{grid-template-columns:repeat(2,minmax(0,1fr))}.uc-list li:nth-child(3){padding-left:0;border-left:0}.uc-list li:nth-child(n+3){border-top:1px solid var(--hair)}}
+@media (max-width:560px){.uc-list{grid-template-columns:minmax(0,1fr)}.uc-list li{padding-left:0!important;border-left:0!important}.uc-list li + li{border-top:1px solid var(--hair)}}
+
+.hero2 .slogan{font:600 clamp(1.5rem,3vw,2.25rem)/1.2 var(--sans);letter-spacing:-.015em;color:var(--ink);margin-top:-.5rem}
+.hero2 .slogan em{font-style:normal;text-decoration:underline;text-decoration-color:var(--brass);text-decoration-thickness:3px;text-underline-offset:.18em}
+.hero2 .eyebrow{letter-spacing:.14em}
+.for-line{font:400 .8125rem/1.5 var(--mono);color:var(--muted)}
+.foot-slogan{font-weight:600;color:var(--ink)!important;font-size:1rem!important}
 </style>
 </head>
 <body>
@@ -447,6 +537,7 @@ table.mini th,table.mini td{padding:.75rem 1rem}
   <a class="brand" href="#" aria-label="Anchored, home"><img class="logo-navy" src="brand/anchored-logo-navy.png" width="538" height="160" alt="Anchored"><img class="logo-paper" src="brand/anchored-logo-paper.png" width="479" height="139" alt="Anchored"></a>
   <nav class="nav right" aria-label="Main">
     <a href="#how">How it works</a>
+    <a href="#value">Why Anchored</a>
     <a href="#start">Free tools</a>
     <a href="#guides">Guides</a>
     <a href="#pricing">Pricing</a>
@@ -458,10 +549,12 @@ table.mini th,table.mini td{padding:.75rem 1rem}
 <main id="main">
 <div class="band hero-band">
   <div class="shell hero2">
-    <p class="eyebrow">For fintech and payment code under DORA</p>
-    <h1>Move beyond spec‑driven to <em>anchor‑based development.</em></h1>
-    <p class="lede">Every change your AI coding agent makes to rule-bound code is traced to the rule it implements,
-      the test that proves it and the person who approved it. <strong>Anchored is the toolkit that runs it in your repository.</strong></p>
+    <p class="eyebrow">AI writes your code faster than anyone can check it.</p>
+    <h1>AI under control.</h1>
+    <p class="slogan">Your rules. Your sign-off. <em>Your proof.</em></p>
+    <p class="lede"><strong>AI that can’t drift from your rules, and can’t slip a mistake into your release.</strong>
+      A person signs each rule first. Anchored checks every change as the AI writes it, and again before release.</p>
+    <p class="for-line">For fintech and payment code under DORA, and any code that must follow a written rulebook.</p>
     <div class="hero-actions">
       <a class="button" data-free="hero" href="#start">Start free <span class="arr" aria-hidden="true">→</span></a>
       <a class="button ghost" href="#pricing">Pricing</a>
@@ -619,7 +712,7 @@ An ID not in the catalogue proves nothing. Add the requirement, or fix the typo.
     <div class="row">
       <div class="row-text">
         <p class="row-num">03</p>
-        <h3>Proof for the auditor</h3>
+        <h3>Proof for internal audit and the regulator</h3>
         <p>One command exports the change record for the current commit: the rule and its article, the agreed reading,
           who approved it and in which commit, where it is implemented, who changed that code, whether an AI helped,
           whether the approver is independent, and the test that proves it. As CSV or a printable page.</p>
@@ -643,6 +736,55 @@ An ID not in the catalogue proves nothing. Add the requirement, or fix the typo.
       </div>
     </div>
   </div>
+</section>
+
+<section id="value" class="shell" style="padding-top:clamp(1rem,3vw,2rem)">
+  <div class="intro">
+    <p class="eyebrow">Why Anchored</p>
+    <h2>Use AI on code that must follow the law. <em>Prove it did.</em></h2>
+    <p>Anchored checks every change the AI makes against the rule it must follow, has a person sign off what each rule means, and keeps the proof ready for internal audit and the regulator.</p>
+  </div>
+  <div class="why">
+    <div class="why-col">
+      <p class="why-title">What you get</p>
+      <ol class="why-list">
+      <li><b>Proof on demand</b><span>For every rule: where it comes from, who approved it, and the code and test behind it. Ready the day internal audit or the regulator asks.</span><span class="saves"><span class="vlab2">What it saves</span>Rebuilding the record by hand from tickets and memory before every audit.</span></li>
+      <li><b>A person decides, not the AI</b><span>Only the people you name can sign off what a rule means. The AI is stopped when it tries.</span><span class="saves"><span class="vlab2">What it saves</span>Explaining to a regulator a decision nobody signed.</span></li>
+      <li><b>Mistakes stop before customers see them</b><span>A fee or limit the AI copies into the code is caught the moment it is typed.</span><span class="saves"><span class="vlab2">What it saves</span>The refunds, complaints and audit findings a wrong fee brings.</span></li>
+      </ol>
+    </div>
+    <div class="why-col">
+      <p class="why-title">Why Anchored, not the others</p>
+      <ol class="why-list">
+      <li><b>It starts from the law</b><span>Each rule points to the article or clause it comes from.</span><span class="others"><span class="vlab2">The others</span>Spec-driven AI tools start from a plan your team wrote.</span></li>
+      <li><b>A person signs, never the AI</b><span>The approver of every rule is on record.</span><span class="others"><span class="vlab2">The others</span>Spec tools and AI guardrails do not record who approved a rule.</span></li>
+      <li><b>It acts while the AI types</b><span>The AI fixes the mistake on the spot, before anyone has to review it.</span><span class="others"><span class="vlab2">The others</span>Compliance platforms and release checks look after the code is written.</span></li>
+      <li><b>The proof comes from the code itself</b><span>Made inside your own systems, nothing sent to us.</span><span class="others"><span class="vlab2">The others</span>Compliance platforms collect evidence beside the code; release checks need their own platform.</span></li>
+      </ol>
+      <p class="why-sum">Other tools do one or two of these. No other tool we checked does all four together.</p>
+    </div>
+  </div>
+  <div class="uc">
+    <p class="why-title">When someone asks for proof</p>
+    <ul class="uc-list">
+      <li><p class="uc-who"><b>Internal audit</b><small>Required by DORA, on a regular plan.</small></p><p class="uc-ask"><span class="vlab2">They ask</span>“How was this change controlled?”</p><p class="uc-show"><span class="vlab2">You show</span>The record: rule, test, approver. One file.</p></li>
+      <li><p class="uc-who"><b>The regulator</b><small>The national supervisor can ask any time.</small></p><p class="uc-ask"><span class="vlab2">They ask</span>“Show us the evidence for this release.”</p><p class="uc-show"><span class="vlab2">You show</span>The record for that release. Nothing rebuilt by hand.</p></li>
+      <li><p class="uc-who"><b>The external auditor</b><small>Part of the yearly audit.</small></p><p class="uc-ask"><span class="vlab2">They ask</span>“Who approved changes, and were they independent?”</p><p class="uc-show"><span class="vlab2">You show</span>Each rule's approver. And whether they also wrote the code.</p></li>
+      <li><p class="uc-who"><b>A bank or card scheme</b><small>Before and during a contract.</small></p><p class="uc-ask"><span class="vlab2">They ask</span>“How do you control AI-written code?”</p><p class="uc-show"><span class="vlab2">You show</span>A sample record, not a promise.</p></li>
+    </ul>
+  </div>
+  <details class="why-more">
+    <summary>Compare by kind of tool</summary>
+    <div class="compare">
+    <div class="chead" aria-hidden="true"><p>Kind of tool</p><p>Good at</p><p>The gap for rule-bound code</p><p>Anchored</p></div>
+      <div class="crow"><div class="cwho"><b>Spec-driven AI tools</b><small>for example GitHub Spec Kit, AWS Kiro, Tessl</small></div><p class="cgood"><span class="vlab">Good at</span>Help the AI plan and build from a specification.</p><p class="cgap"><span class="vlab">The gap</span>The specification is your team's own plan. Nothing records which law it follows or who approved it.</p><p class="cus"><span class="vlab">Anchored</span>Every rule points to the law or contract it comes from, and a named person signs what it means.</p></div>
+      <div class="crow"><div class="cwho"><b>Compliance platforms</b><small>for example Vanta, Drata</small></div><p class="cgood"><span class="vlab">Good at</span>Map DORA controls and collect evidence from your systems.</p><p class="cgap"><span class="vlab">The gap</span>They work beside the code. They do not see what the AI writes, or stop it.</p><p class="cus"><span class="vlab">Anchored</span>Works inside the code: catches the AI as it writes, and the evidence comes from the code and its history.</p></div>
+      <div class="crow"><div class="cwho"><b>AI coding guardrails</b><small>for example Codacy Guardrails</small></div><p class="cgood"><span class="vlab">Good at</span>Give the AI your quality and security standards while it writes.</p><p class="cgap"><span class="vlab">The gap</span>The standards are your own, not tied to a law, with no approver behind them.</p><p class="cus"><span class="vlab">Anchored</span>Rules come from the outside authority, each with its approver and its test.</p></div>
+      <div class="crow"><div class="cwho"><b>Release policy checks</b><small>for example JFrog AppTrust (DORA)</small></div><p class="cgood"><span class="vlab">Good at</span>Check changes against policy when software is released.</p><p class="cgap"><span class="vlab">The gap</span>The check comes at release, after the code is written, and needs their platform.</p><p class="cus"><span class="vlab">Anchored</span>Catches the problem while the AI writes, and runs in your own repository and build.</p></div>
+  </div>
+    <p class="after">Based on each vendor's public pages, November 2026. Names are trademarks of their owners. Something out of date? <a class="text-link" data-call="Comparison" href="#call">Tell us</a> and we correct it.</p>
+  </details>
+  <div class="hero-actions value-cta"><a class="button" data-free="value" href="#start">Start free <span class="arr" aria-hidden="true">→</span></a><a class="button ghost" href="#pricing">See pricing</a></div>
 </section>
 
 <section class="band trust-band">
@@ -714,7 +856,7 @@ claude plugin install anchor-core@anchored-lite</pre>
   <div class="intro">
     <p class="eyebrow">The method</p>
     <h2>Four steps, <em>one of them human.</em></h2>
-    <p>The part of your code a specification governs, usually 15 to 25 percent, is anchored to it; everything else is built the way you build it today.</p>
+    <p>Only the part of your code a rulebook governs is anchored to it. You choose the folders; everything else is built the way you build it today.</p>
   </div>
   <ol class="steps">
     <li><h3>Bring in your specification</h3><p>The agent drafts one numbered requirement per rule, each pointing to the paragraph it came from, all marked unapproved, with every unclear point listed.</p></li>
@@ -842,6 +984,7 @@ claude plugin install anchor-core@anchored-lite</pre>
   <div class="footer-top">
     <div class="footer-brand">
       <a class="brand" href="#" aria-label="Anchored, home"><img class="logo-navy" src="brand/anchored-logo-navy.png" width="538" height="160" alt="Anchored"><img class="logo-paper" src="brand/anchored-logo-paper.png" width="479" height="139" alt="Anchored"></a>
+      <p class="foot-slogan">AI under control. Your rules. Your sign-off. Your proof.</p>
       <p>Anchor-based development and the Anchored toolkit by newcleardigital. Evidence for your reviews, not legal advice.</p>
     </div>
     <div class="footer-links">
