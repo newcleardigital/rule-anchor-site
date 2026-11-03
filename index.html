@@ -165,6 +165,7 @@ dialog.contact-box::backdrop{background:rgba(11,27,46,.6)}
 @media (prefers-reduced-motion:no-preference){
   .seq{opacity:0;animation:in .4s ease forwards}
   .s1{animation-delay:.3s}.s2{animation-delay:1.3s}.s3{animation-delay:2.5s}.s4{animation-delay:3.3s}
+  .js .editor-card:not(.play) .seq{animation:none}
   @keyframes in{to{opacity:1}}
 }
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.cursor{animation:none}}
@@ -512,13 +513,13 @@ table.mini th,table.mini td{padding:.75rem 1rem}
 /* Use cases: who asks, what they ask, what you show */
 .uc{margin-top:2.5rem;border-top:1px solid var(--ink);padding-top:1.5rem}
 .uc-list{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid var(--hair);margin-top:.5rem}
-.uc-list li{display:flex;flex-direction:column;gap:.9rem;padding:1.25rem 1.25rem 1.25rem 0}
+.uc-list li{display:grid;grid-row:span 3;grid-template-rows:subgrid;row-gap:.9rem;padding:1.25rem 1.25rem 1.25rem 0}
 .uc-list li + li{padding-left:1.25rem;border-left:1px solid var(--hair)}
 .uc-who b{display:block;font-size:1.125rem;font-weight:600}
 .uc-who small{display:block;margin-top:.15rem;color:var(--muted);font-size:.875rem}
 .uc-ask{color:var(--muted);font-style:italic}
 .uc-ask .vlab2,.uc-show .vlab2{font-style:normal;color:var(--muted)}
-.uc-show{margin-top:auto;padding:.75rem .9rem;background:var(--sunken);color:var(--ink);font-weight:500}
+.uc-show{padding:.75rem .9rem;background:var(--sunken);color:var(--ink);font-weight:500}
 .uc-show .vlab2{color:var(--success)}
 @media (max-width:1000px){.uc-list{grid-template-columns:repeat(2,minmax(0,1fr))}.uc-list li:nth-child(3){padding-left:0;border-left:0}.uc-list li:nth-child(n+3){border-top:1px solid var(--hair)}}
 @media (max-width:560px){.uc-list{grid-template-columns:minmax(0,1fr)}.uc-list li{padding-left:0!important;border-left:0!important}.uc-list li + li{border-top:1px solid var(--hair)}}
@@ -526,6 +527,13 @@ table.mini th,table.mini td{padding:.75rem 1rem}
 .hero2 .slogan{font:600 clamp(1.5rem,3vw,2.25rem)/1.2 var(--sans);letter-spacing:-.015em;color:var(--ink);margin-top:-.5rem}
 .hero2 .slogan em{font-style:normal;text-decoration:underline;text-decoration-color:var(--brass);text-decoration-thickness:3px;text-underline-offset:.18em}
 .hero2 .eyebrow{letter-spacing:.14em}
+.hero2 .slogan em{white-space:nowrap}
+/* Wide screens: the Scan box sits beside the message, so the check output starts above the fold */
+@media (min-width:1200px){
+  .hero2{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);column-gap:3.5rem;row-gap:1.5rem;align-content:start}
+  .hero2 > *{grid-column:1}
+  .hero2 > .install{grid-column:2;grid-row:1/span 6;align-self:center;margin-top:0;max-width:none}
+}
 .for-line{font:400 .8125rem/1.5 var(--mono);color:var(--muted)}
 .foot-slogan{font-weight:600;color:var(--ink)!important;font-size:1rem!important}
 </style>
@@ -817,7 +825,7 @@ An ID not in the catalogue proves nothing. Add the requirement, or fix the typo.
 </section>
 
 
-<section id="start" class="shell">
+<section id="start" class="shell" style="padding-top:0">
   <div class="intro">
     <p class="eyebrow">Start free</p>
     <h2>Try the checks <em>today, for free.</em></h2>
@@ -1109,6 +1117,16 @@ claude plugin install anchor-core@anchored-lite</pre>
       if (es.some(e => e.isIntersecting)) { io.disconnect(); play(); }
     }, { threshold: 0.35 });
     io.observe(box);
+  })();
+  // The editor card in "How it works" plays when it scrolls into view, not on page load.
+  (function () {
+    const card = document.querySelector(".editor-card");
+    if (!card || !("IntersectionObserver" in window)) return;
+    document.documentElement.classList.add("js");
+    const io = new IntersectionObserver(es => {
+      if (es.some(e => e.isIntersecting)) { io.disconnect(); card.classList.add("play"); }
+    }, { threshold: 0.5 });
+    io.observe(card);
   })();
 </script>
 <script>
