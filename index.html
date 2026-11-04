@@ -16,240 +16,244 @@
 <link rel="preload" href="fonts/inter-tight.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/ibm-plex-mono-400.woff2" as="font" type="font/woff2" crossorigin>
 <style>
-/* Hallmark · shape: kept argument, recomposed · genre: modern-minimal · theme: brand (Anchored design system) · redesign: full
- * paper: #f4f1ea · accent: #c8963e (thread only) · display: Inter Tight · body: Inter Tight · hero: Stage · nav: kept · footer: kept · signature: the real check output beside the headline
- * axes: paper/sans/brass · posture: Stage · contrast: pass · fold: pass · job: sign up (start free) · v2.0.0 */
-/* Hallmark · pre-emit critique: P4 H4 E4 S5 R4 V3 · weakest: V, the brand fixes the look; varied the compositions instead (stage hero, rows, index, table, figures) */
-/* Hallmark · brand holds over 54, 63, 64, 67: the Anchored design system sets tracked uppercase labels and mono record lines joined by spaced middle dots (owner's choice, 2026-11-03) */
-/* Hallmark · kept "—" inside the product shots · it is real check output, copied verbatim */
-/* Anchored design system (Design System artifact "Anchored", 2026-11-02): navy-dominant, square,
-   quiet, one brass thread of accent. Green and red mean status only and always come with the word.
-   Fonts are self-hosted (npm @fontsource, SIL OFL): the page loads no fonts from other servers. */
+/* The scroll film: the page is told over the Anchored film (3d/js/film.js), drawn live on one canvas.
+   Each chapter is one beat of the film: "play" scrubs the beat with its headline at the bottom,
+   "read" holds the beat's last frame, dimmed, under the details. Navy only: the film is the ground.
+   Anchored design system: square, quiet, one brass thread; green and red mean status and come with the word. */
 @font-face{font-family:"Inter Tight";src:url(fonts/inter-tight.woff2) format("woff2");font-weight:100 900;font-display:swap}
 @font-face{font-family:"IBM Plex Mono";src:url(fonts/ibm-plex-mono-400.woff2) format("woff2");font-weight:400;font-display:swap}
 @font-face{font-family:"IBM Plex Mono";src:url(fonts/ibm-plex-mono-500.woff2) format("woff2");font-weight:500;font-display:swap}
 
 :root{
-  /* primitives */
-  --navy:#0b1b2e; --paper:#f4f1ea; --brass:#c8963e; --verified-green:#2e9e78; --refused-red:#c73e3e; --slate:#5b6b7d;
-  --navy-sunken:#13263b; --navy-muted:#93a1b1;
-  --navy-hair:rgba(147,161,177,.3); --navy-danger:#e06a6a; --navy-success-fill:rgba(46,158,120,.16); --navy-danger-fill:rgba(224,106,106,.14);
-  --scrim:rgba(11,27,46,.6);
-  /* semantic, light theme (Paper) */
-  --surface:var(--paper); --sunken:#e9ebee; --ink:var(--navy); --muted:var(--slate); --border:var(--slate);
-  --hair:rgba(91,107,125,.35); --success:#1a6b50; --danger:#b23535; --focus:var(--navy);
-  --success-fill:rgba(46,158,120,.12); --danger-fill:rgba(199,62,62,.10); --accent-fill:rgba(200,150,62,.28);
+  --navy:#0b1b2e; --paper:#f4f1ea; --brass:#c8963e; --gold:#f0c06a;
+  --surface:var(--navy); --sunken:rgba(19,38,59,.78); --ink:var(--paper); --muted:#93a1b1; --border:#93a1b1;
+  --hair:rgba(147,161,177,.26); --success:#3fbf8f; --danger:#e06a6a; --focus:var(--brass);
+  --success-fill:rgba(46,158,120,.16); --danger-fill:rgba(224,106,106,.16); --accent-fill:rgba(200,150,62,.34);
   --sans:"Inter Tight","Helvetica Neue",Arial,sans-serif;
   --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
   --pad:clamp(16px,6vw,96px);
-  color-scheme:light;
+  color-scheme:dark;
 }
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
-  --surface:var(--navy); --sunken:var(--navy-sunken); --ink:var(--paper); --muted:var(--navy-muted); --border:var(--navy-muted);
-  --hair:rgba(147,161,177,.3); --success:var(--verified-green); --danger:#e06a6a; --focus:var(--brass);
-  --success-fill:rgba(46,158,120,.16); --danger-fill:rgba(224,106,106,.14); --accent-fill:rgba(200,150,62,.32);
-  color-scheme:dark}}
-:root[data-theme="dark"]{
-  --surface:var(--navy); --sunken:var(--navy-sunken); --ink:var(--paper); --muted:var(--navy-muted); --border:var(--navy-muted);
-  --hair:rgba(147,161,177,.3); --success:var(--verified-green); --danger:#e06a6a; --focus:var(--brass);
-  --success-fill:rgba(46,158,120,.16); --danger-fill:rgba(224,106,106,.14); --accent-fill:rgba(200,150,62,.32);
-  color-scheme:dark}
-/* A navy band looks the same in both themes: the brand's dark ground. */
-.band{
-  --surface:var(--navy); --sunken:var(--navy-sunken); --ink:var(--paper); --muted:var(--navy-muted); --border:var(--navy-muted);
-  --hair:var(--navy-hair); --success:var(--verified-green); --danger:var(--navy-danger); --focus:var(--brass);
-  --success-fill:var(--navy-success-fill); --danger-fill:var(--navy-danger-fill);
-  background:var(--surface); color:var(--ink); color-scheme:dark}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .band{border-block:1px solid var(--hair)}}
-:root[data-theme="dark"] .band{border-block:1px solid var(--hair)}
-
 *,*::before,*::after{box-sizing:border-box}
 [hidden]{display:none!important}
-html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;overflow-x:clip}
-body{margin:0;background:var(--surface);color:var(--ink);font:400 1rem/1.5 var(--sans);-webkit-font-smoothing:antialiased;overflow-x:clip}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;overflow-x:clip;background:#060c16}
+body{margin:0;background:#060c16;color:var(--ink);font:400 1rem/1.5 var(--sans);-webkit-font-smoothing:antialiased;overflow-x:clip}
 h1,h2,h3,p,ul,ol,figure{margin:0}
 ul,ol{padding:0;list-style:none}
 a{color:var(--ink);text-underline-offset:.2em;text-decoration-thickness:1px}
 a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
-.shell{max-width:1440px;margin:0 auto;padding-inline:var(--pad)}
-.skip{position:absolute;left:-999px}.skip:focus{left:16px;top:.5rem;z-index:9;background:var(--surface);padding:.5rem .8rem;border:1px solid var(--border)}
-
-h1,h2,h3{font-family:var(--sans);font-weight:600;color:inherit}
-h1{font-size:clamp(2.75rem,6vw,4.5rem);line-height:1.05;letter-spacing:-.025em;text-wrap:balance}
-h2{font-size:clamp(2rem,3.6vw,3rem);line-height:1.08;letter-spacing:-.02em;text-wrap:balance}
+.shell{max-width:1280px;margin:0 auto;padding-inline:var(--pad)}
+.skip{position:absolute;left:-999px}.skip:focus{left:16px;top:.5rem;z-index:20;background:var(--surface);padding:.5rem .8rem;border:1px solid var(--border)}
+h1,h2,h3{font-family:var(--sans);font-weight:600;color:inherit;text-wrap:balance;overflow-wrap:break-word}
+h1{font-size:clamp(2.75rem,6.4vw,5.5rem);line-height:1.02;letter-spacing:-.03em}
+h2{font-size:clamp(1.9rem,3.6vw,3rem);line-height:1.08;letter-spacing:-.02em}
 h3{font-size:1.375rem;line-height:1.27;letter-spacing:-.01em}
-.lede{color:var(--muted);font-size:1.25rem;line-height:1.5;max-width:34rem}
-.lede strong{color:var(--ink);font-weight:600}
-.eyebrow{font:500 .75rem/1.33 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.eyebrow{font:500 .75rem/1.33 var(--mono);letter-spacing:.24em;text-transform:uppercase;color:var(--brass)}
 
-/* Buttons: square, ink fill (primary) or border outline (secondary); never brass, green or red */
-.button{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;border:1px solid var(--ink);border-radius:2px;padding:.75rem 1.5rem;background:var(--ink);color:var(--surface);font:600 .9375rem/1.33 var(--sans);letter-spacing:-.005em;text-decoration:none;white-space:nowrap;cursor:pointer}
-.button:hover{background:color-mix(in srgb,var(--ink) 86%,var(--surface))}
-.button.ghost{background:transparent;color:var(--ink);border-color:var(--border)}
-.button.ghost:hover{background:var(--sunken)}
-.button.light{background:var(--ink);color:var(--surface)}
+/* the film and its dimmer */
+#film{position:fixed;inset:0;width:100%;height:100%;display:block;z-index:0}
+.scrim{position:fixed;inset:0;z-index:0;background:#050b14;opacity:0;pointer-events:none}
+main,.site-footer,.site-header{position:relative;z-index:1}
+
+/* Buttons: square; paper fill (primary) or hairline outline (secondary) */
+.button{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;border:1px solid var(--ink);border-radius:2px;padding:.75rem 1.5rem;background:var(--ink);color:var(--navy);font:600 .9375rem/1.33 var(--sans);text-decoration:none;white-space:nowrap;cursor:pointer}
+.button:hover{background:#fff}
+.button:active{transform:translateY(1px)}
+.button.ghost{background:rgba(11,27,46,.4);color:var(--ink);border-color:var(--hair);backdrop-filter:blur(6px)}
+.button.ghost:hover{border-color:var(--ink)}
 .text-link{display:inline-flex;gap:.4rem;align-items:center;font-weight:600;font-size:.9375rem;color:var(--ink);text-decoration:underline;text-decoration-color:var(--hair);text-underline-offset:.3em}
-.text-link:hover{text-decoration-color:currentColor}
+.text-link:hover{text-decoration-color:var(--brass)}
 
-/* Header */
-.site-header{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;gap:1.5rem;padding-block:1.25rem;border-bottom:1px solid var(--hair)}
-.brand{justify-self:center;display:inline-flex;align-items:center;text-decoration:none}
-.brand img{display:block;height:34px;width:auto}
-.logo-paper{display:none!important}
-.band .logo-navy{display:none!important}.band .logo-paper{display:block!important}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .logo-navy{display:none!important}:root:not([data-theme="light"]) .logo-paper{display:block!important}}
-:root[data-theme="dark"] .logo-navy{display:none!important}:root[data-theme="dark"] .logo-paper{display:block!important}
-.nav{display:flex;align-items:center;gap:2rem;font-size:.9375rem;color:var(--muted)}.nav.right{justify-self:end}
+/* Header: over the film, fading to it */
+.site-header{position:fixed;inset:0 0 auto;z-index:10;display:flex;align-items:center;gap:1.5rem;padding-block:1rem;background:rgba(6,12,22,.62);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--hair);max-width:none;padding-inline:max(var(--pad),calc((100% - 1280px) / 2 + var(--pad)))}
+.brand{display:inline-flex;align-items:center;text-decoration:none;margin-right:auto}
+.brand img{display:block;height:30px;width:auto}
+.nav{display:flex;align-items:center;gap:1.75rem;font-size:.9375rem;color:var(--muted)}
 .nav a{color:inherit;text-decoration:none}
 .nav a:hover{color:var(--ink)}
-.header-cta{padding:.6rem 1rem;border:1px solid var(--ink);border-radius:2px;font-size:.875rem;font-weight:600;color:var(--surface)!important;background:var(--ink);white-space:nowrap}
-.header-cta span{margin-left:.4rem}
-@media (max-width:860px){.site-header{grid-template-columns:auto minmax(0,1fr)}.brand{justify-self:start}.brand img{height:28px}}
-@media (max-width:400px){.brand img{height:24px}.header-cta{padding:.55rem .75rem;font-size:.8rem}}
+.header-cta{padding:.55rem 1rem;border:1px solid var(--ink);border-radius:2px;font-size:.875rem;font-weight:600;color:var(--navy)!important;background:var(--ink);white-space:nowrap}
+@media (max-width:860px){.nav a:not(.header-cta){display:none}.brand img{height:26px}}
 
-/* Contact window */
-dialog.contact-box{border:1px solid var(--border);border-radius:0;padding:0;width:min(30rem,calc(100% - 32px));background:var(--surface);color:var(--ink)}
-dialog.contact-box::backdrop{background:var(--scrim)}
-.cb{padding:1.5rem;display:flex;flex-direction:column;gap:1rem}
-.cb-head{display:flex;justify-content:space-between;align-items:start;gap:1rem}
-.cb h2{font-size:1.375rem;letter-spacing:-.01em}
-.cb p{color:var(--muted);font-size:1rem}
-.cb-x{border:0;background:transparent;color:var(--muted);font:400 1.6rem/1 var(--sans);cursor:pointer;padding:.1rem .4rem}
-.cb-x:hover{color:var(--ink)}
-.cb-addr{display:flex;align-items:center;justify-content:space-between;gap:.8rem;padding:.4rem .4rem .4rem .9rem;background:var(--sunken)}
-.cb-addr b{font:500 .9375rem var(--mono);overflow-wrap:anywhere}
-.cb-copy{font:600 .875rem var(--sans);border:1px solid var(--ink);background:var(--ink);color:var(--surface);border-radius:2px;padding:.6rem .9rem;cursor:pointer;white-space:nowrap}
-.cb-ways{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.5rem}
-.cb-ways a{display:flex;justify-content:center;font-weight:600;font-size:.875rem;text-decoration:none;color:var(--ink);border:1px solid var(--border);border-radius:2px;padding:.7rem .4rem;text-align:center}
-.cb-ways a:hover{background:var(--sunken)}
-@media (max-width:480px){.cb-ways{grid-template-columns:1fr}}
+/* Chapter rail: one dot per beat */
+.rail{position:fixed;right:clamp(10px,2vw,28px);top:50%;transform:translateY(-50%);z-index:9;display:flex;flex-direction:column;gap:14px}
+.rail a{position:relative;display:block;width:9px;height:9px;border:1px solid var(--muted);border-radius:50%;opacity:.6}
+.rail a.on{background:var(--gold);border-color:var(--gold);opacity:1;box-shadow:0 0 12px var(--gold)}
+.rail a span{position:absolute;right:20px;top:50%;transform:translateY(-50%);font:500 .6875rem var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--muted);white-space:nowrap;opacity:0;transition:opacity .2s}
+.rail a:hover span,.rail a.on span{opacity:1}
+.rail a.on span{color:var(--gold)}
+@media (max-width:760px){.rail{display:none}}
 
-/* Hero: navy ground, headline top-left, a brass thread from the rule to the line of code */
-.hero-copy{display:flex;flex-direction:column;gap:1.5rem}
+/* Play: a sticky stage over the film; each caption owns a stretch of the scroll */
+.stage{position:sticky;top:0;height:100vh;height:100svh;pointer-events:none}
+.cap{position:absolute;inset:auto 0 clamp(1.75rem,7vh,4.5rem);margin:0 auto;width:min(62rem,calc(100% - 2 * var(--pad)));display:flex;flex-direction:column;align-items:center;gap:1rem;text-align:center;opacity:0;visibility:hidden}
+.cap a,.cap button{pointer-events:auto}
+.cap .say{font:300 clamp(1.4rem,2.6vw,2.25rem)/1.28 var(--sans);letter-spacing:-.01em;color:var(--ink);text-wrap:balance}
+.cap .say b{font-weight:500}
+.cap h2{font-size:clamp(2rem,4vw,3.5rem)}
+.slogan{font:500 clamp(1.25rem,2.2vw,1.75rem)/1.2 var(--sans);letter-spacing:-.015em}
+.hero-actions{display:flex;flex-wrap:wrap;justify-content:center;gap:.75rem;margin-top:.5rem}
+.for-line{font:400 .8125rem/1.5 var(--mono);color:var(--muted);max-width:34rem}
+.hint-scroll{font:500 .6875rem var(--mono);letter-spacing:.24em;text-transform:uppercase;color:var(--muted)}
+.hint-scroll::after{content:"";display:block;width:1px;height:28px;margin:.6rem auto 0;background:linear-gradient(var(--brass),transparent)}
+/* highlight that draws in with the words */
+.hl{background:linear-gradient(transparent 64%,var(--accent-fill) 64%) no-repeat 0 0/var(--hl,0%) 100%}
+.hl.red{background-image:linear-gradient(transparent 64%,var(--danger-fill) 64%)}
+.w{display:inline-block;will-change:opacity,filter,transform}
 
-.hero-art{position:relative;padding:4.5rem 0 2rem}
-.editor-card{position:relative;z-index:1;background:var(--sunken);color:var(--ink);border:1px solid var(--hair)}
-.topbar{display:flex;align-items:center;gap:.75rem;padding:.65rem 1rem;border-bottom:1px solid var(--hair);color:var(--muted);font:500 .75rem/1.33 var(--mono);letter-spacing:.06em}
-.dots{display:none}
-.live{margin-left:auto;display:inline-flex;align-items:center;gap:.4rem;color:var(--muted)}
-.live i{width:6px;height:6px;background:var(--brass)}
-.editor-body{padding:1.25rem 1rem 1.1rem;font:400 clamp(.75rem,1.05vw,.875rem)/1.6 var(--mono);letter-spacing:.01em}
-.who{display:block;color:var(--muted);font:500 .6875rem/1.4 var(--sans);letter-spacing:.2em;text-transform:uppercase;margin-bottom:.25rem}
-.code{display:flex;white-space:pre-wrap}
-.ln{flex:none;width:2.4em;color:var(--muted);user-select:none}
-.seq + .seq{margin-top:.9rem}
-.bad{color:var(--danger);text-decoration:line-through;text-decoration-thickness:1px}
-.good{color:var(--ink);box-shadow:inset 0 -2px 0 var(--brass)}
-.verdict{display:block;margin-top:.35rem;padding:.65rem .8rem;border-left:2px solid var(--danger);background:var(--danger-fill);white-space:pre-wrap}
-.verdict b{color:var(--danger);font-weight:500}
-.verdict.ok{border-left-color:var(--success);background:var(--success-fill)}
-.verdict.ok b{color:var(--success)}
-.editor-footer{display:flex;justify-content:space-between;gap:1rem;padding:.65rem 1rem;border-top:1px solid var(--hair);color:var(--muted);font:400 .75rem var(--mono)}
-.editor-footer b{color:var(--ink);font-weight:500}
-.cursor{display:inline-block;width:.55em;height:1.05em;vertical-align:-.18em;margin-left:2px;background:var(--brass);animation:blink 1s steps(1) infinite}
-@keyframes blink{50%{opacity:0}}
-/* Floating notes become record chips; the top one is the brass tag the thread hangs from */
-.floating-note{position:absolute;z-index:2;display:flex;flex-direction:column;gap:2px;padding:.6rem .85rem;background:var(--surface);border:1px solid var(--hair);font:400 .8125rem/1.35 var(--mono);color:var(--ink)}
-.floating-note span{color:var(--muted);font:500 .6875rem var(--sans);letter-spacing:.2em;text-transform:uppercase}
-.floating-note b{font:500 .875rem var(--mono)}
-.floating-note small{color:var(--muted);font-size:.75rem}
-.floating-note .sg{font:500 .875rem var(--mono);color:var(--ink)}
-.note-top{bottom:calc(100% - 3.75rem);left:0;border-color:var(--brass)}
-.note-top span{color:var(--danger)}
-.note-top::after{content:"";position:absolute;left:.5rem;top:100%;width:1.5px;height:6.4rem;background:var(--brass)}
-.note-bottom{position:relative;margin-left:auto;width:max-content;border-top:0}
-@media (prefers-reduced-motion:no-preference){
-  .seq{opacity:0;animation:in .4s ease forwards}
-  .s1{animation-delay:.3s}.s2{animation-delay:1.3s}.s3{animation-delay:2.5s}.s4{animation-delay:3.3s}
-  .js .editor-card:not(.play) .seq{animation:none}
-  @keyframes in{to{opacity:1}}
-}
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.cursor{animation:none}}
-@media (max-width:640px){.hero-art{padding:4.25rem 0 1rem}.editor-body{padding:1rem .85rem}}
+/* Read: details over the dimmed film */
+.read{padding-block:18vh 22vh}
+.read .shell > * + *{margin-top:clamp(2.5rem,5vw,4rem)}
+.rv{opacity:0;transform:translateY(28px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.7,.2,1)}
+.rv.in{opacity:1;transform:none}
+.intro{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);align-items:end;gap:1.25rem 3rem;padding-top:1.25rem;border-top:1px solid var(--brass)}
+.intro .eyebrow{grid-column:1/-1}
+.intro > p:last-child:not(.eyebrow){color:var(--muted);max-width:28rem;justify-self:end}
+@media (max-width:860px){.intro{grid-template-columns:minmax(0,1fr)}.intro > p:last-child:not(.eyebrow){justify-self:start}}
+.row{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(2rem,5vw,5rem);align-items:start}
+.row-text{display:flex;flex-direction:column;gap:1rem;align-items:flex-start;font-size:1.0625rem;color:var(--muted)}
+.row-text h3{font-size:clamp(1.6rem,2.6vw,2.25rem);line-height:1.12;letter-spacing:-.02em;color:var(--ink)}
+.row-pic{min-width:0;display:flex;flex-direction:column;gap:1rem}
+@media (max-width:900px){.row{grid-template-columns:minmax(0,1fr)}}
+.panel{background:var(--sunken);border:1px solid var(--hair);backdrop-filter:blur(10px)}
+.term{margin:0;padding:1.25rem;font:400 .8125rem/1.65 var(--mono);color:var(--ink);white-space:pre-wrap;overflow-wrap:anywhere}
+.t-dim{color:var(--muted)}.t-bad{color:var(--danger)}.t-ok{color:var(--success)}
+.panel figcaption,.panel .cap-line{padding:.6rem 1.25rem;border-top:1px solid var(--hair);font:400 .75rem var(--mono);color:var(--muted)}
+.notes{display:flex;flex-wrap:wrap;gap:.75rem}
+.note{display:flex;flex-direction:column;gap:2px;padding:.6rem .85rem;background:var(--sunken);border:1px solid var(--hair);font:400 .8125rem/1.35 var(--mono);backdrop-filter:blur(10px)}
+.note span{color:var(--muted);font:500 .6875rem var(--sans);letter-spacing:.2em;text-transform:uppercase}
+.note.top{border-color:var(--brass)}.note.top span{color:var(--danger)}
+.note b{font:500 .875rem var(--mono)}
+.note small{color:var(--muted);font-size:.75rem}
+.ledger{padding:1rem}
+.ledger-head,.ledger-foot{font:500 .6875rem var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.ledger-foot{letter-spacing:.06em;text-transform:none;font:400 .75rem var(--mono);margin-top:.75rem}
+.rec{margin-top:.6rem;padding:.6rem .75rem;background:rgba(6,12,22,.6);font:400 .8125rem/1.5 var(--mono)}
+.rec .sep{color:var(--muted);padding:0 .4em}
+.rec .yes{color:var(--success)}.rec .no{color:var(--danger)}
 
-/* Signal strip */
-
-/* Sections: tracked label | title | text, divided by hairline rules */
-section{padding-block:clamp(4rem,9vw,6rem)}
-.intro{display:grid;grid-template-columns:.7fr 1.2fr 1fr;align-items:end;gap:1.5rem 2rem;margin-bottom:3rem;padding-top:1.25rem;border-top:1px solid var(--ink)}
-.intro .eyebrow{align-self:start}
-.intro > p:last-child{max-width:24rem;margin:0 0 .2rem auto;color:var(--muted);line-height:1.5}
-@media (max-width:980px){.intro{grid-template-columns:1fr 1.3fr}.intro .eyebrow{grid-column:1/-1}.intro > p:last-child{margin-left:0}}
-@media (max-width:640px){.intro{display:block;margin-bottom:2rem}.intro .eyebrow{margin:0 0 1rem}.intro > p:last-child{margin-top:1rem;max-width:none}}
-
-/* Status tags: mono word with a square dot, outlined in its status colour */
-.tag,.outcome span,td .ok{display:inline-flex;align-items:center;gap:.4rem;font:400 .8125rem/1.38 var(--mono);padding:2px .5rem;border:1px solid currentColor;border-radius:2px;white-space:nowrap}
-.tag::before,.outcome span::before,td .ok::before{content:"";width:6px;height:6px;background:currentColor}
-td .ok{color:var(--success)}
-
-/* The four controls: columns divided by hairline verticals */
-
-/* The record: navy band, a data well */
-.product-window{background:var(--sunken);border:1px solid var(--hair)}
+/* Tables */
 .window-header{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem 1rem;padding:.75rem 1.25rem;border-bottom:1px solid var(--hair);color:var(--muted);font:500 .75rem var(--mono);letter-spacing:.06em}
 .window-title{margin-right:auto;color:var(--ink)}
 .scroll{overflow-x:auto}
-table{width:100%;border-collapse:collapse;min-width:54rem;font-size:.9375rem}
+table{width:100%;border-collapse:collapse;font-size:.9375rem}
 th,td{text-align:left;padding:.9rem 1.25rem;border-bottom:1px solid var(--hair);vertical-align:middle}
 th{font:500 .75rem var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
 tbody tr:last-child td{border-bottom:0}
 td.id{font:500 .875rem var(--mono);white-space:nowrap}
 td.loc{font:400 .8125rem var(--mono);color:var(--muted);white-space:nowrap}
-.sig{display:flex;flex-direction:column;gap:.15rem;line-height:1.3}
 .sig span{font:500 .875rem var(--mono);white-space:nowrap}
-.sig small{font:400 .75rem var(--mono);color:var(--muted);white-space:nowrap}
+td .ok{display:inline-flex;align-items:center;gap:.4rem;font:400 .8125rem/1.38 var(--mono);padding:2px .5rem;border:1px solid currentColor;border-radius:2px;white-space:nowrap;color:var(--success)}
+td .ok::before{content:"";width:6px;height:6px;background:currentColor}
+table.mini{min-width:30rem}
+.uc-table{min-width:40rem}
+.uc-table td{vertical-align:top;padding-block:1.1rem}
+.uc-table td b{display:block;font-weight:600}
+.uc-table td small{display:block;margin-top:.15rem;color:var(--muted);font-size:.8125rem}
+.uc-table td.uc-ask{color:var(--muted);font-style:italic}
+.uc-table td:last-child{font-weight:500}
+.why-title{font:500 .75rem var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:.75rem}
 
-/* The method */
-
-/* Limits */
-
-/* Pricing */
-.offers{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border:1px solid var(--hair)}
+/* Products */
+.starts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem}
+.start-card{min-width:0;display:flex;flex-direction:column;gap:1rem;padding:clamp(1.5rem,3vw,2rem)}
+.start-card.toolkit{border-color:var(--brass)}
+.who-for{font:500 .75rem var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.start-card > p{color:var(--muted)}
+.snippet{margin:0;padding:1rem;background:rgba(6,12,22,.6);color:var(--ink);font:400 .8125rem/1.6 var(--mono);white-space:pre-wrap;overflow-wrap:break-word}
+.snippet.has{display:flex;flex-direction:column;gap:.35rem;font:400 .875rem/1.5 var(--sans)}
+.snippet.has li,.offer li{position:relative;padding-left:1.1rem}
+.snippet.has li::before,.offer li::before{content:"";position:absolute;left:0;top:.6em;width:6px;height:6px;background:var(--brass)}
+.hint{color:var(--muted);font-size:.875rem}
+.hint code{font:400 .8125rem var(--mono);color:var(--ink)}
+.buy{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:auto;padding-top:.5rem}
+@media (max-width:1100px){.starts{grid-template-columns:minmax(0,1fr)}}
+.offers{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem;padding-bottom:1.25rem}
 .offer{display:flex;flex-direction:column;gap:1rem;padding:clamp(1.5rem,3vw,2rem)}
-.offer + .offer{border-left:1px solid var(--hair)}
-.offer.first{box-shadow:inset 0 3px 0 var(--ink)}
-.offer .who-for{font:500 .75rem var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
 .offer h3{font-size:1.375rem}
 .price{font:600 clamp(2.5rem,4vw,3rem)/1 var(--sans);letter-spacing:-.025em}
 .price small{font:400 .9375rem var(--sans);letter-spacing:0;color:var(--muted)}
 .offer ul{display:flex;flex-direction:column;gap:.5rem;padding-top:1rem;border-top:1px solid var(--hair)}
-.offer li{position:relative;padding-left:1.25rem}
-.offer li::before{content:"";position:absolute;left:0;top:.6em;width:6px;height:6px;background:var(--ink)}
-.buy{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:auto;padding-top:.5rem}
 .after{margin-top:1.25rem;color:var(--muted);font-size:.875rem;line-height:1.43;max-width:46rem}
-@media (max-width:1020px){.offers{grid-template-columns:1fr}.offer + .offer{border-left:0;border-top:1px solid var(--hair)}}
+@media (max-width:1020px){.offers{grid-template-columns:1fr}}
 
-/* Start free */
-.starts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));border:1px solid var(--hair)}
-.start-card{min-width:0;display:flex;flex-direction:column;gap:1rem;padding:clamp(1.5rem,3vw,2rem)}
-.start-card + .start-card{border-left:1px solid var(--hair)}
-.start-card .who-for{font:500 .75rem var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
-.start-card h3{font-size:1.375rem}
-.start-card > p{color:var(--muted)}
-.snippet{margin:0;padding:1rem;background:var(--sunken);color:var(--ink);font:400 .8125rem/1.6 var(--mono);overflow-x:auto;white-space:pre}
-@media (max-width:820px){.starts{grid-template-columns:minmax(0,1fr)}.start-card + .start-card{border-left:0;border-top:1px solid var(--hair)}}
-
-/* Questions */
-.faq{border-top:1px solid var(--hair)}
+/* Folds */
 details{border-bottom:1px solid var(--hair)}
 summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:1.1rem 0;font:600 1.125rem/1.35 var(--sans);letter-spacing:-.01em}
 summary::-webkit-details-marker{display:none}
-summary::after{content:"+";flex:none;font:400 1.25rem/1 var(--mono);color:var(--muted)}
+summary::after{content:"+";flex:none;font:400 1.25rem/1 var(--mono);color:var(--brass)}
 details[open] summary::after{content:"\2212"}
 details > p{padding:0 0 1.25rem;color:var(--muted);max-width:44rem}
-.faq-wrap{display:grid;grid-template-columns:.7fr 1.3fr;gap:clamp(2rem,8vw,8rem);align-items:start;padding-top:1.25rem;border-top:1px solid var(--ink)}
-.faq-wrap .eyebrow{margin-bottom:1.5rem}
-@media (max-width:980px){.faq-wrap{grid-template-columns:1fr}}
+.plans{border-top:1px solid var(--brass)}
+.plans > summary{flex-wrap:wrap;gap:.5rem 2rem;padding-block:1.25rem}
+.plans > summary h3{font-size:clamp(1.5rem,2.4vw,2rem)}
+.plans-note{margin-left:auto;color:var(--muted);font:400 1rem/1.5 var(--sans);max-width:32rem}
+@media (max-width:640px){.plans-note{display:none}}
 
-/* Last word: a navy block */
+/* Why */
+.why{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}
+.why-col{padding:1.5rem 1.75rem}
+.why-list{counter-reset:w}
+.why-list li{counter-increment:w;position:relative;display:flex;flex-direction:column;gap:.3rem;padding:1.1rem 0 1.1rem 2.5rem;border-top:1px solid var(--hair)}
+.why-list li:first-child{border-top:0}
+.why-list li::before{content:"0" counter(w);position:absolute;left:0;top:1.2rem;font:500 .8125rem var(--mono);color:var(--brass)}
+.why-list b{font-size:1.25rem;font-weight:600;letter-spacing:-.01em;line-height:1.3}
+.why-list span{color:var(--muted);line-height:1.5}
+.why-list .saves,.why-list .others{margin-top:.35rem;color:var(--ink);font-size:.9375rem}
+.vlab2{display:block;font:500 .6875rem var(--sans);letter-spacing:.2em;text-transform:uppercase;margin-bottom:.1rem}
+.saves .vlab2{color:var(--success)}.others .vlab2{color:var(--muted)}
+.why-sum{margin:.5rem 0 0 2.5rem;padding:.9rem 1rem;background:rgba(6,12,22,.6);font-weight:600}
+@media (max-width:900px){.why{grid-template-columns:minmax(0,1fr)}.why-sum{margin-left:0}}
+.vlab{display:none}
+.compare{border-top:1px solid var(--hair)}
+.chead,.crow{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1fr) minmax(0,1.1fr) minmax(0,1.1fr)}
+.chead p{padding:.9rem 1.25rem .9rem 0;font:500 .75rem var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.chead p:last-child{color:var(--ink);padding-left:1.25rem}
+.crow{border-top:1px solid var(--hair)}
+.crow > *{padding:1.15rem 1.25rem 1.15rem 0;line-height:1.5}
+.cwho b{display:block;font-weight:600}
+.cwho small{display:block;margin-top:.2rem;color:var(--muted);font-size:.8125rem}
+.cgood,.cgap{color:var(--muted)}
+.cus{padding-left:1.25rem!important;color:var(--ink);font-weight:500;box-shadow:inset 2px 0 0 var(--brass)}
+@media (max-width:900px){.chead{display:none}.crow{grid-template-columns:minmax(0,1fr)}.crow > *{padding:.35rem 0}.cwho{padding-top:1.1rem!important}.cus{padding:.75rem 1rem!important;margin:.4rem 0 1.1rem}.vlab{display:block;font:500 .6875rem var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:.15rem}}
+
+/* Proof numbers, trust, guides, questions */
+.proof{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1rem}
+.proof > div{padding:1.5rem;display:flex;flex-direction:column;gap:.6rem;align-items:flex-start}
+.stat{font:500 clamp(2.25rem,4vw,3rem)/1 var(--mono);letter-spacing:-.02em;color:var(--gold)}
+.proof p:not(.stat){color:var(--muted)}
+@media (max-width:1000px){.proof{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.proof{grid-template-columns:1fr}}
+.trust{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}
+.trust > div{padding:1.5rem;display:flex;flex-direction:column;gap:.6rem}
+.trust p{color:var(--muted)}
+@media (max-width:860px){.trust{grid-template-columns:1fr}}
+.guide-index{border-top:1px solid var(--brass)}
+.guide-index li{border-bottom:1px solid var(--hair)}
+.guide-index a{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:.5rem 2rem;align-items:baseline;padding:1.25rem 0;text-decoration:none;color:var(--ink)}
+.guide-index a:hover h3{color:var(--gold)}
+.guide-index h3{font-size:1.125rem;line-height:1.3;transition:color .2s}
+.guide-index p{color:var(--muted)}
+@media (max-width:760px){.guide-index a{grid-template-columns:minmax(0,1fr)}}
+.faq-wrap{display:grid;grid-template-columns:.8fr 1.2fr;gap:clamp(2rem,6vw,6rem);align-items:stretch}
+@media (max-width:980px){.faq-wrap{grid-template-columns:1fr}}
+.ask{display:flex;flex-direction:column;gap:1rem;padding:clamp(1.75rem,4vw,3rem)}
+.ask .body{color:var(--muted)}
+.ask .who-is{font:400 .875rem var(--mono);color:var(--muted)}
+.ask .actions{display:flex;flex-wrap:wrap;align-items:center;gap:1rem 1.5rem}
+.ask .mail{font:500 .9375rem var(--mono);color:var(--ink);overflow-wrap:anywhere}
+.cta-install{display:flex;flex-wrap:wrap;align-items:center;gap:.75rem 1rem;margin-top:auto;padding-top:1.25rem;border-top:1px solid var(--hair);color:var(--muted);font-size:.9375rem}
+.ask .fine{color:var(--muted);font:400 .8125rem var(--mono)}
+.faq{border-top:1px solid var(--hair)}
 
 /* Footer */
-.paid{background:var(--success-fill);color:var(--ink);padding-block:1rem;border-bottom:1px solid var(--hair)}
-.site-footer{padding-bottom:1.5rem}
-.footer-top{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,auto);gap:2.5rem 4rem;margin-bottom:3rem;padding-top:2rem;border-top:1px solid var(--ink)}
-.footer-brand .brand{justify-self:start}
+.paid{position:relative;z-index:11;background:var(--success-fill);padding-block:1rem;border-bottom:1px solid var(--hair);margin-top:4.5rem}
+.site-footer{padding-block:3rem 1.5rem;max-width:none;padding-inline:max(var(--pad),calc((100% - 1280px) / 2 + var(--pad)));background:#060c16}
+/* the closing shot: the scrim lifts and the anchor holds, then the footer */
+.rest{height:110vh;height:110svh}
+.footer-top{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,auto);gap:2.5rem 4rem;margin-bottom:3rem;padding-top:2rem;border-top:1px solid var(--brass)}
 .footer-brand .brand img{height:30px}
 .footer-brand p{margin-top:1rem;max-width:26rem;color:var(--muted);font-size:.875rem}
+.foot-slogan{font-weight:600;color:var(--ink)!important;font-size:1rem!important}
 .footer-links{display:flex;gap:clamp(3rem,9vw,8rem)}
 .footer-links > div{display:flex;flex-direction:column;gap:.55rem;min-width:6rem}
 .footer-links a{width:max-content;color:var(--muted);font-size:.9375rem;text-decoration:none}
@@ -257,250 +261,40 @@ details > p{padding:0 0 1.25rem;color:var(--muted);max-width:44rem}
 .footer-label{margin-bottom:.25rem;color:var(--muted);font:500 .75rem var(--sans);letter-spacing:.2em;text-transform:uppercase}
 .legal{margin:0 0 1.25rem;color:var(--muted);font-size:.8125rem}
 .footer-bottom{display:flex;flex-wrap:wrap;justify-content:space-between;gap:.6rem 2rem;padding-top:1rem;border-top:1px solid var(--hair);color:var(--muted);font:400 .75rem var(--mono)}
-.footer-bottom a{color:var(--ink)}
 @media (max-width:760px){.footer-top{grid-template-columns:minmax(0,1fr)}.footer-links{gap:3rem}}
 
-/* The problem: one sequence, played once when it scrolls into view */
-.problem-wrap{padding-top:clamp(3rem,7vw,5rem)}
-.problem{position:relative;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:clamp(1.5rem,4vw,4rem);align-items:center;padding:clamp(1.25rem,3vw,2.5rem) 0;border-top:1px solid var(--ink);border-bottom:1px solid var(--hair)}
-.problem .eyebrow{margin-bottom:.4rem}
-.p-text{display:flex;flex-direction:column;gap:.85rem;font-size:1.125rem;line-height:1.5;color:var(--muted)}
-.p-text b{color:var(--ink);font-weight:600}
-.p-text .lead{font:600 clamp(1.5rem,2.4vw,2rem)/1.2 var(--sans);letter-spacing:-.015em;color:var(--ink)}
-.hl{background:linear-gradient(transparent 62%,var(--accent-fill) 62%) no-repeat 0 0/0% 100%;transition:background-size .9s ease .35s;color:var(--ink)}
-.hl.red{background-image:linear-gradient(transparent 62%,var(--danger-fill) 62%)}
-.p-line.on .hl{background-size:100% 100%}
-.p-stage{position:relative;display:flex;flex-direction:column;gap:1px;background:var(--hair);border:1px solid var(--hair);font:400 .75rem var(--mono)}
-.p-row{background:var(--surface);padding:1rem 1.1rem}
-.p-cap{display:flex;justify-content:space-between;gap:1rem;color:var(--muted);font:500 .6875rem var(--sans);letter-spacing:.2em;text-transform:uppercase;margin-bottom:.75rem}
-.code-bars{display:flex;flex-direction:column;gap:.45rem}
-.code-bars i{display:block;height:4px;background:var(--slate);transform-origin:left;transform:scaleX(0);transition:transform .6s ease}
-.code-bars i:nth-child(1){width:78%}.code-bars i:nth-child(2){width:56%;background:var(--brass);transition-delay:.15s}.code-bars i:nth-child(3){width:68%;transition-delay:.3s}
-.p-on-1 .code-bars i{transform:scaleX(1)}
-.chips{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.85rem}
-.chip{display:inline-flex;align-items:center;gap:.35rem;padding:2px .5rem;border:1px solid var(--border);border-radius:2px;color:var(--ink);font:400 .75rem var(--mono);opacity:0;transition:opacity .45s ease,color .3s}
-.p-on-1 .chip.looks{opacity:1}
-.chip.looks s{text-decoration:none;background:linear-gradient(currentColor,currentColor) no-repeat 0 55%/0% 1px;transition:background-size .5s ease .2s}
-.p-on-2 .chip.looks{color:var(--muted)}
-.p-on-2 .chip.looks s{background-size:100% 1px}
-.chip.audit{border-color:var(--danger);color:var(--danger)}
-.p-on-2 .chip.audit{opacity:1;transition-delay:.5s}
-.chain{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.9rem}
-.node{position:relative;display:flex;flex-direction:column;gap:.3rem;padding:.55rem .6rem;border:1px solid var(--border);background:var(--surface);opacity:0;transition:opacity .4s ease,transform .5s ease}
-.node b{font:600 .8125rem var(--sans);color:var(--ink)}
-.node small{color:var(--muted);font-size:.6875rem;min-height:1.1em;position:relative;white-space:nowrap}
-.node small span{transition:opacity .35s}
-.node small .now{position:absolute;left:0;top:0;opacity:0;color:var(--danger)}
-.node + .node::before{content:"";position:absolute;left:-.95rem;top:50%;width:.9rem;height:1.5px;background:var(--brass);transform-origin:left;transform:scaleX(0);transition:transform .35s ease}
-.p-on-3 .node{opacity:1}
-.p-on-3 .node:nth-child(2){transition-delay:.35s}.p-on-3 .node:nth-child(3){transition-delay:.7s}.p-on-3 .node:nth-child(4){transition-delay:1.05s}
-.p-on-3 .node:nth-child(2)::before{transform:scaleX(1);transition-delay:.35s}.p-on-3 .node:nth-child(3)::before{transform:scaleX(1);transition-delay:.7s}.p-on-3 .node:nth-child(4)::before{transform:scaleX(1);transition-delay:1.05s}
-.p-on-4 .node + .node::before{background:repeating-linear-gradient(90deg,var(--danger) 0 3px,transparent 3px 6px)}
-.p-on-4 .node{border-style:dashed;transition-delay:0s!important}
-.p-on-4 .node:nth-child(odd){transform:translateY(-4px)}
-.p-on-4 .node:nth-child(even){transform:translateY(4px)}
-.p-on-4 .node small .was{opacity:0}
-.p-on-4 .node small .now{opacity:1}
-.sessions{position:relative;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:.35rem;align-items:end;padding-top:2.6rem}
-.sessions i{display:block;height:1.5rem;background:var(--sunken);border:1px solid var(--hair);transform-origin:bottom;transition:opacity .3s ease calc(var(--n) * 70ms),transform .35s ease calc(var(--n) * 70ms),background-color .4s ease 1.6s,border-color .4s ease 1.6s}
-.js .sessions i{opacity:0;transform:scaleY(.3)}
-.p-on-5 .sessions i{opacity:1;transform:none}
-.sessions i.s3,.sessions i.s12{border-color:var(--ink)}
-.p-on-5 .sessions i.s12{background:var(--danger-fill);border-color:var(--danger)}
-.s-label{position:absolute;top:0;font:500 .6875rem var(--mono);white-space:nowrap;opacity:0;transition:opacity .4s ease;color:var(--ink)}
-.s-label.a{left:calc((100% + .35rem) * 2 / 12)}
-.s-label.b{right:0;color:var(--danger)}
-.p-on-5 .s-label.a{opacity:1;transition-delay:1s}
-.p-on-5 .s-label.b{opacity:1;transition-delay:1.6s}
-.arc{position:absolute;left:calc((100% + .35rem) * 2.5 / 12);right:calc((100% + .35rem) * .5 / 12);top:1.3rem;height:1.1rem;border:1px dashed var(--danger);border-bottom:0;opacity:0;clip-path:inset(0 100% 0 0);transition:clip-path .9s ease 1.9s,opacity .2s ease 1.9s}
-.p-on-5 .arc{opacity:1;clip-path:inset(-1rem 0 0 0)}
-.arc span{position:absolute;left:50%;top:-.7rem;transform:translateX(-50%);background:var(--surface);color:var(--danger);padding:0 .4rem;font:500 .625rem var(--sans);letter-spacing:.2em;text-transform:uppercase}
-.p-replay{position:absolute;right:0;top:1rem;border:1px solid var(--border);border-radius:2px;background:transparent;color:var(--muted);font:500 .75rem var(--mono);padding:.25rem .6rem;cursor:pointer;opacity:0;transition:opacity .4s}
-.p-done .p-replay{opacity:1}
-.p-replay:hover{color:var(--ink)}
-.js .p-line{opacity:.2;transition:opacity .6s ease}
-.js .p-line.on{opacity:1}
-@media (max-width:980px){.problem{grid-template-columns:1fr}}
-@media (max-width:520px){.chain{grid-template-columns:repeat(2,minmax(0,1fr))}.chain .node:nth-child(3)::before{display:none}.sessions{gap:.2rem}.s-label.a{left:0}}
-@media (prefers-reduced-motion:reduce){.problem *{transition:none!important}.js .p-line{opacity:1}}
+/* Contact window */
+dialog.contact-box{border:1px solid var(--hair);border-radius:0;padding:0;width:min(30rem,calc(100% - 32px));background:var(--navy);color:var(--ink)}
+dialog.contact-box::backdrop{background:rgba(5,11,20,.7)}
+.cb{padding:1.5rem;display:flex;flex-direction:column;gap:1rem}
+.cb-head{display:flex;justify-content:space-between;align-items:start;gap:1rem}
+.cb h2{font-size:1.375rem;letter-spacing:-.01em}
+.cb p{color:var(--muted)}
+.cb-x{border:0;background:transparent;color:var(--muted);font:400 1.6rem/1 var(--sans);cursor:pointer;padding:.1rem .4rem}
+.cb-addr{display:flex;align-items:center;justify-content:space-between;gap:.8rem;padding:.4rem .4rem .4rem .9rem;background:#13263b}
+.cb-addr b{font:500 .9375rem var(--mono);overflow-wrap:anywhere}
+.cb-copy{font:600 .875rem var(--sans);border:1px solid var(--ink);background:var(--ink);color:var(--navy);border-radius:2px;padding:.6rem .9rem;cursor:pointer;white-space:nowrap}
+.cb-ways{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.5rem}
+.cb-ways a{display:flex;justify-content:center;font-weight:600;font-size:.875rem;text-decoration:none;color:var(--ink);border:1px solid var(--hair);border-radius:2px;padding:.7rem .4rem;text-align:center}
+.cb-ways a:hover{border-color:var(--ink)}
+@media (max-width:480px){.cb-ways{grid-template-columns:1fr}}
 
-/* Kiro-style structure (2026-11-02): install first, then proof, then trust. The look stays the Anchored design system. */
-.site-header.kiro{grid-template-columns:auto minmax(0,1fr)}
-.site-header.kiro .brand{justify-self:start}
-.site-header.kiro .nav.right{gap:1.75rem}
-@media (max-width:860px){.site-header.kiro .nav.right a:not(.header-cta){display:none}}
-.hero-actions{display:flex;flex-wrap:wrap;gap:.75rem}
-.hero-band{padding-bottom:clamp(3rem,6vw,5rem)}
-.shots{margin:clamp(2.5rem,5vw,4rem) 0 0;border:1px solid var(--hair);background:var(--sunken)}
-.tabs{display:flex;flex-wrap:wrap;border-bottom:1px solid var(--hair)}
-.tab{border:0;border-right:1px solid var(--hair);background:transparent;color:var(--muted);font:500 .875rem var(--sans);padding:.8rem 1.1rem;cursor:pointer}
-.tab:hover{color:var(--ink)}
-.tab[aria-selected="true"]{color:var(--ink);box-shadow:inset 0 -2px 0 var(--brass)}
-.term{margin:0;padding:1.25rem;min-height:15rem;font:400 .8125rem/1.65 var(--mono);color:var(--ink);white-space:pre-wrap;overflow-wrap:anywhere}
-.t-dim{color:var(--muted)}.t-bad{color:var(--danger)}.t-ok{color:var(--success)}
-.shots figcaption{padding:.6rem 1.25rem;border-top:1px solid var(--hair);font:400 .75rem var(--mono);color:var(--muted)}
-.rows{display:flex;flex-direction:column;border-top:1px solid var(--hair)}
-.row{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(2rem,5vw,5rem);align-items:center;padding-block:clamp(2.5rem,5vw,4rem);border-bottom:1px solid var(--hair)}
-.row.rev .row-text{order:2}
-.row-text{display:flex;flex-direction:column;gap:1rem;align-items:flex-start}
-.row-text h3{font-size:clamp(1.5rem,2.4vw,2rem);line-height:1.15;letter-spacing:-.015em}
-.row-pic{min-width:0}
-.row-pic .hero-art{padding:4.5rem 0 0}
-@media (max-width:900px){.row{grid-template-columns:minmax(0,1fr)}.row.rev .row-text{order:0}}
-.ledger{background:var(--sunken);border:1px solid var(--hair);padding:1rem}
-.ledger-head,.ledger-foot{font:500 .6875rem var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
-.ledger-foot{letter-spacing:.06em;text-transform:none;font:400 .75rem var(--mono);margin-top:.75rem}
-.rec{margin-top:.6rem;padding:.6rem .75rem;background:var(--surface);font:400 .8125rem/1.5 var(--mono);color:var(--ink)}
-.rec .sep{color:var(--muted);padding:0 .4em}
-.rec .yes{color:var(--success)}.rec .no{color:var(--danger)}
-table.mini{min-width:30rem}
-table.mini th,table.mini td{padding:.75rem 1rem}
-.trust{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid var(--hair)}
-.trust div{padding:1.5rem 1.5rem 0 0;display:flex;flex-direction:column;gap:.6rem}
-.trust div + div{padding-left:1.5rem;border-left:1px solid var(--hair)}
-.trust p{color:var(--muted)}
-.trust-band .intro{border-top-color:var(--hair)}
-@media (max-width:860px){.trust{grid-template-columns:1fr}.trust div + div{padding-left:0;border-left:0;border-top:1px solid var(--hair)}.trust div{padding-bottom:1.25rem}}
-.proof{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid var(--hair);border-bottom:1px solid var(--hair)}
-.proof > div{padding:1.5rem;display:flex;flex-direction:column;gap:.6rem;align-items:flex-start}
-.proof > div + div{border-left:1px solid var(--hair)}
-.stat{font:500 clamp(2.25rem,4vw,3rem)/1 var(--mono);letter-spacing:-.02em}
-.proof p:not(.stat){color:var(--muted)}
-@media (max-width:1000px){.proof{grid-template-columns:repeat(2,minmax(0,1fr))}.proof > div:nth-child(3){border-left:0}.proof > div:nth-child(n+3){border-top:1px solid var(--hair)}}
-@media (max-width:560px){.proof{grid-template-columns:1fr}.proof > div{border-left:0!important}.proof > div + div{border-top:1px solid var(--hair)}}
-.cta-install{display:flex;flex-wrap:wrap;align-items:center;gap:.75rem 1rem;margin-top:1.75rem;padding-top:1.25rem;border-top:1px solid var(--hair);color:var(--muted);font-size:.9375rem}
-
-/* What you get / what you miss */
-.vlab{display:none}
-@media (max-width:760px){
-  .vlab{display:block;font:500 .6875rem var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:.25rem}
-}
-
-/* Comparison */
-.compare{border-top:1px solid var(--ink)}
-.chead,.crow{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1fr) minmax(0,1.1fr) minmax(0,1.1fr)}
-.chead p{padding:.9rem 1.25rem .9rem 0;font:500 .75rem var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
-.chead p:last-child{color:var(--ink);padding-left:1.25rem;background:var(--sunken)}
-.crow{border-top:1px solid var(--hair)}
-.crow > *{padding:1.15rem 1.25rem 1.15rem 0;line-height:1.5}
-.cwho b{display:block;font-weight:600}
-.cwho small{display:block;margin-top:.2rem;color:var(--muted);font-size:.8125rem}
-.cgood,.cgap{color:var(--muted)}
-.cgap{position:relative;padding-left:1.1rem}
-.cgap::before{content:"";position:absolute;left:0;top:1.85rem;width:8px;height:2px;background:var(--danger)}
-.cus{background:var(--sunken);padding-left:1.25rem!important;color:var(--ink);font-weight:500}
-@media (max-width:900px){
-  .chead{display:none}
-  .crow{grid-template-columns:minmax(0,1fr)}
-  .crow > *{padding:.35rem 0}
-  .cwho{padding-top:1.1rem!important}
-  .cgap{padding-left:0}.cgap::before{display:none}
-  .crow .cgap .vlab{color:var(--danger)}
-  .cus{padding:.75rem 1rem!important;margin:.4rem 0 1.1rem}
-  .crow .vlab{display:block;font:500 .6875rem var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:.15rem}
-}
-
-/* Why Anchored: get + saves, unique + others */
-.why{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));border-top:1px solid var(--ink)}
-.why-col{padding:1.5rem 2rem 0 0}
-.why-col + .why-col{padding-left:2rem;border-left:1px solid var(--hair)}
-.why-title{font:500 .75rem var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem}
-.why-list{counter-reset:w}
-.why-list li{counter-increment:w;position:relative;display:flex;flex-direction:column;gap:.3rem;padding:1.1rem 0 1.1rem 2.5rem;border-top:1px solid var(--hair)}
-.why-list li:first-child{border-top:0}
-.why-list li::before{content:"0" counter(w);position:absolute;left:0;top:1.2rem;font:500 .8125rem var(--mono);color:var(--muted)}
-.why-list b{font-size:1.25rem;font-weight:600;letter-spacing:-.01em;line-height:1.3}
-.why-list span{color:var(--muted);line-height:1.5}
-.why-list .saves,.why-list .others{margin-top:.35rem;color:var(--ink);font-size:.9375rem}
-.vlab2{display:block;font:500 .6875rem var(--sans);letter-spacing:.2em;text-transform:uppercase;margin-bottom:.1rem}
-.saves .vlab2{color:var(--success)}
-.others .vlab2{color:var(--muted)}
-.why-sum{margin:.5rem 0 0 2.5rem;padding:.9rem 1rem;background:var(--sunken);font-weight:600}
-.why-more{margin-top:2.5rem;border-top:1px solid var(--hair);border-bottom:1px solid var(--hair)}
-.why-more > summary{font:600 1rem var(--sans)}
-.why-more .compare{margin-top:.5rem}
-.why-more .after{margin-bottom:1.25rem}
-@media (max-width:900px){.why{grid-template-columns:minmax(0,1fr)}.why-col{padding-right:0}.why-col + .why-col{padding-left:0;border-left:0;border-top:1px solid var(--hair);margin-top:1rem}.why-sum{margin-left:0}}
-
-/* Use cases: who asks, what they ask, what you show */
-.uc{margin-top:2.5rem;border-top:1px solid var(--ink);padding-top:1.5rem}
-.uc-ask{color:var(--muted);font-style:italic}
-.uc-ask .vlab2,.uc-show .vlab2{font-style:normal;color:var(--muted)}
-/* Wide screens: the Scan box sits beside the message, so the check output starts above the fold */
-.for-line{font:400 .8125rem/1.5 var(--mono);color:var(--muted)}
-.foot-slogan{font-weight:600;color:var(--ink)!important;font-size:1rem!important}
-
-/* Hallmark redesign (2026-11-03): fewer words per screen, the real output beside the headline */
-section{padding-block:clamp(3.5rem,6vw,4.5rem)}
-.button:active{transform:translateY(1px)}
-.button:disabled{opacity:.5;cursor:not-allowed}
-h1,h2{overflow-wrap:break-word;min-width:0}
-.hero3{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(2.5rem,5vw,4.5rem);align-items:center;padding-block:clamp(3rem,6vw,4.5rem)}
-.hero-copy{display:flex;flex-direction:column;gap:1.25rem;align-items:flex-start}
-.hero3 h1{font-size:clamp(2.75rem,5.6vw,5.25rem)}
-.hero3 .slogan{font:600 clamp(1.375rem,2.2vw,1.875rem)/1.2 var(--sans);letter-spacing:-.015em;color:var(--ink)}
-.hero3 .slogan em{white-space:nowrap}
-.hero3 .lede{font-size:1.25rem;color:var(--ink);max-width:28rem}
-.hero3 .for-line{max-width:28rem;padding-top:1rem;border-top:1px solid var(--hair)}
-.hero3 .shots{margin:0;align-self:center}
-.hero3 .term{min-height:17rem}
-@media (max-width:980px){.hero3{grid-template-columns:minmax(0,1fr)}}
-.p-head{font-size:clamp(1.75rem,3vw,2.5rem);line-height:1.12;letter-spacing:-.02em;color:var(--ink);margin-bottom:.25rem}
-.rows{list-style:none;counter-reset:r}
-.rows > li{counter-increment:r}
-.rows .row-text::before{content:counter(r,decimal-leading-zero);font:500 .75rem var(--mono);letter-spacing:.16em;color:var(--muted)}
-.hint{color:var(--muted);font-size:.875rem}
-.hint code{font:400 .8125rem var(--mono);color:var(--ink)}
-.uc-table{min-width:40rem}
-.uc-table td{vertical-align:top;padding-block:1.1rem}
-.uc-table td b{display:block;font-weight:600}
-.uc-table td small{display:block;margin-top:.15rem;color:var(--muted);font-size:.8125rem}
-.uc-table td.uc-ask{color:var(--muted);font-style:italic}
-.uc-table td:last-child{font-weight:500}
-.guide-index{border-top:1px solid var(--ink)}
-.guide-index li{border-bottom:1px solid var(--hair)}
-.guide-index a{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:.5rem 2rem;align-items:baseline;padding:1.25rem 0;text-decoration:none;color:var(--ink)}
-.guide-index a:hover h3{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.2em}
-.guide-index h3{font-size:1.125rem;line-height:1.3}
-.guide-index p{color:var(--muted)}
-@media (max-width:760px){.guide-index a{grid-template-columns:minmax(0,1fr)}}
-#call .faq-wrap{border-top:0;padding-top:0;align-items:stretch}
-.ask{display:flex;flex-direction:column;gap:1rem;padding:clamp(1.75rem,4vw,3rem)}
-.ask .body{color:var(--muted)}
-.ask .who-is{font:400 .875rem var(--mono);color:var(--muted)}
-.ask .actions{display:flex;flex-wrap:wrap;align-items:center;gap:1rem 1.5rem}
-.ask .mail{font:500 .9375rem var(--mono);color:var(--ink);overflow-wrap:anywhere}
-.ask .cta-install{margin-top:auto}
-.ask .fine{color:var(--muted);font:400 .8125rem var(--mono)}
-/* Products: the two free tools and the paid toolkit side by side, the plans beneath */
-.starts{grid-template-columns:repeat(3,minmax(0,1fr))}
-.snippet{white-space:pre-wrap;overflow-wrap:break-word}
-.snippet.has{display:flex;flex-direction:column;gap:.35rem;font:400 .875rem/1.5 var(--sans);list-style:none}
-.snippet.has li{position:relative;padding-left:1.1rem}
-.snippet.has li::before{content:"";position:absolute;left:0;top:.6em;width:6px;height:6px;background:var(--ink)}
-.start-card.toolkit{background:var(--sunken)}
-.start-card.toolkit .snippet{background:var(--surface)}
-.plans{margin-top:clamp(2.5rem,5vw,3.5rem)}
-/* The plans stay folded so no price shows until a visitor asks: "See the plans" and the Pricing links open them */
-.plans{border-top:1px solid var(--ink)}
-.plans > summary{padding-block:1.25rem;flex-wrap:wrap;gap:.5rem 2rem}
-.plans > summary h3{font-size:clamp(1.5rem,2.4vw,2rem);letter-spacing:-.015em}
-.plans-note{margin-left:auto;color:var(--muted);font:400 1rem/1.5 var(--sans);letter-spacing:0;max-width:32rem}
-.plans[open] > summary{padding-bottom:1.5rem}
-@media (max-width:640px){.plans-note{display:none}}
-@media (max-width:1100px){.starts{grid-template-columns:minmax(0,1fr)}.start-card + .start-card{border-left:0;border-top:1px solid var(--hair)}}
-.trust.two{grid-template-columns:repeat(2,minmax(0,1fr));margin-top:clamp(2.5rem,5vw,3.5rem)}
-@media (max-width:860px){.trust.two{grid-template-columns:minmax(0,1fr)}}
-/* Without the script the problem diagram shows its finished state */
-html:not(.js) .problem *{opacity:1!important;transform:none!important;clip-path:none!important}
+/* Without the script: no film, a plain readable page */
+html:not(.js) .stage{position:static;height:auto;padding:7rem 0 2rem}
+html:not(.js) .cap{position:static;opacity:1;visibility:visible;margin:0 auto 3rem}
+html:not(.js) .rv{opacity:1;transform:none}
+html:not(.js) .hl{--hl:100%}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.rv{transition:none}}
 </style>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
+<canvas id="film" aria-hidden="true"></canvas>
+<div class="scrim" aria-hidden="true"></div>
 
-<header class="site-header kiro shell">
-  <a class="brand" href="#" aria-label="Anchored, home"><img class="logo-navy" src="brand/anchored-logo-navy.png" width="538" height="160" alt="Anchored"><img class="logo-paper" src="brand/anchored-logo-paper.png" width="479" height="139" alt="Anchored"></a>
-  <nav class="nav right" aria-label="Main">
+<header class="site-header shell">
+  <a class="brand" href="#top" aria-label="Anchored, home"><img src="brand/anchored-logo-paper.png" width="479" height="139" alt="Anchored"></a>
+  <nav class="nav" aria-label="Main">
     <a href="#how">How it works</a>
     <a href="#value">Why Anchored</a>
     <a href="#start">Products</a>
@@ -509,28 +303,101 @@ html:not(.js) .problem *{opacity:1!important;transform:none!important;clip-path:
     <a class="header-cta" data-free="header" href="#start">Start free</a>
   </nav>
 </header>
+<nav class="rail" aria-label="Chapters"></nav>
 
 <div class="paid" id="paid" hidden role="status"><div class="shell">Thank you for your order. On the order page, click <b>Connect GitHub account</b> and GitHub emails you access to the repository. Questions: <a href="mailto:office@newcleardigital.com">office@newcleardigital.com</a></div></div>
 <main id="main">
-<div class="band hero-band">
-  <div class="shell hero3">
-    <div class="hero-copy">
-      <h1>AI under control.</h1>
-      <p class="slogan">Your rules. Your sign-off. Your proof.</p>
-      <p class="lede">AI that can’t drift from your rules, and can’t slip a mistake into your release.</p>
+
+<!-- 1 · drift: the hero, then the problem, while the session rings pull apart -->
+<section class="ch" id="top" data-name="Drift" aria-labelledby="hero-title">
+  <div class="play"><div class="stage">
+    <div class="cap">
+      <h1 id="hero-title" data-words>AI under control.</h1>
+      <p class="slogan" data-words>Your rules. Your sign-off. Your proof.</p>
       <div class="hero-actions">
         <a class="button" data-free="hero" href="#start">Start free</a>
         <a class="button ghost" href="#pricing">Pricing</a>
       </div>
+      <p class="hint-scroll" aria-hidden="true">Scroll</p>
+    </div>
+    <div class="cap">
+      <p class="say" data-words>AI that can’t drift from your rules, and can’t slip a mistake into your release.</p>
       <p class="for-line">For fintech and payment code under DORA, and any code that must follow a written rulebook.</p>
     </div>
-    <figure class="shots" id="shots">
-      <div class="tabs" role="tablist" aria-label="What the AI sees">
-        <button class="tab" role="tab" id="tab-1" aria-controls="shot-1" aria-selected="true">Caught on save</button>
-        <button class="tab" role="tab" id="tab-2" aria-controls="shot-2" aria-selected="false" tabindex="-1">The AI cannot sign</button>
-        <button class="tab" role="tab" id="tab-3" aria-controls="shot-3" aria-selected="false" tabindex="-1">The build fails</button>
+    <div class="cap">
+      <p class="eyebrow">The problem</p>
+      <h2 data-words>AI writes the code and the tests. Who checks both against the rule?</h2>
+    </div>
+    <div class="cap"><p class="say" data-words>In regulated software (fintech, insurance, anything bound by a law, standard or contract), <span class="hl red">“the AI wrote it and it looks right” won’t pass an audit.</span></p></div>
+    <div class="cap"><p class="say" data-words>Teams must show that each rule from the outside authority <span class="hl">became code, was tested, and was checked by a named person.</span></p></div>
+    <div class="cap"><p class="say" data-words>Today that proof sits in <b>spreadsheets, Jira tickets and memory.</b></p></div>
+    <div class="cap"><p class="say" data-words>AI agents don’t keep it, and they drift: <span class="hl red">session 12 quietly contradicts session 3.</span></p></div>
+  </div></div>
+</section>
+
+<!-- 2 · weight: the clauses of the law become rules on one ring -->
+<section class="ch" id="how" data-name="Rules">
+  <div class="play"><div class="stage">
+    <div class="cap">
+      <p class="eyebrow">How it works</p>
+      <h2 data-words>They give the AI the rules. We make it follow them.</h2>
+    </div>
+    <div class="cap"><p class="say" data-words>A person signs each rule first. Anchored checks every change as the AI writes it, and again before release.</p></div>
+  </div></div>
+</section>
+
+<!-- 3 · signature: the AI is refused, a named person signs -->
+<section class="ch" data-name="Sign-off">
+  <div class="play"><div class="stage">
+    <div class="cap"><p class="eyebrow">Sign-off</p><h2 data-words>The AI cannot approve itself</h2></div>
+  </div></div>
+  <div class="read"><div class="shell">
+    <div class="row">
+      <div class="row-text">
+        <p>A reading of a rule counts only when a named person signs it, in their own terminal, in a commit that changes
+          nothing else. The agent is blocked from signing or rewording a signed rule, and CI checks every sign-off against
+          the approver list. The record shows it when an approver also changed the code.</p>
+        <a class="text-link" href="guides/ai-change-approval-independence.html">Who may approve a change an AI agent wrote</a>
       </div>
-      <div class="shot" role="tabpanel" id="shot-1" aria-labelledby="tab-1">
+      <div class="row-pic">
+        <div class="ledger panel" aria-label="Three lines from the sample change record">
+          <p class="ledger-head">From the sample change record</p>
+          <p class="rec">IF-CAP-001<span class="sep">·</span>Maria Petrova<span class="sep">·</span>a3ebe5a<span class="sep">·</span>AI-assisted<span class="sep">·</span><span class="yes">independent</span></p>
+          <p class="rec">IF-SCOPE-001<span class="sep">·</span>Maria Petrova<span class="sep">·</span>3c20407<span class="sep">·</span>AI-assisted<span class="sep">·</span><span class="yes">independent</span></p>
+          <p class="rec">IF-INFO-001<span class="sep">·</span>Maria Petrova<span class="sep">·</span>d86f2d7<span class="sep">·</span>AI-assisted<span class="sep">·</span><span class="no">not independent: the approver also changed this code</span></p>
+          <p class="ledger-foot">Rule · approver · approval commit · AI-assisted change · approver independent of the implementers</p>
+        </div>
+        <figure class="panel">
+<pre class="term"><span class="t-dim">The agent tries to mark IF-SCOPE-001 as signed off in docs/requirements.json.</span>
+<span class="t-dim">The edit is blocked before it happens:</span>
+<span class="t-bad">Anchored: this edit signs off or rewrites a signed-off reading: IF-SCOPE-001.</span>
+Only a named approver signs a reading. Leave `verified`, `verified_by`, `verified_on` as they are, and do not change the text or reading of a signed-off requirement. To propose a new reading, set `verified` to false in the same edit.
+Ask the person who signs readings to approve it in their own terminal: python3 .anchor/gates/approve.py &lt;ID&gt;.</pre>
+          <figcaption>Real output, copied from a run on the public interchange-fees example (Anchored 1.6.1).</figcaption>
+        </figure>
+      </div>
+    </div>
+  </div></div>
+</section>
+
+<!-- 4 · catch: a number from the law, refused on save -->
+<section class="ch" data-name="Caught">
+  <div class="play"><div class="stage">
+    <div class="cap"><p class="eyebrow">On save</p><h2 data-words>Caught while the AI types</h2></div>
+  </div></div>
+  <div class="read"><div class="shell">
+    <div class="row">
+      <div class="row-text">
+        <p>When the agent saves a file, the check runs. A number from the rulebook typed into the code, a requirement ID
+          that does not exist, a banned name: each is named with its file and line, and the agent fixes it in the same turn.</p>
+        <a class="text-link" href="guides/ai-agents-copy-fixed-values.html">Why AI agents copy fixed values</a>
+        <div class="notes" aria-hidden="true">
+          <div class="note top"><span>Caught</span><b>Line 9: 0.2</b><small>belongs to IF-CAP-001</small></div>
+          <div class="note"><span>Approved by</span><b>M. Petrova</b><small>Head of compliance</small></div>
+        </div>
+      </div>
+      <div class="row-pic">
+        <figure class="panel">
 <pre class="term"><span class="t-dim">The agent writes into src/fees/interchange.py:</span>
     return a * 0.2 / 100
 
@@ -539,15 +406,20 @@ html:not(.js) .problem *{opacity:1!important;transform:none!important;clip-path:
   line 36: 0.2 is a threshold from the authority — read it from `law`
 
 Fix it now, or mark a deliberate use `anchor-allow: &lt;why&gt;`.</pre>
+          <figcaption>Real output, copied from a run on the public interchange-fees example (Anchored 1.6.1).</figcaption>
+        </figure>
       </div>
-      <div class="shot" role="tabpanel" id="shot-2" aria-labelledby="tab-2" hidden>
-<pre class="term"><span class="t-dim">The agent tries to mark IF-SCOPE-001 as signed off in docs/requirements.json.</span>
-<span class="t-dim">The edit is blocked before it happens:</span>
-<span class="t-bad">Anchored: this edit signs off or rewrites a signed-off reading: IF-SCOPE-001.</span>
-Only a named approver signs a reading. Leave `verified`, `verified_by`, `verified_on` as they are, and do not change the text or reading of a signed-off requirement. To propose a new reading, set `verified` to false in the same edit.
-Ask the person who signs readings to approve it in their own terminal: python3 .anchor/gates/approve.py &lt;ID&gt;.</pre>
-      </div>
-      <div class="shot" role="tabpanel" id="shot-3" aria-labelledby="tab-3" hidden>
+    </div>
+  </div></div>
+</section>
+
+<!-- 5 · gate: every push runs the gates; one fails, then all pass -->
+<section class="ch" data-name="Gates">
+  <div class="play"><div class="stage">
+    <div class="cap"><p class="eyebrow">In CI</p><p class="say" data-words>Your build runs the same checks again, and <span class="hl">a rule without a passing test fails it.</span></p></div>
+  </div></div>
+  <div class="read"><div class="shell">
+    <figure class="panel">
 <pre class="term"><span class="t-dim">$ bash .anchor/gates/run.sh      (in CI, on every push; excerpt)</span>
 <span class="t-ok">OK</span>  catalogue well formed  ·  4 requirements, 3 declared domain(s)  ·  all verified
 <span class="t-ok">OK</span>  boundary named  ·  6 anchored, 2 exempt  (75% anchored)
@@ -559,141 +431,67 @@ An ID not in the catalogue proves nothing. Add the requirement, or fix the typo.
 <span class="t-ok">OK</span>  checks Anchored 1.6.1, fingerprint 7715b6ff279e, intact
 
 <span class="t-bad">GATES FAILED</span></pre>
-      </div>
-      <figcaption>Real output, copied from a run on the public interchange-fees example (Anchored 1.6.1).</figcaption>
+      <figcaption>The build fails. Real output, copied from a run on the public interchange-fees example (Anchored 1.6.1).</figcaption>
     </figure>
-  </div>
-</div>
+  </div></div>
+</section>
 
-<div class="shell problem-wrap">
-  <section class="problem" id="problem" aria-labelledby="problem-title">
-    <div class="p-text">
-      <p class="eyebrow">The problem</p>
-      <h2 class="p-head" id="problem-title">AI writes the code and the tests. Who checks both against the rule?</h2>
-      <p class="p-line" data-at="2">In regulated software (fintech, insurance, anything bound by a law, standard or contract), <span class="hl red">&ldquo;the AI wrote it and it looks right&rdquo; won&rsquo;t pass an audit.</span></p>
-      <p class="p-line" data-at="3">Teams must show that each rule from the outside authority <span class="hl">became code, was tested, and was checked by a named person.</span></p>
-      <p class="p-line" data-at="4">Today that proof sits in <b>spreadsheets, Jira tickets and memory.</b></p>
-      <p class="p-line" data-at="5">AI agents don&rsquo;t keep it, and they drift: <span class="hl red">session 12 quietly contradicts session 3.</span></p>
-    </div>
-    <div class="p-stage" aria-hidden="true">
-      <div class="p-row">
-        <div class="p-cap"><span>The AI wrote it</span><span>pricing.ts</span></div>
-        <div class="code-bars"><i></i><i></i><i></i></div>
-        <div class="chips"><span class="chip looks">&#10003; <s>Looks right</s></span><span class="chip audit">Audit: where is the proof?</span></div>
-      </div>
-      <div class="p-row">
-        <div class="p-cap"><span>What an audit needs</span><span>per rule</span></div>
-        <div class="chain">
-          <div class="node"><b>Rule</b><small><span class="was">&sect;3(1)</span><span class="now">spreadsheet</span></small></div>
-          <div class="node"><b>Code</b><small><span class="was">pricing.ts:9</span><span class="now">Jira ticket</span></small></div>
-          <div class="node"><b>Test</b><small><span class="was">passes</span><span class="now">memory</span></small></div>
-          <div class="node"><b>Person</b><small><span class="was">signed</span><span class="now">?</span></small></div>
-        </div>
-      </div>
-      <div class="p-row">
-        <div class="p-cap"><span>Agent sessions</span><span>1 &rarr; 12</span></div>
-        <div class="sessions">
-          <span class="s-label a">s3: VAT 19%</span><span class="s-label b">s12: VAT 16%</span>
-          <div class="arc"><span>contradicts</span></div>
-          <i style="--n:1"></i><i style="--n:2"></i><i style="--n:3" class="s3"></i><i style="--n:4"></i><i style="--n:5"></i><i style="--n:6"></i><i style="--n:7"></i><i style="--n:8"></i><i style="--n:9"></i><i style="--n:10"></i><i style="--n:11"></i><i style="--n:12" class="s12"></i>
-        </div>
-      </div>
-    </div>
-    <button class="p-replay" type="button" hidden>Replay</button>
-  </section>
-</div>
-
-<section id="how" class="shell">
-  <div class="intro">
-    <p class="eyebrow">How it works</p>
-    <h2>They give the AI the rules. We make it follow them.</h2>
-    <p>A person signs each rule first. Anchored checks every change as the AI writes it, and again before release.</p>
-  </div>
-  <ol class="rows">
-    <li class="row">
+<!-- 6 · proof: the line becomes the record -->
+<section class="ch" data-name="Proof">
+  <div class="play"><div class="stage">
+    <div class="cap"><p class="eyebrow">The record</p><h2 data-words>Proof for internal audit and the regulator</h2></div>
+  </div></div>
+  <div class="read"><div class="shell">
+    <div class="row" id="record">
       <div class="row-text">
-        <h3>Caught while the AI types</h3>
-        <p>When the agent saves a file, the check runs. A number from the rulebook typed into the code, a requirement ID
-          that does not exist, a banned name: each is named with its file and line, and the agent fixes it in the same turn.
-          Your build runs the same checks again, and a rule without a passing test fails it.</p>
-        <a class="text-link" href="guides/ai-agents-copy-fixed-values.html">Why AI agents copy fixed values</a>
-      </div>
-      <div class="row-pic">
-  <div class="hero-art">
-    <figure class="editor-card" aria-label="An AI agent writes the debit-card interchange cap straight into the code. The check catches it as the file is saved and says where the value must come from. The agent fixes it and all four rules pass.">
-      <div class="topbar" aria-hidden="true"><div class="dots"><i></i><i></i><i></i></div><span>interchange-fees / interchange.py</span><span class="live">Claude Code</span></div>
-      <div class="editor-body" aria-hidden="true">
-        <div class="seq s1"><span class="who">The agent writes</span><span class="code"><span class="ln">9</span><span>cap = amount * <span class="bad">0.2</span> / 100</span></span></div>
-        <div class="seq s2"><span class="verdict"><b>Anchored:</b> src/fees/interchange.py breaks the project's own rules:
-  line 9: 0.2 is a threshold from the authority — read it from `law`</span></div>
-        <div class="seq s3"><span class="who">The agent fixes it</span><span class="code"><span class="ln">9</span><span>cap = amount * <span class="good">debit_cap_pct(day)</span> / 100<b class="cursor"></b></span></span></div>
-        <div class="seq s4"><span class="verdict ok"><b>All checks pass.</b> 4 of 4 rules proved by a test.</span></div>
-      </div>
-      <div class="editor-footer" aria-hidden="true"><span>Rule: <b>IF-CAP-001</b></span><span>4 / 4 proved</span></div>
-    </figure>
-    <div class="floating-note note-top" aria-hidden="true"><span>Caught</span><b>Line 9: 0.2</b><small>belongs to IF-CAP-001</small></div>
-    <div class="floating-note note-bottom" aria-hidden="true"><span>Approved by</span><b class="sg">M. Petrova</b><small>Head of compliance</small></div>
-  </div>
-      </div>
-    </li>
-    <li class="row rev">
-      <div class="row-text">
-        <h3>The AI cannot approve itself</h3>
-        <p>A reading of a rule counts only when a named person signs it, in their own terminal, in a commit that changes
-          nothing else. The agent is blocked from signing or rewording a signed rule, and CI checks every sign-off against
-          the approver list. The record shows it when an approver also changed the code.</p>
-        <a class="text-link" href="guides/ai-change-approval-independence.html">Who may approve a change an AI agent wrote</a>
-      </div>
-      <div class="row-pic">
-        <div class="ledger" aria-label="Three lines from the sample change record">
-          <p class="ledger-head">From the sample change record</p>
-          <p class="rec">IF-CAP-001<span class="sep">·</span>Maria Petrova<span class="sep">·</span>a3ebe5a<span class="sep">·</span>AI-assisted<span class="sep">·</span><span class="yes">independent</span></p>
-          <p class="rec">IF-SCOPE-001<span class="sep">·</span>Maria Petrova<span class="sep">·</span>3c20407<span class="sep">·</span>AI-assisted<span class="sep">·</span><span class="yes">independent</span></p>
-          <p class="rec">IF-INFO-001<span class="sep">·</span>Maria Petrova<span class="sep">·</span>d86f2d7<span class="sep">·</span>AI-assisted<span class="sep">·</span><span class="no">not independent: the approver also changed this code</span></p>
-          <p class="ledger-foot">Rule · approver · approval commit · AI-assisted change · approver independent of the implementers</p>
-        </div>
-      </div>
-    </li>
-    <li class="row">
-      <div class="row-text">
-        <h3>Proof for internal audit and the regulator</h3>
         <p>One command exports the change record for the current commit: the rule and its article, the agreed reading,
           who approved it and in which commit, where it is implemented, who changed that code, whether an AI helped,
           whether the approver is independent, and the test that proves it. As CSV or a printable page.</p>
         <a class="text-link" data-free="sample-row" href="sample/dora-change-record.html">See the sample DORA change record</a>
       </div>
-      <div class="row-pic" id="record">
-        <figure class="product-window">
-          <div class="window-header"><span class="window-title">Traceability · interchange-fees</span><span>Generated, do not edit</span></div>
-          <div class="scroll">
-            <table class="mini">
-              <thead><tr><th>Rule</th><th>Approved by</th><th>Test</th><th>Status</th></tr></thead>
-              <tbody>
-                <tr><td class="id">IF-CAP-001</td><td><span class="sig"><span>M. Petrova</span></span></td><td class="loc">test_interchange.py:13</td><td><span class="ok">Proved</span></td></tr>
-                <tr><td class="id">IF-CAP-002</td><td><span class="sig"><span>M. Petrova</span></span></td><td class="loc">test_interchange.py:18</td><td><span class="ok">Proved</span></td></tr>
-                <tr><td class="id">IF-SCOPE-001</td><td><span class="sig"><span>M. Petrova</span></span></td><td class="loc">test_interchange.py:23</td><td><span class="ok">Proved</span></td></tr>
-                <tr><td class="id">IF-INFO-001</td><td><span class="sig"><span>M. Petrova</span></span></td><td class="loc">test_interchange.py:27</td><td><span class="ok">Proved</span></td></tr>
-              </tbody>
-            </table>
-          </div>
-        </figure>
-      </div>
-    </li>
-  </ol>
+      <figure class="panel">
+        <div class="window-header"><span class="window-title">Traceability · interchange-fees</span><span>Generated, do not edit</span></div>
+        <div class="scroll">
+          <table class="mini">
+            <thead><tr><th>Rule</th><th>Approved by</th><th>Test</th><th>Status</th></tr></thead>
+            <tbody>
+              <tr><td class="id">IF-CAP-001</td><td><span class="sig"><span>M. Petrova</span></span></td><td class="loc">test_interchange.py:13</td><td><span class="ok">Proved</span></td></tr>
+              <tr><td class="id">IF-CAP-002</td><td><span class="sig"><span>M. Petrova</span></span></td><td class="loc">test_interchange.py:18</td><td><span class="ok">Proved</span></td></tr>
+              <tr><td class="id">IF-SCOPE-001</td><td><span class="sig"><span>M. Petrova</span></span></td><td class="loc">test_interchange.py:23</td><td><span class="ok">Proved</span></td></tr>
+              <tr><td class="id">IF-INFO-001</td><td><span class="sig"><span>M. Petrova</span></span></td><td class="loc">test_interchange.py:27</td><td><span class="ok">Proved</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+    </div>
+    <div class="uc">
+      <p class="why-title">When someone asks for proof</p>
+      <div class="panel scroll"><table class="uc-table">
+        <thead><tr><th>Who asks</th><th>They ask</th><th>You show</th></tr></thead>
+        <tbody>
+          <tr><td><b>Internal audit</b><small>Required by DORA, on a regular plan.</small></td><td class="uc-ask">“How was this change controlled?”</td><td>The record: rule, test, approver. One file.</td></tr>
+          <tr><td><b>The regulator</b><small>The national supervisor can ask any time.</small></td><td class="uc-ask">“Show us the evidence for this release.”</td><td>The record for that release. Nothing rebuilt by hand.</td></tr>
+          <tr><td><b>The external auditor</b><small>Part of the yearly audit.</small></td><td class="uc-ask">“Who approved changes, and were they independent?”</td><td>Each rule's approver. And whether they also wrote the code.</td></tr>
+          <tr><td><b>A bank or card scheme</b><small>Before and during a contract.</small></td><td class="uc-ask">“How do you control AI-written code?”</td><td>A sample record, not a promise.</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+  </div></div>
 </section>
 
-<section id="start" class="shell">
-  <div class="intro">
-    <p class="eyebrow">Products</p>
-    <h2>Start free. Buy when you need the evidence.</h2>
-    <p>Two free tools catch the first problems AI-written code brings: copied fixed values, drifting names and hand-edited generated files. No account, no sign-up, and nothing leaves your repository.</p>
-  </div>
-  <div class="starts">
-    <div class="start-card lead">
-      <p class="who-for">GitHub Action · free · MIT</p>
-      <h3>Anchored Scan</h3>
-      <p>Comments on every pull request with two things AI-written code gets wrong and reviewers miss: a fixed number copied into a second file, and a generated file edited by hand. Zero configuration.</p>
-      <div id="scan-yaml-card"><pre class="snippet" id="scan-yaml">on: pull_request
+<!-- 7 · dock: the three products on the horizon -->
+<section class="ch" id="start" data-name="Products">
+  <div class="play"><div class="stage">
+    <div class="cap"><p class="eyebrow">Products</p><h2 data-words>Start free. Buy when you need the evidence.</h2></div>
+    <div class="cap"><p class="say" data-words>Two free tools catch the first problems AI-written code brings: copied fixed values, drifting names and hand-edited generated files. No account, no sign-up, and nothing leaves your repository.</p></div>
+  </div></div>
+  <div class="read"><div class="shell">
+    <div class="starts">
+      <div class="start-card panel">
+        <p class="who-for">GitHub Action · free · MIT</p>
+        <h3>Anchored Scan</h3>
+        <p>Comments on every pull request with two things AI-written code gets wrong and reviewers miss: a fixed number copied into a second file, and a generated file edited by hand. Zero configuration.</p>
+        <div id="scan-yaml-card"><pre class="snippet" id="scan-yaml">on: pull_request
 permissions:
   contents: read
   pull-requests: write
@@ -703,194 +501,180 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: newcleardigital/anchored-scan@v1</pre></div>
-      <p class="hint">Save it as a file in <code>.github/workflows/</code>. Scan then comments on every pull request.</p>
-      <div class="buy"><button class="button" type="button" data-copy="scan-yaml-card">Copy the workflow</button><a class="button ghost" data-free="scan" href="https://github.com/newcleardigital/anchored-scan">See it on GitHub</a></div>
-    </div>
-    <div class="start-card">
-      <p class="who-for">Claude Code plugin · free · MIT</p>
-      <h3>Anchored Lite</h3>
-      <p>Stops the agent the moment it writes a copied value or a banned name, so it fixes it in the same turn. Every session starts from the written record and ends with a handover note.</p>
-      <pre class="snippet" id="lite-cmd">claude plugin marketplace add newcleardigital/anchored-lite
-claude plugin install anchor-core@anchored-lite</pre>
-      <div class="buy"><button class="button" type="button" data-copy="lite-cmd">Copy the commands</button><a class="button ghost" data-lite href="https://github.com/newcleardigital/anchored-lite">See it on GitHub</a></div>
-    </div>
-    <div class="start-card toolkit">
-      <p class="who-for">Paid toolkit · per repository</p>
-      <h3>Anchored</h3>
-      <p>When your rules come from outside, such as card-scheme rules, regulator fees or a contract, Anchored traces each one to its code, its test and the person who approved it.</p>
-      <ul class="snippet has"><li>The rule catalogue</li><li>The approval lock</li><li>A test per rule</li><li>The evidence export</li></ul>
-      <p class="hint"><a class="text-link" data-free="sample-start" href="sample/dora-change-record.html">See a sample change record</a>, built from a public example with the EU interchange fee caps.</p>
-      <div class="buy"><a class="button" href="#pricing">See the plans</a></div>
-    </div>
-  </div>
-  <details class="plans" id="pricing">
-    <summary><h3>Anchored plans</h3><span class="plans-note">Anchored runs Anchor-based development in your repository and build.</span></summary>
-  <div class="offers">
-    <div class="offer first">
-      <p class="who-for">One repository</p>
-      <h3>Solo</h3>
-      <p class="price">€99 <small>per month</small></p>
-      <ul>
-        <li>One repository, up to three developers</li>
-        <li>Every rule traced to its code, test and approver</li>
-        <li>Approval lock and evidence export</li>
-        <li>Email support · cancel any time</li>
-      </ul>
-      <div class="buy"><a class="button" data-buy="solo" hidden>Subscribe</a><a class="button ghost" data-call="Solo" href="#call">Email a question</a></div>
-    </div>
-    <div class="offer">
-      <p class="who-for">The whole team</p>
-      <h3>Team</h3>
-      <p class="price">€490 <small>per repository, per month</small></p>
-      <ul>
-        <li>Unlimited developers on the repository</li>
-        <li>Everything in Solo</li>
-        <li>Reply within one working day</li>
-        <li>Written help setting up your catalogue</li>
-      </ul>
-      <div class="buy"><a class="button" data-buy="traceability" hidden>Subscribe</a><a class="button ghost" data-call="Team" href="#call">Email a question</a></div>
-    </div>
-    <div class="offer">
-      <p class="who-for">For the first five teams</p>
-      <h3>Design Partner</h3>
-      <p class="price">€2,500 <small>one time</small></p>
-      <ul>
-        <li>We set it up in your repository, by pull request</li>
-        <li>Your requirements, checks and first traceability export, done</li>
-        <li>Three months included, questions by email</li>
-        <li>In return: your feedback and a short case study</li>
-      </ul>
-      <div class="buy"><a class="button" data-buy="designPartner" hidden>Buy Design Partner</a><a class="button ghost" data-call="Design Partner" href="#call">Email a question</a></div>
-    </div>
-  </div>
-  <p class="after" data-after-buy hidden>Secure checkout by Polar. Prices include VAT; in the US, Canada and India sales tax is added at checkout where due. After paying, connect your GitHub account on the order page and you get access to the repository. Monthly plans: 14 days to change your mind, full refund.</p>
-  <p class="after" data-after-call>Questions before buying? Email them; the person who built it answers. Prices include VAT; in the US, Canada and India sales tax is added at checkout where due.</p>
-  </details>
-</section>
-
-<section id="value" class="shell">
-  <div class="intro">
-    <p class="eyebrow">Why Anchored</p>
-    <h2>Use AI on code that must follow the law. Prove it did.</h2>
-  </div>
-  <div class="why">
-    <div class="why-col">
-      <p class="why-title">What you get</p>
-      <ol class="why-list">
-      <li><b>Proof on demand</b><span>For every rule: where it comes from, who approved it, and the code and test behind it. Ready the day internal audit or the regulator asks.</span><span class="saves"><span class="vlab2">What it saves</span>Rebuilding the record by hand from tickets and memory before every audit.</span></li>
-      <li><b>A person decides, not the AI</b><span>Only the people you name can sign off what a rule means. The AI is stopped when it tries.</span><span class="saves"><span class="vlab2">What it saves</span>Explaining to a regulator a decision nobody signed.</span></li>
-      <li><b>Mistakes stop before customers see them</b><span>A fee or limit the AI copies into the code is caught the moment it is typed.</span><span class="saves"><span class="vlab2">What it saves</span>The refunds, complaints and audit findings a wrong fee brings.</span></li>
-      </ol>
-    </div>
-    <div class="why-col">
-      <p class="why-title">Why Anchored, not the others</p>
-      <ol class="why-list">
-      <li><b>It starts from the law</b><span>Each rule points to the article or clause it comes from.</span><span class="others"><span class="vlab2">The others</span>Spec-driven AI tools start from a plan your team wrote.</span></li>
-      <li><b>A person signs, never the AI</b><span>The approver of every rule is on record.</span><span class="others"><span class="vlab2">The others</span>Spec tools and AI guardrails do not record who approved a rule.</span></li>
-      <li><b>It acts while the AI types</b><span>The AI fixes the mistake on the spot, before anyone has to review it.</span><span class="others"><span class="vlab2">The others</span>Compliance platforms and release checks look after the code is written.</span></li>
-      <li><b>The proof comes from the code itself</b><span>Made inside your own systems, nothing sent to us.</span><span class="others"><span class="vlab2">The others</span>Compliance platforms collect evidence beside the code; release checks need their own platform.</span></li>
-      </ol>
-      <p class="why-sum">Other tools do one or two of these. No other tool we checked does all four together.</p>
-    </div>
-  </div>
-  <div class="uc">
-    <p class="why-title">When someone asks for proof</p>
-    <div class="scroll"><table class="uc-table">
-      <thead><tr><th>Who asks</th><th>They ask</th><th>You show</th></tr></thead>
-      <tbody>
-        <tr><td><b>Internal audit</b><small>Required by DORA, on a regular plan.</small></td><td class="uc-ask">“How was this change controlled?”</td><td>The record: rule, test, approver. One file.</td></tr>
-        <tr><td><b>The regulator</b><small>The national supervisor can ask any time.</small></td><td class="uc-ask">“Show us the evidence for this release.”</td><td>The record for that release. Nothing rebuilt by hand.</td></tr>
-        <tr><td><b>The external auditor</b><small>Part of the yearly audit.</small></td><td class="uc-ask">“Who approved changes, and were they independent?”</td><td>Each rule's approver. And whether they also wrote the code.</td></tr>
-        <tr><td><b>A bank or card scheme</b><small>Before and during a contract.</small></td><td class="uc-ask">“How do you control AI-written code?”</td><td>A sample record, not a promise.</td></tr>
-      </tbody>
-    </table></div>
-  </div>
-  <details class="why-more">
-    <summary>Compare by kind of tool</summary>
-    <div class="compare">
-    <div class="chead" aria-hidden="true"><p>Kind of tool</p><p>Good at</p><p>The gap for rule-bound code</p><p>Anchored</p></div>
-      <div class="crow"><div class="cwho"><b>Spec-driven AI tools</b><small>for example GitHub Spec Kit, AWS Kiro, Tessl</small></div><p class="cgood"><span class="vlab">Good at</span>Help the AI plan and build from a specification.</p><p class="cgap"><span class="vlab">The gap</span>The specification is your team's own plan. Nothing records which law it follows or who approved it.</p><p class="cus"><span class="vlab">Anchored</span>Every rule points to the law or contract it comes from, and a named person signs what it means.</p></div>
-      <div class="crow"><div class="cwho"><b>Compliance platforms</b><small>for example Vanta, Drata</small></div><p class="cgood"><span class="vlab">Good at</span>Map DORA controls and collect evidence from your systems.</p><p class="cgap"><span class="vlab">The gap</span>They work beside the code. They do not see what the AI writes, or stop it.</p><p class="cus"><span class="vlab">Anchored</span>Works inside the code: catches the AI as it writes, and the evidence comes from the code and its history.</p></div>
-      <div class="crow"><div class="cwho"><b>AI coding guardrails</b><small>for example Codacy Guardrails</small></div><p class="cgood"><span class="vlab">Good at</span>Give the AI your quality and security standards while it writes.</p><p class="cgap"><span class="vlab">The gap</span>The standards are your own, not tied to a law, with no approver behind them.</p><p class="cus"><span class="vlab">Anchored</span>Rules come from the outside authority, each with its approver and its test.</p></div>
-      <div class="crow"><div class="cwho"><b>Release policy checks</b><small>for example JFrog AppTrust (DORA)</small></div><p class="cgood"><span class="vlab">Good at</span>Check changes against policy when software is released.</p><p class="cgap"><span class="vlab">The gap</span>The check comes at release, after the code is written, and needs their platform.</p><p class="cus"><span class="vlab">Anchored</span>Catches the problem while the AI writes, and runs in your own repository and build.</p></div>
-  </div>
-    <p class="after">Based on each vendor's public pages, November 2026. Names are trademarks of their owners. Something out of date? <a class="text-link" data-call="Comparison" href="#call">Tell us</a> and we correct it.</p>
-  </details>
-</section>
-
-<section class="band trust-band">
-  <div class="shell">
-  <div class="intro">
-    <p class="eyebrow">Proof</p>
-    <h2>Numbers you can check yourself.</h2>
-    <p>No quotes from customers, because there are none to quote yet. These you can rerun.</p>
-  </div>
-  <div class="proof">
-    <div><p class="stat">2</p><p>candidate copied values Anchored Scan flags in pip's own source.</p></div>
-    <div><p class="stat">9</p><p>in Actual Budget, an open-source finance app.</p><a class="text-link" data-free="proof-scan" href="https://github.com/newcleardigital/anchored-scan">Run Scan on yours</a></div>
-    <div><p class="stat">62/62</p><p>self-test of the paid checks: each gate is broken on purpose and must go red, and only that gate.</p></div>
-    <div><p class="stat">8</p><p>gates in your CI, run from your repository's own pinned copy of the checks.</p><a class="text-link" data-free="proof-sample" href="sample/dora-change-record.html">See what they export</a></div>
-  </div>
-  <div class="trust two">
-    <div><h3>Your code stays in your repository</h3><p>The checks are plain Python that run in your repository and your CI. No sign-in, no upload, no telemetry. Nothing is sent to us.</p></div>
-    <div><h3>The record does not depend on the AI</h3><p>The build checks read the code and the git history, not the tool that wrote it. The check on save and the approval lock run in Claude Code.</p></div>
-  </div>
-  </div>
-</section>
-
-<section id="guides" class="shell">
-  <div class="intro">
-    <p class="eyebrow">Guides</p>
-    <h2>Read before you install.</h2>
-    <p>Short guides on DORA change records, approval independence and AI-written code. <a class="text-link" href="guides/">All guides</a></p>
-  </div>
-  <ul class="guide-index">
-    <li><a href="guides/dora-ai-written-code.html"><h3>DORA and AI-written code: what the change record has to show</h3><p>The five facts the record needs when an AI agent writes the change, and where each one comes from.</p></a></li>
-    <li><a href="guides/ai-change-approval-independence.html"><h3>Who may approve a change an AI agent wrote?</h3><p>RTS 2024/1774 Article 17(1)(b) asks for independent approval. How to make it provable from git.</p></a></li>
-    <li><a href="guides/claude-code-audit-trail.html"><h3>An audit trail for Claude Code</h3><p>Rule, change, test and approver for every AI edit, without leaving your repository.</p></a></li>
-    <li><a href="guides/interchange-fee-caps-in-code.html"><h3>Coding the EU interchange fee caps so an auditor can check them</h3><p>0.2 % debit, 0.3 % credit, the commercial-card exception and the payee statement, fully traced.</p></a></li>
-    <li><a href="guides/ai-agents-copy-fixed-values.html"><h3>Why AI coding agents copy fixed values</h3><p>The same fee typed into a second file, and a free GitHub Action that catches it on every pull request.</p></a></li>
-  </ul>
-</section>
-
-<section id="call" class="shell">
-  <div class="faq-wrap">
-    <div class="ask band">
-      <p class="eyebrow">Questions</p>
-      <h2>Ask the person who built it.</h2>
-      <p class="body">Write with your product and the rules it must follow. I answer every email myself.
-        The checks are plain Python you can read, and everything they produce in your repository stays yours.</p>
-      <p class="who-is">Stoyan Dimitrov, newcleardigital</p>
-      <div class="actions">
-        <a class="button light" data-call href="#call">Email a question</a>
-        <a class="mail" data-call href="mailto:office@newcleardigital.com">office@newcleardigital.com</a>
+        <p class="hint">Save it as a file in <code>.github/workflows/</code>. Scan then comments on every pull request.</p>
+        <div class="buy"><button class="button" type="button" data-copy="scan-yaml-card">Copy the workflow</button><a class="button ghost" data-free="scan" href="https://github.com/newcleardigital/anchored-scan">See it on GitHub</a></div>
       </div>
-      <div class="cta-install"><span>Or start now, free: add Anchored Scan to a repository.</span><button class="button ghost" type="button" data-copy="scan-yaml">Copy the workflow</button></div>
-      <p class="fine">No email list. No cookies. Just a reply from a person.</p>
+      <div class="start-card panel">
+        <p class="who-for">Claude Code plugin · free · MIT</p>
+        <h3>Anchored Lite</h3>
+        <p>Stops the agent the moment it writes a copied value or a banned name, so it fixes it in the same turn. Every session starts from the written record and ends with a handover note.</p>
+        <pre class="snippet" id="lite-cmd">claude plugin marketplace add newcleardigital/anchored-lite
+claude plugin install anchor-core@anchored-lite</pre>
+        <div class="buy"><button class="button" type="button" data-copy="lite-cmd">Copy the commands</button><a class="button ghost" data-lite href="https://github.com/newcleardigital/anchored-lite">See it on GitHub</a></div>
+      </div>
+      <div class="start-card panel toolkit">
+        <p class="who-for">Paid toolkit · per repository</p>
+        <h3>Anchored</h3>
+        <p>When your rules come from outside, such as card-scheme rules, regulator fees or a contract, Anchored traces each one to its code, its test and the person who approved it.</p>
+        <ul class="snippet has"><li>The rule catalogue</li><li>The approval lock</li><li>A test per rule</li><li>The evidence export</li></ul>
+        <p class="hint"><a class="text-link" data-free="sample-start" href="sample/dora-change-record.html">See a sample change record</a>, built from a public example with the EU interchange fee caps.</p>
+        <div class="buy"><a class="button" href="#pricing">See the plans</a></div>
+      </div>
     </div>
-    <div class="faq">
-      <details><summary>Can we try it before paying?</summary>
-        <p>Yes. Anchored Scan and Anchored Lite are free and show how the checks work on your own code. The paid toolkit adds the rule catalogue, the approval lock, a test per rule and the evidence export; the sample change record shows what you get. Monthly plans come with 14 days to change your mind and a full refund.</p></details>
-      <details><summary>We already use Jira, Confluence or ServiceNow.</summary>
-        <p>Keep them. They hold tickets and change requests; Anchored works where the code is written: it catches untraced changes as they are saved and fails the build on any that remain. Its evidence exports as a CSV you can attach to those records.</p></details>
-      <details><summary>We don't use AI on that part of our code yet.</summary>
-        <p>Then this is the easiest time to start: setup is simplest before the first AI-written line, and the record is complete from day one.</p></details>
-      <details><summary>Which rulebooks does it work with?</summary>
-        <p>Any written document your software must follow: a product specification, a contract, pricing and consumer rules, or payment and billing rules.</p></details>
-      <details><summary>What do we need?</summary>
-        <p>For Anchored: Claude Code, a GitHub repository and Python 3 in your CI. The free Scan needs only GitHub. The checks work with TypeScript, Python, Java, Kotlin, C#, Go, Rust and more.</p></details>
-      <details><summary>Does all our code have to change?</summary>
-        <p>Only the part of your code a rulebook governs is anchored to it. You choose the folders; everything else is built the way you build it today.</p></details>
-      <details id="method"><summary>How do the rules get in?</summary>
-        <p>The agent drafts one numbered requirement per rule, each pointing to the paragraph it came from, all marked unapproved, with every unclear point listed. Your domain expert decides what each requirement means. Only the people you name can approve.</p></details>
-      <details><summary>Does it interpret our rules?</summary>
-        <p>No. If your expert approves a reading, the code follows that reading, and the record shows who approved it.</p></details>
-      <details><summary>Does it give legal advice?</summary>
-        <p>No. It proves that the code does what the approved requirements say. What a rule means is decided by your people.</p></details>
-      <details><summary>Does our code leave our servers?</summary>
-        <p>No. The checks run in your repository and your build. Nothing is sent to us.</p></details>
+    <details class="plans" id="pricing">
+      <summary><h3>Anchored plans</h3><span class="plans-note">Anchored runs Anchor-based development in your repository and build.</span></summary>
+      <div class="offers">
+        <div class="offer panel">
+          <p class="who-for">One repository</p>
+          <h3>Solo</h3>
+          <p class="price">€99 <small>per month</small></p>
+          <ul>
+            <li>One repository, up to three developers</li>
+            <li>Every rule traced to its code, test and approver</li>
+            <li>Approval lock and evidence export</li>
+            <li>Email support · cancel any time</li>
+          </ul>
+          <div class="buy"><a class="button" data-buy="solo" hidden>Subscribe</a><a class="button ghost" data-call="Solo" href="#call">Email a question</a></div>
+        </div>
+        <div class="offer panel">
+          <p class="who-for">The whole team</p>
+          <h3>Team</h3>
+          <p class="price">€490 <small>per repository, per month</small></p>
+          <ul>
+            <li>Unlimited developers on the repository</li>
+            <li>Everything in Solo</li>
+            <li>Reply within one working day</li>
+            <li>Written help setting up your catalogue</li>
+          </ul>
+          <div class="buy"><a class="button" data-buy="traceability" hidden>Subscribe</a><a class="button ghost" data-call="Team" href="#call">Email a question</a></div>
+        </div>
+        <div class="offer panel">
+          <p class="who-for">For the first five teams</p>
+          <h3>Design Partner</h3>
+          <p class="price">€2,500 <small>one time</small></p>
+          <ul>
+            <li>We set it up in your repository, by pull request</li>
+            <li>Your requirements, checks and first traceability export, done</li>
+            <li>Three months included, questions by email</li>
+            <li>In return: your feedback and a short case study</li>
+          </ul>
+          <div class="buy"><a class="button" data-buy="designPartner" hidden>Buy Design Partner</a><a class="button ghost" data-call="Design Partner" href="#call">Email a question</a></div>
+        </div>
+      </div>
+      <p class="after" data-after-buy hidden>Secure checkout by Polar. Prices include VAT; in the US, Canada and India sales tax is added at checkout where due. After paying, connect your GitHub account on the order page and you get access to the repository. Monthly plans: 14 days to change your mind, full refund.</p>
+      <p class="after" data-after-call>Questions before buying? Email them; the person who built it answers. Prices include VAT; in the US, Canada and India sales tax is added at checkout where due.</p>
+    </details>
+  </div></div>
+</section>
+
+<!-- 8 · drop: the anchor goes down and holds; the rest of the page rests on it -->
+<section class="ch" data-name="Anchored">
+  <div class="play"><div class="stage"></div></div>
+  <div class="read"><div class="shell">
+    <div class="intro" id="value">
+      <p class="eyebrow">Why Anchored</p>
+      <h2 data-words>Use AI on code that must follow the law. Prove it did.</h2>
     </div>
-  </div>
+    <div class="why">
+      <div class="why-col panel">
+        <p class="why-title">What you get</p>
+        <ol class="why-list">
+        <li><b>Proof on demand</b><span>For every rule: where it comes from, who approved it, and the code and test behind it. Ready the day internal audit or the regulator asks.</span><span class="saves"><span class="vlab2">What it saves</span>Rebuilding the record by hand from tickets and memory before every audit.</span></li>
+        <li><b>A person decides, not the AI</b><span>Only the people you name can sign off what a rule means. The AI is stopped when it tries.</span><span class="saves"><span class="vlab2">What it saves</span>Explaining to a regulator a decision nobody signed.</span></li>
+        <li><b>Mistakes stop before customers see them</b><span>A fee or limit the AI copies into the code is caught the moment it is typed.</span><span class="saves"><span class="vlab2">What it saves</span>The refunds, complaints and audit findings a wrong fee brings.</span></li>
+        </ol>
+      </div>
+      <div class="why-col panel">
+        <p class="why-title">Why Anchored, not the others</p>
+        <ol class="why-list">
+        <li><b>It starts from the law</b><span>Each rule points to the article or clause it comes from.</span><span class="others"><span class="vlab2">The others</span>Spec-driven AI tools start from a plan your team wrote.</span></li>
+        <li><b>A person signs, never the AI</b><span>The approver of every rule is on record.</span><span class="others"><span class="vlab2">The others</span>Spec tools and AI guardrails do not record who approved a rule.</span></li>
+        <li><b>It acts while the AI types</b><span>The AI fixes the mistake on the spot, before anyone has to review it.</span><span class="others"><span class="vlab2">The others</span>Compliance platforms and release checks look after the code is written.</span></li>
+        <li><b>The proof comes from the code itself</b><span>Made inside your own systems, nothing sent to us.</span><span class="others"><span class="vlab2">The others</span>Compliance platforms collect evidence beside the code; release checks need their own platform.</span></li>
+        </ol>
+        <p class="why-sum">Other tools do one or two of these. No other tool we checked does all four together.</p>
+      </div>
+    </div>
+    <details class="why-more">
+      <summary>Compare by kind of tool</summary>
+      <div class="compare">
+      <div class="chead" aria-hidden="true"><p>Kind of tool</p><p>Good at</p><p>The gap for rule-bound code</p><p>Anchored</p></div>
+        <div class="crow"><div class="cwho"><b>Spec-driven AI tools</b><small>for example GitHub Spec Kit, AWS Kiro, Tessl</small></div><p class="cgood"><span class="vlab">Good at</span>Help the AI plan and build from a specification.</p><p class="cgap"><span class="vlab">The gap</span>The specification is your team's own plan. Nothing records which law it follows or who approved it.</p><p class="cus"><span class="vlab">Anchored</span>Every rule points to the law or contract it comes from, and a named person signs what it means.</p></div>
+        <div class="crow"><div class="cwho"><b>Compliance platforms</b><small>for example Vanta, Drata</small></div><p class="cgood"><span class="vlab">Good at</span>Map DORA controls and collect evidence from your systems.</p><p class="cgap"><span class="vlab">The gap</span>They work beside the code. They do not see what the AI writes, or stop it.</p><p class="cus"><span class="vlab">Anchored</span>Works inside the code: catches the AI as it writes, and the evidence comes from the code and its history.</p></div>
+        <div class="crow"><div class="cwho"><b>AI coding guardrails</b><small>for example Codacy Guardrails</small></div><p class="cgood"><span class="vlab">Good at</span>Give the AI your quality and security standards while it writes.</p><p class="cgap"><span class="vlab">The gap</span>The standards are your own, not tied to a law, with no approver behind them.</p><p class="cus"><span class="vlab">Anchored</span>Rules come from the outside authority, each with its approver and its test.</p></div>
+        <div class="crow"><div class="cwho"><b>Release policy checks</b><small>for example JFrog AppTrust (DORA)</small></div><p class="cgood"><span class="vlab">Good at</span>Check changes against policy when software is released.</p><p class="cgap"><span class="vlab">The gap</span>The check comes at release, after the code is written, and needs their platform.</p><p class="cus"><span class="vlab">Anchored</span>Catches the problem while the AI writes, and runs in your own repository and build.</p></div>
+      </div>
+      <p class="after">Based on each vendor's public pages, November 2026. Names are trademarks of their owners. Something out of date? <a class="text-link" data-call="Comparison" href="#call">Tell us</a> and we correct it.</p>
+    </details>
+
+    <div class="intro">
+      <p class="eyebrow">Proof</p>
+      <h2 data-words>Numbers you can check yourself.</h2>
+      <p>No quotes from customers, because there are none to quote yet. These you can rerun.</p>
+    </div>
+    <div class="proof">
+      <div class="panel"><p class="stat">2</p><p>candidate copied values Anchored Scan flags in pip's own source.</p></div>
+      <div class="panel"><p class="stat">9</p><p>in Actual Budget, an open-source finance app.</p><a class="text-link" data-free="proof-scan" href="https://github.com/newcleardigital/anchored-scan">Run Scan on yours</a></div>
+      <div class="panel"><p class="stat">62/62</p><p>self-test of the paid checks: each gate is broken on purpose and must go red, and only that gate.</p></div>
+      <div class="panel"><p class="stat">8</p><p>gates in your CI, run from your repository's own pinned copy of the checks.</p><a class="text-link" data-free="proof-sample" href="sample/dora-change-record.html">See what they export</a></div>
+    </div>
+    <div class="trust">
+      <div class="panel"><h3>Your code stays in your repository</h3><p>The checks are plain Python that run in your repository and your CI. No sign-in, no upload, no telemetry. Nothing is sent to us.</p></div>
+      <div class="panel"><h3>The record does not depend on the AI</h3><p>The build checks read the code and the git history, not the tool that wrote it. The check on save and the approval lock run in Claude Code.</p></div>
+    </div>
+
+    <div class="intro" id="guides">
+      <p class="eyebrow">Guides</p>
+      <h2 data-words>Read before you install.</h2>
+      <p>Short guides on DORA change records, approval independence and AI-written code. <a class="text-link" href="guides/">All guides</a></p>
+    </div>
+    <ul class="guide-index">
+      <li><a href="guides/dora-ai-written-code.html"><h3>DORA and AI-written code: what the change record has to show</h3><p>The five facts the record needs when an AI agent writes the change, and where each one comes from.</p></a></li>
+      <li><a href="guides/ai-change-approval-independence.html"><h3>Who may approve a change an AI agent wrote?</h3><p>RTS 2024/1774 Article 17(1)(b) asks for independent approval. How to make it provable from git.</p></a></li>
+      <li><a href="guides/claude-code-audit-trail.html"><h3>An audit trail for Claude Code</h3><p>Rule, change, test and approver for every AI edit, without leaving your repository.</p></a></li>
+      <li><a href="guides/interchange-fee-caps-in-code.html"><h3>Coding the EU interchange fee caps so an auditor can check them</h3><p>0.2 % debit, 0.3 % credit, the commercial-card exception and the payee statement, fully traced.</p></a></li>
+      <li><a href="guides/ai-agents-copy-fixed-values.html"><h3>Why AI coding agents copy fixed values</h3><p>The same fee typed into a second file, and a free GitHub Action that catches it on every pull request.</p></a></li>
+    </ul>
+
+    <div class="faq-wrap" id="call">
+      <div class="ask panel">
+        <p class="eyebrow">Questions</p>
+        <h2 data-words>Ask the person who built it.</h2>
+        <p class="body">Write with your product and the rules it must follow. I answer every email myself.
+          The checks are plain Python you can read, and everything they produce in your repository stays yours.</p>
+        <p class="who-is">Stoyan Dimitrov, newcleardigital</p>
+        <div class="actions">
+          <a class="button" data-call href="#call">Email a question</a>
+          <a class="mail" data-call href="mailto:office@newcleardigital.com">office@newcleardigital.com</a>
+        </div>
+        <div class="cta-install"><span>Or start now, free: add Anchored Scan to a repository.</span><button class="button ghost" type="button" data-copy="scan-yaml">Copy the workflow</button></div>
+        <p class="fine">No email list. No cookies. Just a reply from a person.</p>
+      </div>
+      <div class="faq">
+        <details><summary>Can we try it before paying?</summary>
+          <p>Yes. Anchored Scan and Anchored Lite are free and show how the checks work on your own code. The paid toolkit adds the rule catalogue, the approval lock, a test per rule and the evidence export; the sample change record shows what you get. Monthly plans come with 14 days to change your mind and a full refund.</p></details>
+        <details><summary>We already use Jira, Confluence or ServiceNow.</summary>
+          <p>Keep them. They hold tickets and change requests; Anchored works where the code is written: it catches untraced changes as they are saved and fails the build on any that remain. Its evidence exports as a CSV you can attach to those records.</p></details>
+        <details><summary>We don't use AI on that part of our code yet.</summary>
+          <p>Then this is the easiest time to start: setup is simplest before the first AI-written line, and the record is complete from day one.</p></details>
+        <details><summary>Which rulebooks does it work with?</summary>
+          <p>Any written document your software must follow: a product specification, a contract, pricing and consumer rules, or payment and billing rules.</p></details>
+        <details><summary>What do we need?</summary>
+          <p>For Anchored: Claude Code, a GitHub repository and Python 3 in your CI. The free Scan needs only GitHub. The checks work with TypeScript, Python, Java, Kotlin, C#, Go, Rust and more.</p></details>
+        <details><summary>Does all our code have to change?</summary>
+          <p>Only the part of your code a rulebook governs is anchored to it. You choose the folders; everything else is built the way you build it today.</p></details>
+        <details id="method"><summary>How do the rules get in?</summary>
+          <p>The agent drafts one numbered requirement per rule, each pointing to the paragraph it came from, all marked unapproved, with every unclear point listed. Your domain expert decides what each requirement means. Only the people you name can approve.</p></details>
+        <details><summary>Does it interpret our rules?</summary>
+          <p>No. If your expert approves a reading, the code follows that reading, and the record shows who approved it.</p></details>
+        <details><summary>Does it give legal advice?</summary>
+          <p>No. It proves that the code does what the approved requirements say. What a rule means is decided by your people.</p></details>
+        <details><summary>Does our code leave our servers?</summary>
+          <p>No. The checks run in your repository and your build. Nothing is sent to us.</p></details>
+      </div>
+    </div>
+  </div></div>
+  <div class="rest" aria-hidden="true"></div>
 </section>
 
 </main>
@@ -898,7 +682,7 @@ claude plugin install anchor-core@anchored-lite</pre>
 <footer class="site-footer shell">
   <div class="footer-top">
     <div class="footer-brand">
-      <a class="brand" href="#" aria-label="Anchored, home"><img class="logo-navy" src="brand/anchored-logo-navy.png" width="538" height="160" alt="Anchored"><img class="logo-paper" src="brand/anchored-logo-paper.png" width="479" height="139" alt="Anchored"></a>
+      <a class="brand" href="#top" aria-label="Anchored, home"><img src="brand/anchored-logo-paper.png" width="479" height="139" alt="Anchored"></a>
       <p class="foot-slogan">AI under control. Your rules. Your sign-off. Your proof.</p>
       <p>Anchor-based development and the Anchored toolkit by newcleardigital. Evidence for your reviews, not legal advice.</p>
     </div>
@@ -927,6 +711,136 @@ claude plugin install anchor-core@anchored-lite</pre>
   </form>
 </dialog>
 
+<script type="module">
+  // The scroll film. Scroll position → film frame → draw(), the same function the Remotion render uses.
+  import { draw, BEAT, TOTAL } from "./3d/js/film.js";
+  const root = document.documentElement;
+  root.classList.add("js");
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+  const span = (x, a, b) => clamp((x - a) / (b - a));
+  // where each beat's finished picture sits (fraction of the beat), held while its details are read
+  const HOLD = [0.9, 0.95, 0.92, 0.94, 0.97, 0.95, 0.95, 1];
+  const CAP_VH = 80, FILM_VH = 160; // scroll per caption, and the least scroll a beat plays over
+
+  // words light up one after another
+  function split(el) {
+    const words = [];
+    (function walk(n) {
+      for (const c of [...n.childNodes]) {
+        if (c.nodeType === 1) { walk(c); continue; }
+        if (c.nodeType !== 3) continue;
+        const f = document.createDocumentFragment();
+        for (const part of c.textContent.split(/(\s+)/)) {
+          if (!part) continue;
+          if (/^\s+$/.test(part)) { f.append(part); continue; }
+          const s = document.createElement("span");
+          s.className = "w";
+          s.textContent = part;
+          f.append(s);
+          words.push(s);
+        }
+        c.replaceWith(f);
+      }
+    })(el);
+    return { el, words, hls: [...el.querySelectorAll(".hl")] };
+  }
+  function light({ words, hls }, pr) {
+    const n = words.length;
+    words.forEach((w, i) => {
+      const o = clamp((pr * (n + 4) - i) / 4);
+      w.style.opacity = 0.14 + 0.86 * o;
+      w.style.filter = reduce || o >= 1 ? "" : `blur(${(1 - o) * 7}px)`;
+      w.style.transform = reduce || o >= 1 ? "" : `translateY(${(1 - o) * 0.35}em)`;
+    });
+    hls.forEach((h) => h.style.setProperty("--hl", `${Math.round(span(pr, 0.55, 1) * 100)}%`));
+  }
+
+  const chapters = [...document.querySelectorAll(".ch")].map((el, i) => {
+    const play = el.querySelector(".play");
+    const caps = [...play.querySelectorAll(".cap")].map((c) => ({ c, texts: [...c.querySelectorAll("[data-words]")].map(split) }));
+    return { el, i, play, caps, read: el.querySelector(".read"), from: i ? i - 1 + HOLD[i - 1] : 0, to: i + HOLD[i] };
+  });
+  const readTexts = [...document.querySelectorAll(".read [data-words]")].map(split);
+  const dims = [...document.querySelectorAll(".read")];
+
+  // details rise in as they arrive
+  const io = new IntersectionObserver((es) => es.forEach((e) => e.isIntersecting && (e.target.classList.add("in"), io.unobserve(e.target))), { rootMargin: "0px 0px -12% 0px" });
+  document.querySelectorAll(".read .shell > *, .read .row > *, .starts > *, .why > *, .proof > *, .trust > *").forEach((el) => { el.classList.add("rv"); io.observe(el); });
+
+  // chapter rail
+  const rail = document.querySelector(".rail");
+  const dots = chapters.map((ch) => {
+    const a = document.createElement("a");
+    a.href = "#" + (ch.el.id || (ch.el.id = "beat-" + (ch.i + 1)));
+    a.innerHTML = `<span>${String(ch.i + 1).padStart(2, "0")} · ${ch.el.dataset.name}</span>`;
+    a.setAttribute("aria-label", ch.el.dataset.name);
+    rail.append(a);
+    return a;
+  });
+
+  const canvas = document.getElementById("film"), g = canvas.getContext("2d"), scrim = document.querySelector(".scrim");
+  let view = [1, 0, 0], cur = 0, target = 0, drawn = -1, ticking = false;
+  function size() {
+    const w = innerWidth, h = innerHeight, d = Math.min(devicePixelRatio || 1, 1.5);
+    // resizing clears the canvas (and can drop the context), so only when the size really changed
+    if (canvas.width !== Math.round(w * d) || canvas.height !== Math.round(h * d)) {
+      canvas.width = Math.round(w * d);
+      canvas.height = Math.round(h * d);
+    }
+    // ponytail: phones show a wider crop of the 16:9 film rather than a separate 9:16 cut
+    const portrait = w / h < 1.1, s = portrait ? w / 1000 : Math.max(w / 1920, h / 1080) * 0.92;
+    view = [s * d, (w / 2 - 960 * s) * d, (h * (portrait ? 0.34 : 0.4) - 470 * s) * d];
+    for (const ch of chapters) ch.play.style.height = `${Math.max(ch.caps.length * CAP_VH, FILM_VH) + 100}vh`;
+    drawn = -1;
+  }
+
+  function update() {
+    ticking = false;
+    const vh = innerHeight, mid = vh / 2;
+    let active = 0;
+    for (const ch of chapters) {
+      const r = ch.play.getBoundingClientRect(), p = clamp(-r.top / (r.height - vh));
+      if (r.top <= mid) {
+        active = ch.i;
+        target = BEAT * (r.bottom > 0 || !ch.read ? ch.from + (ch.to - ch.from) * p : ch.to);
+      }
+      const n = ch.caps.length;
+      ch.caps.forEach(({ c, texts }, k) => {
+        const q = p * n - k;
+        const first = ch.i === 0 && k === 0;
+        const a = (first ? 1 : span(q, 0, 0.14)) * (1 - span(q, 0.84, 1));
+        c.style.opacity = a;
+        c.style.visibility = a > 0.01 ? "visible" : "hidden";
+        c.style.transform = reduce ? "" : `translateY(${(1 - (first ? 1 : span(q, 0, 0.14))) * 26 - span(q, 0.84, 1) * 26}px)`;
+        if (a > 0.01) texts.forEach((t) => light(t, first ? 1 : span(q, 0.02, 0.5)));
+      });
+    }
+    target = Math.min(target, TOTAL - 1);
+    dots.forEach((d, i) => d.classList.toggle("on", i === active));
+    let dim = 0;
+    for (const el of dims) {
+      const r = el.getBoundingClientRect();
+      dim = Math.max(dim, span(vh * 0.85 - r.top, 0, vh * 0.35) * span(r.bottom - vh * 0.15, 0, vh * 0.35));
+    }
+    scrim.style.opacity = (dim * 0.8).toFixed(3);
+    for (const t of readTexts) {
+      const r = t.el.getBoundingClientRect();
+      if (r.bottom > 0 && r.top < vh) light(t, span(vh * 0.92 - r.top, 0, vh * 0.42));
+    }
+    cur = reduce ? target : cur + (target - cur) * 0.2;
+    if (Math.abs(target - cur) < 0.02) cur = target;
+    if (Math.abs(cur - drawn) > 0.01) { draw(g, cur, false, view); drawn = cur; }
+    if (cur !== target) tick();
+  }
+  const tick = () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } };
+  addEventListener("scroll", tick, { passive: true });
+  addEventListener("resize", () => { size(); tick(); });
+  size();
+  canvas.addEventListener("contextrestored", () => { drawn = -1; tick(); });
+  document.fonts.ready.then(() => { drawn = -1; cur = target; update(); });
+  update();
+</script>
 <script>
   // "Email a question" opens a small window with the address and three ways to write.
   // When there is a booking page (Cal.com or Calendly), put its link in CALL_URL
@@ -995,46 +909,12 @@ claude plugin install anchor-core@anchored-lite</pre>
       setTimeout(() => { b.innerHTML = label; }, 2500);
     });
   });
-</script>
-<script>
-  // The problem: reveal one sentence at a time and build the diagram beside it.
-  (function () {
-    const box = document.getElementById("problem");
-    if (!box) return;
-    document.documentElement.classList.add("js");
-    const lines = box.querySelectorAll(".p-line");
-    const replay = box.querySelector(".p-replay");
-    const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const STEP_MS = 2600, LAST = 5;
-    let timers = [];
-    function show(step) {
-      for (let i = 1; i <= LAST; i++) box.classList.toggle("p-on-" + i, i <= step);
-      lines.forEach(l => l.classList.toggle("on", +l.dataset.at <= step));
-      box.classList.toggle("p-done", step >= LAST);
-    }
-    function play() {
-      timers.forEach(clearTimeout); timers = [];
-      show(0);
-      for (let i = 1; i <= LAST; i++) timers.push(setTimeout(() => show(i), 300 + (i - 1) * STEP_MS));
-    }
-    if (reduce || !("IntersectionObserver" in window)) { show(LAST); return; }
-    replay.hidden = false;
-    replay.addEventListener("click", play);
-    const io = new IntersectionObserver(es => {
-      if (es.some(e => e.isIntersecting)) { io.disconnect(); play(); }
-    }, { threshold: 0.35 });
-    io.observe(box);
-  })();
-  // The editor card in "How it works" plays when it scrolls into view, not on page load.
-  (function () {
-    const card = document.querySelector(".editor-card");
-    if (!card || !("IntersectionObserver" in window)) return;
-    document.documentElement.classList.add("js");
-    const io = new IntersectionObserver(es => {
-      if (es.some(e => e.isIntersecting)) { io.disconnect(); card.classList.add("play"); }
-    }, { threshold: 0.5 });
-    io.observe(card);
-  })();
+
+  // Pricing links open the folded plans before the page scrolls to them.
+  const plans = document.getElementById("pricing");
+  const openPlans = () => { plans.open = true; };
+  document.querySelectorAll('a[href="#pricing"]').forEach(a => a.addEventListener("click", openPlans));
+  if (location.hash === "#pricing") openPlans();
 </script>
 <script>
   // Anonymous, cookie-free visit counter. Each click on a buy, email, free-tool or copy button is counted as an event.
@@ -1047,31 +927,6 @@ claude plugin install anchor-core@anchored-lite</pre>
       : "email-" + (a.dataset.call || "general").toLowerCase().replace(/\s+/g, "-");
     window.goatcounter.count({ path: name, title: a.textContent.trim(), event: true });
   });
-</script>
-<script>
-  // Pricing links open the folded plans before the page scrolls to them.
-  const plans = document.getElementById("pricing");
-  const openPlans = () => { plans.open = true; };
-  document.querySelectorAll('a[href="#pricing"]').forEach(a => a.addEventListener("click", openPlans));
-  if (location.hash === "#pricing") openPlans();
-
-  // Product shots: three tabs, switched by click or the arrow keys.
-  (function () {
-    const box = document.getElementById("shots"); if (!box) return;
-    const tabs = [...box.querySelectorAll('[role="tab"]')];
-    function pick(t, focus) {
-      tabs.forEach(x => { const on = x === t; x.setAttribute("aria-selected", on); x.tabIndex = on ? 0 : -1;
-        document.getElementById(x.getAttribute("aria-controls")).hidden = !on; });
-      if (focus) t.focus();
-    }
-    tabs.forEach((t, i) => {
-      t.addEventListener("click", () => pick(t));
-      t.addEventListener("keydown", e => {
-        const d = e.key === "ArrowRight" ? 1 : e.key === "ArrowLeft" ? -1 : 0;
-        if (d) { e.preventDefault(); pick(tabs[(i + d + tabs.length) % tabs.length], true); }
-      });
-    });
-  })();
 </script>
 <script data-goatcounter="https://newcleardigital.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 </body>
