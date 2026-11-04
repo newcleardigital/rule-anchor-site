@@ -535,7 +535,7 @@ html:not(.js) .problem *{opacity:1!important;transform:none!important;clip-path:
     return a * 0.2 / 100
 
 <span class="t-dim">The file is saved. The check runs and answers the agent:</span>
-<span class="t-bad">rule-anchor: src/fees/interchange.py breaks the project's own rules:</span>
+<span class="t-bad">Anchored: src/fees/interchange.py breaks the project's own rules:</span>
   line 36: 0.2 is a threshold from the authority — read it from `law`
 
 Fix it now, or mark a deliberate use `anchor-allow: &lt;why&gt;`.</pre>
@@ -543,7 +543,7 @@ Fix it now, or mark a deliberate use `anchor-allow: &lt;why&gt;`.</pre>
       <div class="shot" role="tabpanel" id="shot-2" aria-labelledby="tab-2" hidden>
 <pre class="term"><span class="t-dim">The agent tries to mark IF-SCOPE-001 as signed off in docs/requirements.json.</span>
 <span class="t-dim">The edit is blocked before it happens:</span>
-<span class="t-bad">rule-anchor: this edit signs off or rewrites a signed-off reading: IF-SCOPE-001.</span>
+<span class="t-bad">Anchored: this edit signs off or rewrites a signed-off reading: IF-SCOPE-001.</span>
 Only a named approver signs a reading. Leave `verified`, `verified_by`, `verified_on` as they are, and do not change the text or reading of a signed-off requirement. To propose a new reading, set `verified` to false in the same edit.
 Ask the person who signs readings to approve it in their own terminal: python3 .anchor/gates/approve.py &lt;ID&gt;.</pre>
       </div>
@@ -556,11 +556,11 @@ Ask the person who signs readings to approve it in their own terminal: python3 .
 
 An ID not in the catalogue proves nothing. Add the requirement, or fix the typo.
 <span class="t-ok">OK</span>  no authority threshold outside law  ·  2 watched value(s), generated from the requirements
-<span class="t-ok">OK</span>  checks rule-anchor 1.6.0, fingerprint c01ddf7a96ee, intact
+<span class="t-ok">OK</span>  checks Anchored 1.6.1, fingerprint 7715b6ff279e, intact
 
 <span class="t-bad">GATES FAILED</span></pre>
       </div>
-      <figcaption>Real output, copied from a run on the public interchange-fees example (Anchored 1.6.0).</figcaption>
+      <figcaption>Real output, copied from a run on the public interchange-fees example (Anchored 1.6.1).</figcaption>
     </figure>
   </div>
 </div>
@@ -569,7 +569,7 @@ An ID not in the catalogue proves nothing. Add the requirement, or fix the typo.
   <section class="problem" id="problem" aria-labelledby="problem-title">
     <div class="p-text">
       <p class="eyebrow">The problem</p>
-      <h2 class="p-head" id="problem-title">AI writes your code faster than anyone can check it.</h2>
+      <h2 class="p-head" id="problem-title">AI writes the code and the tests. Who checks both against the rule?</h2>
       <p class="p-line" data-at="2">In regulated software (fintech, insurance, anything bound by a law, standard or contract), <span class="hl red">&ldquo;the AI wrote it and it looks right&rdquo; won&rsquo;t pass an audit.</span></p>
       <p class="p-line" data-at="3">Teams must show that each rule from the outside authority <span class="hl">became code, was tested, and was checked by a named person.</span></p>
       <p class="p-line" data-at="4">Today that proof sits in <b>spreadsheets, Jira tickets and memory.</b></p>
@@ -624,7 +624,7 @@ An ID not in the catalogue proves nothing. Add the requirement, or fix the typo.
       <div class="topbar" aria-hidden="true"><div class="dots"><i></i><i></i><i></i></div><span>interchange-fees / interchange.py</span><span class="live">Claude Code</span></div>
       <div class="editor-body" aria-hidden="true">
         <div class="seq s1"><span class="who">The agent writes</span><span class="code"><span class="ln">9</span><span>cap = amount * <span class="bad">0.2</span> / 100</span></span></div>
-        <div class="seq s2"><span class="verdict"><b>rule-anchor:</b> src/fees/interchange.py breaks the project's own rules:
+        <div class="seq s2"><span class="verdict"><b>Anchored:</b> src/fees/interchange.py breaks the project's own rules:
   line 9: 0.2 is a threshold from the authority — read it from `law`</span></div>
         <div class="seq s3"><span class="who">The agent fixes it</span><span class="code"><span class="ln">9</span><span>cap = amount * <span class="good">debit_cap_pct(day)</span> / 100<b class="cursor"></b></span></span></div>
         <div class="seq s4"><span class="verdict ok"><b>All checks pass.</b> 4 of 4 rules proved by a test.</span></div>
