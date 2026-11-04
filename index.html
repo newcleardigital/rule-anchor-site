@@ -236,7 +236,7 @@ summary{cursor:pointer;list-style:none;display:flex;justify-content:space-betwee
 summary::-webkit-details-marker{display:none}
 summary::after{content:"+";flex:none;font:400 1.25rem/1 var(--mono);color:var(--muted)}
 details[open] summary::after{content:"\2212"}
-details p{padding:0 0 1.25rem;color:var(--muted);max-width:44rem}
+details > p{padding:0 0 1.25rem;color:var(--muted);max-width:44rem}
 .faq-wrap{display:grid;grid-template-columns:.7fr 1.3fr;gap:clamp(2rem,8vw,8rem);align-items:start;padding-top:1.25rem;border-top:1px solid var(--ink)}
 .faq-wrap .eyebrow{margin-bottom:1.5rem}
 @media (max-width:980px){.faq-wrap{grid-template-columns:1fr}}
@@ -472,6 +472,23 @@ h1,h2{overflow-wrap:break-word;min-width:0}
 .ask .mail{font:500 .9375rem var(--mono);color:var(--ink);overflow-wrap:anywhere}
 .ask .cta-install{margin-top:auto}
 .ask .fine{color:var(--muted);font:400 .8125rem var(--mono)}
+/* Products: the two free tools and the paid toolkit side by side, the plans beneath */
+.starts{grid-template-columns:repeat(3,minmax(0,1fr))}
+.snippet{white-space:pre-wrap;overflow-wrap:break-word}
+.snippet.has{display:flex;flex-direction:column;gap:.35rem;font:400 .875rem/1.5 var(--sans);list-style:none}
+.snippet.has li{position:relative;padding-left:1.1rem}
+.snippet.has li::before{content:"";position:absolute;left:0;top:.6em;width:6px;height:6px;background:var(--ink)}
+.start-card.toolkit{background:var(--sunken)}
+.start-card.toolkit .snippet{background:var(--surface)}
+.plans{margin-top:clamp(2.5rem,5vw,3.5rem)}
+/* The plans stay folded so no price shows until a visitor asks: "See the plans" and the Pricing links open them */
+.plans{border-top:1px solid var(--ink)}
+.plans > summary{padding-block:1.25rem;flex-wrap:wrap;gap:.5rem 2rem}
+.plans > summary h3{font-size:clamp(1.5rem,2.4vw,2rem);letter-spacing:-.015em}
+.plans-note{margin-left:auto;color:var(--muted);font:400 1rem/1.5 var(--sans);letter-spacing:0;max-width:32rem}
+.plans[open] > summary{padding-bottom:1.5rem}
+@media (max-width:640px){.plans-note{display:none}}
+@media (max-width:1100px){.starts{grid-template-columns:minmax(0,1fr)}.start-card + .start-card{border-left:0;border-top:1px solid var(--hair)}}
 .trust.two{grid-template-columns:repeat(2,minmax(0,1fr));margin-top:clamp(2.5rem,5vw,3.5rem)}
 @media (max-width:860px){.trust.two{grid-template-columns:minmax(0,1fr)}}
 /* Without the script the problem diagram shows its finished state */
@@ -486,7 +503,7 @@ html:not(.js) .problem *{opacity:1!important;transform:none!important;clip-path:
   <nav class="nav right" aria-label="Main">
     <a href="#how">How it works</a>
     <a href="#value">Why Anchored</a>
-    <a href="#start">Free tools</a>
+    <a href="#start">Products</a>
     <a href="#guides">Guides</a>
     <a href="#pricing">Pricing</a>
     <a class="header-cta" data-free="header" href="#start">Start free</a>
@@ -667,8 +684,8 @@ An ID not in the catalogue proves nothing. Add the requirement, or fix the typo.
 
 <section id="start" class="shell">
   <div class="intro">
-    <p class="eyebrow">Start free</p>
-    <h2>Try the checks today, for free.</h2>
+    <p class="eyebrow">Products</p>
+    <h2>Start free. Buy when you need the evidence.</h2>
     <p>Two free tools catch the first problems AI-written code brings: copied fixed values, drifting names and hand-edited generated files. No account, no sign-up, and nothing leaves your repository.</p>
   </div>
   <div class="starts">
@@ -697,8 +714,58 @@ jobs:
 claude plugin install anchor-core@anchored-lite</pre>
       <div class="buy"><button class="button" type="button" data-copy="lite-cmd">Copy the commands</button><a class="button ghost" data-lite href="https://github.com/newcleardigital/anchored-lite">See it on GitHub</a></div>
     </div>
+    <div class="start-card toolkit">
+      <p class="who-for">Paid toolkit · per repository</p>
+      <h3>Anchored</h3>
+      <p>When your rules come from outside, such as card-scheme rules, regulator fees or a contract, Anchored traces each one to its code, its test and the person who approved it.</p>
+      <ul class="snippet has"><li>The rule catalogue</li><li>The approval lock</li><li>A test per rule</li><li>The evidence export</li></ul>
+      <p class="hint"><a class="text-link" data-free="sample-start" href="sample/dora-change-record.html">See a sample change record</a>, built from a public example with the EU interchange fee caps.</p>
+      <div class="buy"><a class="button" href="#pricing">See the plans</a></div>
+    </div>
   </div>
-  <p class="after">When your rules come from outside, such as card-scheme rules, regulator fees or a contract, <a class="text-link" href="#pricing">Anchored</a> traces each one to its code, its test and the person who approved it. <a class="text-link" data-free="sample-start" href="sample/dora-change-record.html">See a sample change record</a>, built from a public example with the EU interchange fee caps.</p>
+  <details class="plans" id="pricing">
+    <summary><h3>Anchored plans</h3><span class="plans-note">Anchored runs Anchor-based development in your repository and build.</span></summary>
+  <div class="offers">
+    <div class="offer first">
+      <p class="who-for">One repository</p>
+      <h3>Solo</h3>
+      <p class="price">€99 <small>per month</small></p>
+      <ul>
+        <li>One repository, up to three developers</li>
+        <li>Every rule traced to its code, test and approver</li>
+        <li>Approval lock and evidence export</li>
+        <li>Email support · cancel any time</li>
+      </ul>
+      <div class="buy"><a class="button" data-buy="solo" hidden>Subscribe</a><a class="button ghost" data-call="Solo" href="#call">Email a question</a></div>
+    </div>
+    <div class="offer">
+      <p class="who-for">The whole team</p>
+      <h3>Team</h3>
+      <p class="price">€490 <small>per repository, per month</small></p>
+      <ul>
+        <li>Unlimited developers on the repository</li>
+        <li>Everything in Solo</li>
+        <li>Reply within one working day</li>
+        <li>Written help setting up your catalogue</li>
+      </ul>
+      <div class="buy"><a class="button" data-buy="traceability" hidden>Subscribe</a><a class="button ghost" data-call="Team" href="#call">Email a question</a></div>
+    </div>
+    <div class="offer">
+      <p class="who-for">For the first five teams</p>
+      <h3>Design Partner</h3>
+      <p class="price">€2,500 <small>one time</small></p>
+      <ul>
+        <li>We set it up in your repository, by pull request</li>
+        <li>Your requirements, checks and first traceability export, done</li>
+        <li>Three months included, questions by email</li>
+        <li>In return: your feedback and a short case study</li>
+      </ul>
+      <div class="buy"><a class="button" data-buy="designPartner" hidden>Buy Design Partner</a><a class="button ghost" data-call="Design Partner" href="#call">Email a question</a></div>
+    </div>
+  </div>
+  <p class="after" data-after-buy hidden>Secure checkout by Polar. Prices include VAT; in the US, Canada and India sales tax is added at checkout where due. After paying, connect your GitHub account on the order page and you get access to the repository. Monthly plans: 14 days to change your mind, full refund.</p>
+  <p class="after" data-after-call>Questions before buying? Email them; the person who built it answers. Prices include VAT; in the US, Canada and India sales tax is added at checkout where due.</p>
+  </details>
 </section>
 
 <section id="value" class="shell">
@@ -771,55 +838,6 @@ claude plugin install anchor-core@anchored-lite</pre>
   </div>
 </section>
 
-<section id="pricing" class="shell">
-  <div class="intro">
-    <p class="eyebrow">Pricing</p>
-    <h2>Anchored, the toolkit.</h2>
-    <p>Anchored runs Anchor-based development in your repository and build. Start with the free tools;
-      buy when you need the evidence.</p>
-  </div>
-  <div class="offers">
-    <div class="offer first">
-      <p class="who-for">One repository</p>
-      <h3>Solo</h3>
-      <p class="price">€99 <small>per month</small></p>
-      <ul>
-        <li>One repository, up to three developers</li>
-        <li>Every rule traced to its code, test and approver</li>
-        <li>Approval lock and evidence export</li>
-        <li>Email support · cancel any time</li>
-      </ul>
-      <div class="buy"><a class="button" data-buy="solo" hidden>Subscribe</a><a class="button ghost" data-call="Solo" href="#call">Email a question</a></div>
-    </div>
-    <div class="offer">
-      <p class="who-for">The whole team</p>
-      <h3>Team</h3>
-      <p class="price">€490 <small>per repository, per month</small></p>
-      <ul>
-        <li>Unlimited developers on the repository</li>
-        <li>Everything in Solo</li>
-        <li>Reply within one working day</li>
-        <li>Written help setting up your catalogue</li>
-      </ul>
-      <div class="buy"><a class="button" data-buy="traceability" hidden>Subscribe</a><a class="button ghost" data-call="Team" href="#call">Email a question</a></div>
-    </div>
-    <div class="offer">
-      <p class="who-for">For the first five teams</p>
-      <h3>Design Partner</h3>
-      <p class="price">€2,500 <small>one time</small></p>
-      <ul>
-        <li>We set it up in your repository, by pull request</li>
-        <li>Your requirements, checks and first traceability export, done</li>
-        <li>Three months included, questions by email</li>
-        <li>In return: your feedback and a short case study</li>
-      </ul>
-      <div class="buy"><a class="button" data-buy="designPartner" hidden>Buy Design Partner</a><a class="button ghost" data-call="Design Partner" href="#call">Email a question</a></div>
-    </div>
-  </div>
-  <p class="after" data-after-buy hidden>Secure checkout by Polar. Prices include VAT; in the US, Canada and India sales tax is added at checkout where due. After paying, connect your GitHub account on the order page and you get access to the repository. Monthly plans: 14 days to change your mind, full refund.</p>
-  <p class="after" data-after-call>Questions before buying? Email them; the person who built it answers. Prices include VAT; in the US, Canada and India sales tax is added at checkout where due.</p>
-</section>
-
 <section id="guides" class="shell">
   <div class="intro">
     <p class="eyebrow">Guides</p>
@@ -885,7 +903,7 @@ claude plugin install anchor-core@anchored-lite</pre>
       <p>Anchor-based development and the Anchored toolkit by newcleardigital. Evidence for your reviews, not legal advice.</p>
     </div>
     <div class="footer-links">
-      <div><p class="footer-label">Explore</p><a href="#how">How it works</a><a href="#start">Free tools</a><a href="#guides">Guides</a><a href="#pricing">Pricing</a><a href="#method">The method</a><a href="sample/dora-change-record.html">Sample change record</a><a data-free="footer-scan" href="https://github.com/newcleardigital/anchored-scan">Anchored Scan, free</a><a data-lite href="https://github.com/newcleardigital/anchored-lite">Anchored Lite, free</a></div>
+      <div><p class="footer-label">Explore</p><a href="#how">How it works</a><a href="#start">Products</a><a href="#guides">Guides</a><a href="#pricing">Pricing</a><a href="#method">The method</a><a href="sample/dora-change-record.html">Sample change record</a><a data-free="footer-scan" href="https://github.com/newcleardigital/anchored-scan">Anchored Scan, free</a><a data-lite href="https://github.com/newcleardigital/anchored-lite">Anchored Lite, free</a></div>
       <div><p class="footer-label">Say hello</p><a data-call href="mailto:office@newcleardigital.com">Email</a></div>
     </div>
   </div>
@@ -1031,6 +1049,12 @@ claude plugin install anchor-core@anchored-lite</pre>
   });
 </script>
 <script>
+  // Pricing links open the folded plans before the page scrolls to them.
+  const plans = document.getElementById("pricing");
+  const openPlans = () => { plans.open = true; };
+  document.querySelectorAll('a[href="#pricing"]').forEach(a => a.addEventListener("click", openPlans));
+  if (location.hash === "#pricing") openPlans();
+
   // Product shots: three tabs, switched by click or the arrow keys.
   (function () {
     const box = document.getElementById("shots"); if (!box) return;
