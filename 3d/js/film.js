@@ -47,15 +47,19 @@ const rgba = (hex, a) => {
   const n = parseInt(hex.slice(1), 16);
   return `rgba(${n >> 16},${(n >> 8) & 255},${n & 255},${a})`;
 };
+// fx.glow = 0: no canvas shadow blur and a cached ground, for phones (blur and full-screen
+// gradients every frame held scrolling under 25 fps there). The Remotion render keeps 1.
+export const fx = { glow: 1 };
+
 // Light: additive, so overlapping lines brighten like the reference rings.
 function ink(g, style, a, lw = 1.5, blur = 0, shadow = typeof style === "string" ? style : SILVER) {
   if (a <= 0.002) return;
   g.globalCompositeOperation = "lighter";
-  g.globalAlpha = Math.min(1, a);
   g.strokeStyle = style;
-  g.lineWidth = lw;
   g.shadowColor = shadow;
-  g.shadowBlur = blur;
+  g.shadowBlur = blur * fx.glow;
+  g.globalAlpha = Math.min(1, a);
+  g.lineWidth = lw;
   g.stroke();
 }
 function dot(g, x, y, r, color, a, blur = 16) {
@@ -64,7 +68,7 @@ function dot(g, x, y, r, color, a, blur = 16) {
   g.globalAlpha = Math.min(1, a);
   g.fillStyle = color;
   g.shadowColor = color;
-  g.shadowBlur = blur;
+  g.shadowBlur = blur * fx.glow;
   g.beginPath();
   g.arc(x, y, r, 0, TAU);
   g.fill();
@@ -74,7 +78,7 @@ function say(g, s, x, y, a, { size = 18, color = P.paper, font = MONO, weight = 
   g.globalCompositeOperation = "source-over";
   g.globalAlpha = Math.min(1, a);
   g.shadowColor = color;
-  g.shadowBlur = blur;
+  g.shadowBlur = blur * fx.glow;
   g.letterSpacing = `${spacing}px`;
   text(g, s, x, y, { size, color, font, weight, align });
   g.letterSpacing = "0px";
@@ -150,15 +154,8 @@ function compassGlyph(g, x, y, h) {
   g.closePath();
 }
 
-// view = [scale, x, y]: where the 1920×1080 design lands on the canvas. The ground fills beyond it.
-export function draw(g, frame, captions = true, view = [1, 0, 0]) {
-  const u = frame / BEAT, t = frame / FPS;
-  g.setTransform(view[0], 0, 0, view[0], view[1], view[2]);
-  g.globalCompositeOperation = "source-over";
-  g.globalAlpha = 1;
-  g.shadowBlur = 0;
-
-  // ground: deep navy, a faint teal rise at the bottom
+let ground = null, groundKey = "";
+function paintGround(g) {
   const bg = g.createRadialGradient(CX, CY, 0, CX, CY, 1150);
   bg.addColorStop(0, "#0e2033");
   bg.addColorStop(0.55, "#081422");
@@ -172,6 +169,31 @@ export function draw(g, frame, captions = true, view = [1, 0, 0]) {
   g.fillRect(-W, 760, 3 * W, H - 760);
   g.fillStyle = "rgba(14,58,70,0.32)";
   g.fillRect(-W, H, 3 * W, H);
+}
+
+// view = [scale, x, y]: where the 1920×1080 design lands on the canvas. The ground fills beyond it.
+export function draw(g, frame, captions = true, view = [1, 0, 0]) {
+  const u = frame / BEAT, t = frame / FPS;
+  g.setTransform(view[0], 0, 0, view[0], view[1], view[2]);
+  g.globalCompositeOperation = "source-over";
+  g.globalAlpha = 1;
+  g.shadowBlur = 0;
+
+  // ground: deep navy, a faint teal rise at the bottom. With fx.glow = 0 (phones) it is painted
+  // once per canvas size and copied, since gradients over every pixel each frame cost the most there.
+  if (!fx.glow && typeof OffscreenCanvas !== "undefined") {
+    const key = `${g.canvas.width}x${g.canvas.height}:${view}`;
+    if (groundKey !== key) {
+      groundKey = key;
+      ground = new OffscreenCanvas(g.canvas.width, g.canvas.height);
+      const o = ground.getContext("2d");
+      o.setTransform(view[0], 0, 0, view[0], view[1], view[2]);
+      paintGround(o);
+    }
+    g.setTransform(1, 0, 0, 1, 0, 0);
+    g.drawImage(ground, 0, 0);
+    g.setTransform(view[0], 0, 0, view[0], view[1], view[2]);
+  } else paintGround(g);
 
   // ---------- 1 drift: session rings wobble and pull apart; 2 weight: they settle into one ----------
   const converge = ease(span(u, 1, 1.4));

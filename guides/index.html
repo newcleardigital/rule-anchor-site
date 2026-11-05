@@ -5,48 +5,12 @@
 <meta name="description" content="Guides on DORA change records for AI-written code, approval independence, Claude Code audit trails, the EU interchange fee caps and copied fixed values.">
 <link rel="canonical" href="https://anchored.newcleardigital.com/guides/">
 <link rel="icon" href="../brand/favicon-32.png" type="image/png" sizes="32x32">
-<style>
-@font-face{font-family:"Inter Tight";src:url(../fonts/inter-tight.woff2) format("woff2");font-weight:100 900;font-display:swap}
-@font-face{font-family:"IBM Plex Mono";src:url(../fonts/ibm-plex-mono-400.woff2) format("woff2");font-weight:400;font-display:swap}
-@font-face{font-family:"IBM Plex Mono";src:url(../fonts/ibm-plex-mono-500.woff2) format("woff2");font-weight:500;font-display:swap}
-:root{--surface:#f4f1ea;--sunken:#e9ebee;--ink:#0b1b2e;--muted:#5b6b7d;--hair:rgba(91,107,125,.35);--focus:#0b1b2e;
-  --sans:"Inter Tight","Helvetica Neue",Arial,sans-serif;--mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;color-scheme:light}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--surface:#0b1b2e;--sunken:#13263b;--ink:#f4f1ea;--muted:#93a1b1;--hair:rgba(147,161,177,.3);--focus:#c8963e;color-scheme:dark}}
-:root[data-theme="dark"]{--surface:#0b1b2e;--sunken:#13263b;--ink:#f4f1ea;--muted:#93a1b1;--hair:rgba(147,161,177,.3);--focus:#c8963e;color-scheme:dark}
-*{box-sizing:border-box}html{-webkit-text-size-adjust:100%}
-body{margin:0;background:var(--surface);color:var(--ink);font:400 1.0625rem/1.6 var(--sans);-webkit-font-smoothing:antialiased}
-a{color:var(--ink);text-underline-offset:.2em;text-decoration-thickness:1px}
-a:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
-.top{display:flex;justify-content:space-between;align-items:center;gap:1rem;max-width:46rem;margin:0 auto;padding:1.1rem 16px;border-bottom:1px solid var(--hair)}
-.top .brand{display:inline-flex;text-decoration:none}.top .brand img{display:block;height:28px;width:auto}
-.logo-paper{display:none}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .logo-navy{display:none}:root:not([data-theme="light"]) .logo-paper{display:block}}
-:root[data-theme="dark"] .logo-navy{display:none}:root[data-theme="dark"] .logo-paper{display:block}
-.top .cta{font:600 .875rem var(--sans);padding:.55rem .9rem;border-radius:2px;background:var(--ink);color:var(--surface);text-decoration:none}
-main{max-width:46rem;margin:0 auto;padding:1rem 16px 4rem}
-.eyebrow{font:500 .75rem var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin:2rem 0 .8rem}
-h1{font:600 clamp(2rem,5vw,3rem)/1.08 var(--sans);letter-spacing:-.02em;margin:0 0 1.2rem}
-h2{font:600 1.375rem/1.27 var(--sans);letter-spacing:-.01em;margin:2.4rem 0 .8rem}
-.lede{font-size:1.25rem;line-height:1.5;color:var(--ink)}
-p,li{color:color-mix(in srgb,var(--ink) 84%,transparent)}
-li{margin:.35rem 0}
-code{font:400 .9em var(--mono);background:var(--sunken);padding:.05em .3em}
-pre{background:var(--sunken);color:var(--ink);font:400 .8125rem/1.6 var(--mono);padding:1rem;overflow-x:auto}
-table{width:100%;border-collapse:collapse;font-size:.9375rem;display:block;overflow-x:auto;border-top:1px solid var(--ink)}
-th,td{text-align:left;vertical-align:top;padding:.6rem .7rem;border-bottom:1px solid var(--hair)}
-th{font:500 .75rem var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
-.box{margin-top:3rem;padding:1.5rem;background:#0b1b2e;color:#f4f1ea}
-.box h2{margin-top:0;color:#f4f1ea}.box p{color:#93a1b1}.box a{color:#f4f1ea}
-.box .links{display:flex;flex-wrap:wrap;gap:.6rem 1.4rem}
-.faq{border-top:1px solid var(--hair)}
-.faq dt{font:600 1.0625rem var(--sans);margin-top:1.2rem}.faq dd{margin:.3rem 0 0;color:var(--muted)}
-.more{margin-top:3rem;border-top:1px solid var(--ink);padding-top:1.4rem}
-.more ul{padding-left:1.1rem}
-footer{max-width:46rem;margin:0 auto;padding:2rem 16px 3rem;color:var(--muted);font:400 .8125rem/1.6 var(--mono);border-top:1px solid var(--hair)}
-</style>
+<link rel="stylesheet" href="../inner.css">
 </head><body>
-<header class="top"><a class="brand" href="../" aria-label="Anchored, home"><img class="logo-navy" src="../brand/anchored-logo-navy.png" width="538" height="160" alt="Anchored"><img class="logo-paper" src="../brand/anchored-logo-paper.png" width="479" height="139" alt="Anchored"></a><a class="cta" href="../#start">Start free</a></header>
-<main><p class="eyebrow">Guides</p><h1>AI-written code that follows a rulebook</h1><ul><li><a href="dora-ai-written-code.html">DORA and AI-written code: what the change record has to show</a><br><span style="color:var(--muted)">DORA asks every ICT change to be recorded, tested, assessed and approved. When an AI coding agent writes the change, these are the five facts the record needs, and where each one comes from.</span></li><li><a href="ai-change-approval-independence.html">Who may approve a change an AI agent wrote? RTS 2024/1774 Article 17(1)(b)</a><br><span style="color:var(--muted)">The DORA risk-management RTS asks that the people approving an ICT change are independent of those requesting and implementing it. With AI agents in the loop, here is how to make that provable from git.</span></li><li><a href="claude-code-audit-trail.html">An audit trail for Claude Code: rule, change, test and approver for every AI edit</a><br><span style="color:var(--muted)">How to make every change Claude Code writes traceable to the rule it implements, the test that proves it and the person who approved it, without leaving your repository.</span></li><li><a href="interchange-fee-caps-in-code.html">Coding the EU interchange fee caps so an auditor can check them</a><br><span style="color:var(--muted)">Regulation (EU) 2015/751 caps interchange at 0.2 % for debit and 0.3 % for credit cards. A worked example of implementing the caps, the commercial-card exception and the payee statement with full traceability.</span></li><li><a href="ai-agents-copy-fixed-values.html">Why AI coding agents copy fixed values, and how to catch it on every pull request</a><br><span style="color:var(--muted)">AI agents type the same fee, limit or rate into a second file because they cannot see the first. A zero-config GitHub Action that finds these copies and comments on the pull request.</span></li></ul><div class="box">
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header"><a class="brand" href="../" aria-label="Anchored, home"><img src="../brand/anchored-logo-paper.png" width="479" height="139" alt="Anchored"></a>
+<nav class="nav" aria-label="Main"><a href="../#how">How it works</a><a href="../#value">Why Anchored</a><a href="../#start">Products</a><a href="./" aria-current="page">Guides</a><a href="../#pricing">Pricing</a><a class="header-cta" href="../#start">Start free</a></nav></header>
+<main id="main"><p class="eyebrow">Guides</p><h1>AI-written code that follows a rulebook</h1><ol class="guide-list"><li><a href="dora-ai-written-code.html"><h2>DORA and AI-written code: what the change record has to show</h2><p>DORA asks every ICT change to be recorded, tested, assessed and approved. When an AI coding agent writes the change, these are the five facts the record needs, and where each one comes from.</p></a></li><li><a href="ai-change-approval-independence.html"><h2>Who may approve a change an AI agent wrote? RTS 2024/1774 Article 17(1)(b)</h2><p>The DORA risk-management RTS asks that the people approving an ICT change are independent of those requesting and implementing it. With AI agents in the loop, here is how to make that provable from git.</p></a></li><li><a href="claude-code-audit-trail.html"><h2>An audit trail for Claude Code: rule, change, test and approver for every AI edit</h2><p>How to make every change Claude Code writes traceable to the rule it implements, the test that proves it and the person who approved it, without leaving your repository.</p></a></li><li><a href="interchange-fee-caps-in-code.html"><h2>Coding the EU interchange fee caps so an auditor can check them</h2><p>Regulation (EU) 2015/751 caps interchange at 0.2 % for debit and 0.3 % for credit cards. A worked example of implementing the caps, the commercial-card exception and the payee statement with full traceability.</p></a></li><li><a href="ai-agents-copy-fixed-values.html"><h2>Why AI coding agents copy fixed values, and how to catch it on every pull request</h2><p>AI agents type the same fee, limit or rate into a second file because they cannot see the first. A zero-config GitHub Action that finds these copies and comments on the pull request.</p></a></li></ol><div class="box">
 <h2>Try it on your repository</h2>
 <p>Two free, open-source tools run the same checks. Nothing leaves your repository.</p>
 <div class="links"><a href="https://github.com/newcleardigital/anchored-scan">Anchored Scan, a GitHub Action ↗</a><a href="https://github.com/newcleardigital/anchored-lite">Anchored Lite, a Claude Code plugin ↗</a><a href="../sample/dora-change-record.html">A sample change record ↗</a><a href="../#pricing">Anchored pricing ↗</a></div>
