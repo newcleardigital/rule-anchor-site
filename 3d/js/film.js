@@ -155,6 +155,11 @@ function compassGlyph(g, x, y, h) {
 }
 
 let ground = null, groundKey = "";
+// After a GPU reset the cached ground is wiped but its key still matches; the page calls this on contextrestored.
+export function dropGround() {
+  ground = null;
+  groundKey = "";
+}
 function paintGround(g) {
   const bg = g.createRadialGradient(CX, CY, 0, CX, CY, 1150);
   bg.addColorStop(0, "#0e2033");
@@ -339,29 +344,72 @@ export function draw(g, frame, captions = true, view = [1, 0, 0]) {
 
   // gates: a commit runs the line, stops red at the third, then passes all five
   const gateA = span(u, 3.95, 4.15) * (1 - span(u, 5, 5.12));
-  const px = gt < 0.45 ? lerp(180, 930, ease(span(gt, 0.12, 0.45))) : gt < 0.62 ? 930 : lerp(930, 1760, out(span(gt, 0.62, 0.92)));
   const failing = gt >= 0.45 && gt < 0.62;
-  GX.forEach((x, k) => {
-    const passed = u >= 5 || px > x + 15, red = k === 2 && failing;
-    const col = passed ? OK : red ? BAD : P.slateLight;
-    g.beginPath();
-    g.arc(x, CY, 15, 0, TAU);
-    ink(g, col, gateA * (passed || red ? 1 : 0.6), 1.5, passed || red ? 12 : 0);
-    say(g, (passed ? "✓ " : "") + GATES[k], x, CY - 34, gateA * (passed ? 1 : 0.7), { size: 14, color: passed ? OK : P.slateLight, align: "center" });
-  });
-  if (gateA > 0 && gt > 0.1 && gt < 0.95) {
-    const pa = gateA * span(gt, 0.1, 0.16) * (1 - span(gt, 0.9, 0.95));
-    hline(g, CY, px - 320, px + 20, GOLD, pa * 0.9, 2, 14);
-    dot(g, px, CY, 5, GOLD, pa, 22);
-  }
-  const fp = span(gt, 0.45, 0.6);
-  g.beginPath();
-  g.arc(GX[2], CY, lerp(15, 60, out(fp)), 0, TAU);
-  ink(g, BAD, fp > 0 && fp < 1 ? (1 - fp) * gateA : 0, 1.5, 10);
   const failA = gateA * span(gt, 0.45, 0.48) * (1 - span(gt, 0.6, 0.64));
-  say(g, "FAIL · IF-CAP-999 at src/fees/interchange.py:34", CX, CY + 58, failA, { size: 16, color: BAD, align: "center" });
-  say(g, "An ID not in the catalogue proves nothing.", CX, CY + 84, failA * 0.75, { size: 15, align: "center" });
-  say(g, "ALL GATES GREEN", CX, CY + 66, span(gt, 0.9, 0.95) * (1 - span(u, 5.04, 5.14)), { size: 18, color: OK, align: "center", spacing: 4, blur: 10 });
+  const greenA = span(gt, 0.9, 0.95) * (1 - span(u, 5.04, 5.14));
+  const fp = span(gt, 0.45, 0.6);
+  if (fx.portrait) {
+    // portrait crops the wide line to its middle, so the beat is told down the screen, large enough to read
+    const NX = 580, GY = [165, 300, 435, 570, 705], NR = 20;
+    const py = gt < 0.45 ? lerp(70, GY[2], ease(span(gt, 0.12, 0.45))) : gt < 0.62 ? GY[2] : lerp(GY[2], 800, out(span(gt, 0.62, 0.92)));
+    if (gateA > 0) {
+      const sp = g.createLinearGradient(0, 85, 0, 790);
+      sp.addColorStop(0, rgba(P.slateLight, 0));
+      sp.addColorStop(0.1, rgba(P.slateLight, 1));
+      sp.addColorStop(0.9, rgba(P.slateLight, 1));
+      sp.addColorStop(1, rgba(P.slateLight, 0));
+      g.beginPath();
+      g.moveTo(NX, 85);
+      g.lineTo(NX, 790);
+      ink(g, sp, gateA * 0.3, 1.2, 0, P.slateLight);
+    }
+    GY.forEach((y, k) => {
+      const passed = u >= 5 || py > y + NR, red = k === 2 && failing;
+      const col = passed ? OK : red ? BAD : P.slateLight;
+      g.beginPath();
+      g.arc(NX, y, NR, 0, TAU);
+      ink(g, col, gateA * (passed || red ? 1 : 0.6), 2, passed || red ? 12 : 0);
+      say(g, (passed ? "✓ " : "") + GATES[k], NX + 52, y + 11, gateA * (passed ? 1 : 0.7), { size: 33, color: passed ? OK : P.slateLight });
+    });
+    if (gateA > 0 && gt > 0.1 && gt < 0.95) {
+      const pa = gateA * span(gt, 0.1, 0.16) * (1 - span(gt, 0.9, 0.95));
+      const tr = g.createLinearGradient(0, py - 240, 0, py + 14);
+      tr.addColorStop(0, rgba(GOLD, 0));
+      tr.addColorStop(1, rgba(GOLD, 1));
+      g.beginPath();
+      g.moveTo(NX, py - 240);
+      g.lineTo(NX, py + 14);
+      ink(g, tr, pa * 0.9, 2.4, 14, GOLD);
+      dot(g, NX, py, 8, GOLD, pa, 22);
+    }
+    g.beginPath();
+    g.arc(NX, GY[2], lerp(NR, 80, out(fp)), 0, TAU);
+    ink(g, BAD, fp > 0 && fp < 1 ? (1 - fp) * gateA : 0, 2, 10);
+    say(g, "FAIL · IF-CAP-999 at src/fees/interchange.py:34", CX, 856, failA, { size: 30, color: BAD, align: "center" });
+    say(g, "An ID not in the catalogue proves nothing.", CX, 898, failA * 0.75, { size: 27, align: "center" });
+    say(g, "ALL GATES GREEN", CX, 868, greenA, { size: 36, color: OK, align: "center", spacing: 6, blur: 10 });
+  } else {
+    const px = gt < 0.45 ? lerp(180, 930, ease(span(gt, 0.12, 0.45))) : gt < 0.62 ? 930 : lerp(930, 1760, out(span(gt, 0.62, 0.92)));
+    GX.forEach((x, k) => {
+      const passed = u >= 5 || px > x + 15, red = k === 2 && failing;
+      const col = passed ? OK : red ? BAD : P.slateLight;
+      g.beginPath();
+      g.arc(x, CY, 15, 0, TAU);
+      ink(g, col, gateA * (passed || red ? 1 : 0.6), 1.5, passed || red ? 12 : 0);
+      say(g, (passed ? "✓ " : "") + GATES[k], x, CY - 34, gateA * (passed ? 1 : 0.7), { size: 14, color: passed ? OK : P.slateLight, align: "center" });
+    });
+    if (gateA > 0 && gt > 0.1 && gt < 0.95) {
+      const pa = gateA * span(gt, 0.1, 0.16) * (1 - span(gt, 0.9, 0.95));
+      hline(g, CY, px - 320, px + 20, GOLD, pa * 0.9, 2, 14);
+      dot(g, px, CY, 5, GOLD, pa, 22);
+    }
+    g.beginPath();
+    g.arc(GX[2], CY, lerp(15, 60, out(fp)), 0, TAU);
+    ink(g, BAD, fp > 0 && fp < 1 ? (1 - fp) * gateA : 0, 1.5, 10);
+    say(g, "FAIL · IF-CAP-999 at src/fees/interchange.py:34", CX, CY + 58, failA, { size: 16, color: BAD, align: "center" });
+    say(g, "An ID not in the catalogue proves nothing.", CX, CY + 84, failA * 0.75, { size: 15, align: "center" });
+    say(g, "ALL GATES GREEN", CX, CY + 66, greenA, { size: 18, color: OK, align: "center", spacing: 4, blur: 10 });
+  }
 
   // proof: the record, one row per rule
   const tabA = 1 - span(u, 6, 6.12);

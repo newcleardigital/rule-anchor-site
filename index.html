@@ -763,7 +763,7 @@ claude plugin install anchor-core@anchored-lite</pre>
 
 <script type="module">
   // The scroll film. Scroll position → film frame → draw(), the same function the Remotion render uses.
-  import { draw, fx, BEAT, TOTAL } from "./3d/js/film.js";
+  import { draw, fx, BEAT, TOTAL, dropGround } from "./3d/js/film.js";
   const root = document.documentElement;
   root.classList.add("js");
   const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -843,6 +843,7 @@ claude plugin install anchor-core@anchored-lite</pre>
     }
     // ponytail: phones show a wider crop of the 16:9 film rather than a separate 9:16 cut
     const portrait = w / h < 1.1, s = portrait ? w / 1000 : Math.max(w / 1920, h / 1080) * 0.92;
+    fx.portrait = portrait; // the gate beat re-lays itself out for portrait crops
     view = [s * d, (w / 2 - 960 * s) * d, (h * (portrait ? 0.34 : 0.4) - 470 * s) * d];
     for (const ch of chapters) ch.play.style.height = `${Math.max(ch.caps.length * CAP_VH, FILM_VH) + 100}vh`;
     drawn = -1;
@@ -890,7 +891,7 @@ claude plugin install anchor-core@anchored-lite</pre>
   addEventListener("scroll", tick, { passive: true });
   addEventListener("resize", () => { size(); tick(); });
   size();
-  canvas.addEventListener("contextrestored", () => { drawn = -1; tick(); });
+  canvas.addEventListener("contextrestored", () => { dropGround(); drawn = -1; tick(); });
   document.fonts.ready.then(() => { drawn = -1; cur = target; update(); });
   update();
 </script>
